@@ -58,7 +58,7 @@
   },
   "spec": {
     "tool": "spec-auditor",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "as_of": "2026-08-03",
     "source": {
       "kind": "file",
@@ -73,7 +73,7 @@
       "hold": {
         "value": 2,
         "unit": "findings",
-        "source": "spec-auditor 0.2.0, audit of examples/acme/specs/quote-drafting.md",
+        "source": "spec-auditor 0.3.0, audit of examples/acme/specs/quote-drafting.md",
         "window": {
           "from": "2026-08-03",
           "to": "2026-08-03"
@@ -83,7 +83,7 @@
       "note": {
         "value": 1,
         "unit": "findings",
-        "source": "spec-auditor 0.2.0, audit of examples/acme/specs/quote-drafting.md",
+        "source": "spec-auditor 0.3.0, audit of examples/acme/specs/quote-drafting.md",
         "window": {
           "from": "2026-08-03",
           "to": "2026-08-03"
@@ -93,7 +93,7 @@
       "pass": {
         "value": 11,
         "unit": "findings",
-        "source": "spec-auditor 0.2.0, audit of examples/acme/specs/quote-drafting.md",
+        "source": "spec-auditor 0.3.0, audit of examples/acme/specs/quote-drafting.md",
         "window": {
           "from": "2026-08-03",
           "to": "2026-08-03"
@@ -612,7 +612,7 @@
   "landed": {
     "status": "landed",
     "reason": "Past the bar of 40% by 2026-11-15.",
-    "computed_by": "did-it-land 0.2.0",
+    "computed_by": "did-it-land 0.3.0",
     "as_of": "2026-11-26T09:00:00Z",
     "metric": "Quote draft acceptance rate",
     "better": "higher",

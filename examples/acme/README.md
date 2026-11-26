@@ -22,4 +22,4 @@ Only did-it-land sets landed, watch or stalled. The build checks use their own w
 
 ## Versions
 
-Each record names the skill version that wrote it, as that skill's code says. The samples are rendered from each skill's main branch, so a record can name a version newer than the release the bundle pins: bet-portfolio-review, eval-kit and cost-budget-check write 0.3.0 here, while `marketplace.json` pins v0.2.1, v0.2.0 and v0.2.0 until the next release.
+Each record names the skill version that wrote it, as that skill's code says. Every skill here is at 0.3.0, the release `marketplace.json` pins, except the Leader Report, which reads the record and writes none of it.

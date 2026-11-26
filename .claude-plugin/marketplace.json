@@ -29,8 +29,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/bet-portfolio-review",
-        "ref": "v0.2.1",
-        "sha": "f5f0e682fc602a7f999c16aa7f7ad0bc258ed1db"
+        "ref": "v0.3.0",
+        "sha": "3f8d10c49f3a038dfa9ff3281e978ce1264cbbac"
       },
       "displayName": "Bet portfolio review",
       "description": "Scores the roadmap against each bet's landing brief. Step 01: decide."
@@ -40,8 +40,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/spec-auditor",
-        "ref": "v0.2.0",
-        "sha": "3465b3d4ce71ad9c10896afa54c7c1a636131334"
+        "ref": "v0.3.0",
+        "sha": "6f971c3157c4417b46df55ff50c3967692df542c"
       },
       "displayName": "Spec auditor",
       "description": "Checks a PRD against its landing brief, pass or hold. Step 02: spec."
@@ -51,8 +51,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/eval-kit",
-        "ref": "v0.2.0",
-        "sha": "e7a3a6d1b90e7ade959127fa0cd1d1a668cfcfc9"
+        "ref": "v0.3.0",
+        "sha": "e1404e8605a080a925f23d1119e2d98e354e7ecd"
       },
       "displayName": "Eval kit",
       "description": "Pass rate and autonomy rate for one AI feature. Step 03: build."
@@ -62,8 +62,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/cost-budget-check",
-        "ref": "v0.2.0",
-        "sha": "9947d8360aed1454c69ae1f0484bf6533fecb1c0"
+        "ref": "v0.3.0",
+        "sha": "c7ee98fe6f1484e6e399adc51511a75b21663a80"
       },
       "displayName": "Cost budget check",
       "description": "Tokens per task and price per token against the brief's budget, within budget or over budget. Step 03: build."
@@ -73,8 +73,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/did-it-land",
-        "ref": "v0.2.0",
-        "sha": "8bdde877f95a3def9dfa50dbad8cc47da2cc00c2"
+        "ref": "v0.3.0",
+        "sha": "a628bd41d4e3b950e982a993314d1145f81adc5b"
       },
       "displayName": "Did it land?",
       "description": "Landed, watch or stalled from your own metric data. Step 04: learn."
