@@ -31,6 +31,7 @@ That installs all six. Restart Claude Code, then ask: "Where should I start with
 ## Go deeper
 
 - Example deck: [dacard.ai/update](https://www.dacard.ai/update)
+- How the skills connect: [CONTRACT.md](CONTRACT.md)
 - Each skill installs on its own too: `/plugin install did-it-land@landing-loop`
 
 MIT licence. Made by [Dacard](https://www.dacard.ai).
