@@ -9,10 +9,13 @@ Six skills share one landing brief and one loop record (`landing/<bet>.json`). E
 
 | Step | Use when | Skill |
 |---|---|---|
-| 1 Decide | The roadmap needs scoring against its briefs | bet-portfolio-review |
-| 2 Spec | A PRD needs checking before build | spec-auditor |
-| 3 Build | An AI feature needs evals, or its spend needs checking | eval-kit, cost-budget-check |
-| 4 Learn | A shipped bet needs a landed, watch or stalled call | did-it-land |
-| 5 Report | Leadership, the board or all staff need the update | product-engineering-update |
+| 00 Brief | A bet has no landing brief yet | the Leader Report's landing-brief skill |
+| 01 Decide | The roadmap needs scoring against its briefs | bet-portfolio-review |
+| 02 Spec | A PRD needs checking before build | spec-auditor |
+| 03 Build | An AI feature needs evals, or its spend needs checking | eval-kit, cost-budget-check |
+| 04 Learn | A shipped bet needs a landed, watch or stalled call | did-it-land |
+| 05 Report | Leadership, the board or all staff need the update | product-engineering-update |
 
-Start where the person is. With no brief yet, start at step 1 or write the brief with the Leader Report's landing-brief skill. Name the next step when a step finishes.
+Only did-it-land sets landed, watch or stalled. eval-kit says meets target or below target; cost-budget-check says within budget or over budget.
+
+Start where the person is. With no brief yet, start at 00 and write the brief with the Leader Report's landing-brief skill, then 01 Decide. Name the next step when a step finishes.

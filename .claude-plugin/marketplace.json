@@ -22,7 +22,7 @@
         "sha": "8b843de107d080ed88e248428972b23f996d12fd"
       },
       "displayName": "Product & Technology Leader Report",
-      "description": "Board, leadership and all-staff update with an evidence ledger. Step 5: report."
+      "description": "Board, leadership and all-staff update with an evidence ledger. Step 05: report."
     },
     {
       "name": "bet-portfolio-review",
@@ -33,7 +33,7 @@
         "sha": "f5f0e682fc602a7f999c16aa7f7ad0bc258ed1db"
       },
       "displayName": "Bet portfolio review",
-      "description": "Scores the roadmap against each bet's landing brief. Step 1: decide."
+      "description": "Scores the roadmap against each bet's landing brief. Step 01: decide."
     },
     {
       "name": "spec-auditor",
@@ -44,7 +44,7 @@
         "sha": "3465b3d4ce71ad9c10896afa54c7c1a636131334"
       },
       "displayName": "Spec auditor",
-      "description": "Checks a PRD against its landing brief, pass or hold. Step 2: spec."
+      "description": "Checks a PRD against its landing brief, pass or hold. Step 02: spec."
     },
     {
       "name": "eval-kit",
@@ -55,7 +55,7 @@
         "sha": "e7a3a6d1b90e7ade959127fa0cd1d1a668cfcfc9"
       },
       "displayName": "Eval kit",
-      "description": "Pass rate, autonomy rate and cost per task for one AI feature. Step 3: build."
+      "description": "Pass rate and autonomy rate for one AI feature. Step 03: build."
     },
     {
       "name": "cost-budget-check",
@@ -66,7 +66,7 @@
         "sha": "9947d8360aed1454c69ae1f0484bf6533fecb1c0"
       },
       "displayName": "Cost budget check",
-      "description": "Tokens per task and price per token against the brief's budget. Step 3: build."
+      "description": "Tokens per task and price per token against the brief's budget, within budget or over budget. Step 03: build."
     },
     {
       "name": "did-it-land",
@@ -77,7 +77,7 @@
         "sha": "8bdde877f95a3def9dfa50dbad8cc47da2cc00c2"
       },
       "displayName": "Did it land?",
-      "description": "Landed, watch or stalled from your own metric data. Step 4: learn."
+      "description": "Landed, watch or stalled from your own metric data. Step 04: learn."
     }
   ]
 }

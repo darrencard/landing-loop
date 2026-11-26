@@ -5,12 +5,12 @@ Five skills and the Product & Technology Leader Report work as one loop on one l
 
 | Step | Skill | Reads | Writes (its key in the loop record) |
 |---|---|---|---|
-| 1 Decide | bet-portfolio-review | briefs, roadmap | `portfolio` |
-| 2 Spec | spec-auditor | brief, spec | `spec` |
-| 3 Build | eval-kit | brief, traces | `evals` |
-| 3 Build | cost-budget-check | brief, usage | `cost` |
-| 4 Learn | did-it-land | brief, metric, the record so far | `landed` |
-| 5 Report | Leader Report | the record | slides and ledger rows |
+| 01 Decide | bet-portfolio-review | briefs, roadmap | `portfolio` |
+| 02 Spec | spec-auditor | brief, spec | `spec` |
+| 03 Build | eval-kit | brief, traces | `evals` |
+| 03 Build | cost-budget-check | brief, usage | `cost` |
+| 04 Learn | did-it-land | brief, metric, the record so far | `landed` |
+| 05 Report | Leader Report | the record | slides and ledger rows |
 
 ## The brief
 
@@ -37,7 +37,7 @@ Rules:
 
 - Each skill writes only its own key and keeps every other key exactly as it found it.
 - Every figure inside a key carries `value`, `unit`, `source`, `window` (from, to) and `as_of`. No figure without a source.
-- Status words are landed, watch or stalled only.
+- A bet's status words are landed, watch or stalled only, and only did-it-land sets them (`landed.status`). Build checks use their own words: eval-kit says meets target or below target; cost-budget-check says within budget or over budget for each budget line. Neither uses the status colours.
 - `evals` uses the Leader Report's evals columns (`tasks`, `tasks_unassisted`, pass rate) so the report reads it unchanged.
 - `cost` states tokens per task and price per token as two figures, plus the budget from the brief.
 - `landed.status` is computed in code from the brief's bar and date, never written by the model.

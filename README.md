@@ -19,12 +19,13 @@ That installs all six. Restart Claude Code, then ask: "Where should I start with
 
 | Step | Skill | What it does |
 |---|---|---|
-| 1 Decide | bet-portfolio-review | Scores the roadmap against each bet's brief |
-| 2 Spec | spec-auditor | Checks a PRD against its brief, pass or hold |
-| 3 Build | eval-kit | Pass rate, autonomy rate and cost per task |
-| 3 Build | cost-budget-check | Tokens per task and price per token against the budget |
-| 4 Learn | did-it-land | Landed, watch or stalled, from your own data |
-| 5 Report | Product & Technology Leader Report | The update, with an evidence ledger |
+| 00 Brief | Leader Report's landing-brief skill | Writes the landing brief every step reads |
+| 01 Decide | bet-portfolio-review | Scores the roadmap against each bet's brief |
+| 02 Spec | spec-auditor | Checks a PRD against its brief, pass or hold |
+| 03 Build | eval-kit | Pass rate and autonomy rate for one AI feature, meets target or below target |
+| 03 Build | cost-budget-check | Tokens per task and price per token, within budget or over budget |
+| 04 Learn | did-it-land | Landed, watch or stalled, from your own data. The only step that sets a bet's status |
+| 05 Report | Product & Technology Leader Report | The update, with an evidence ledger |
 
 **How it connects:** one landing brief (problem, definition of good, non-goals, cost budget, the line) and one record per bet, `landing/<bet>.json`. Each skill writes its own section. The report reads them all.
 
