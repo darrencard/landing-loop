@@ -428,7 +428,7 @@
   },
   "evals": {
     "skill": "eval-kit",
-    "skill_version": "0.3.1",
+    "skill_version": "0.3.2",
     "feature": "Quote drafting",
     "version": "v1.4",
     "as_of": "2026-11-15",

@@ -51,8 +51,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/eval-kit",
-        "ref": "v0.3.1",
-        "sha": "81fbfbfb2dde3e8066f617ef0b479edd3e2c20fb"
+        "ref": "v0.3.2",
+        "sha": "0f1708a3c591c38c11da36a0e19a66b0ad665db8"
       },
       "displayName": "Eval kit",
       "description": "Pass rate and autonomy rate for one AI feature. Step 03: build."

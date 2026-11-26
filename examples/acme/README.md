@@ -15,11 +15,11 @@ The record reads in loop order, and the dates follow it. Each step writes only i
 | 2026-08-03 | 02 Spec | `spec` | The PRD holds on two findings (rollback trigger, eval timing) |
 | 2026-09-07 | | | Quote drafting ships |
 | 2026-11-15 | 03 Build | `cost` | 1 to 14 November: all three budget lines over budget, driver vendor-a/xl |
-| 2026-11-15 | 03 Build | `evals` | v1.4's held-out pass rate is 80%, meets target. Cites cost-budget-check: $0.0338 per successful task |
+| 2026-11-15 | 03 Build | `evals` | v1.4's held-out pass rate is 80%, meets target. Cites cost-budget-check: $0.0338 per task |
 | 2026-11-26 | 04 Learn | `landed` | Landed: 43% against the 40% bar, 41% at the date |
 
 Only did-it-land sets landed, watch or stalled. The build checks use their own words (meets target, within budget, over budget).
 
 ## Versions
 
-Each record names the skill version that wrote it, as that skill's code says. Every skill here is at the release `marketplace.json` pins (eval-kit 0.3.1, the others 0.3.0), except the Leader Report, which reads the record and writes none of it.
+Each record names the skill version that wrote it, as that skill's code says. Every skill here is at the release `marketplace.json` pins (eval-kit 0.3.2, the others 0.3.0), except the Leader Report, which reads the record and writes none of it.
