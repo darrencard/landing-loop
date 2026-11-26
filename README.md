@@ -13,7 +13,7 @@ Paste into Claude Code:
 /plugin install landing-loop@landing-loop
 ```
 
-That installs all six. Restart Claude Code, then ask: "Where should I start with the Landing Loop?"
+That installs all six. Restart Claude Code, then paste: "Write a landing brief for one bet I'm working on, then tell me which Landing Loop step comes next."
 
 ## The loop
 

@@ -15,8 +15,8 @@ from pathlib import Path
 ORDER = [
     ("bet-portfolio-review", "portfolio"),
     ("spec-auditor", "spec"),
-    ("eval-kit", "evals"),
     ("cost-budget-check", "cost"),
+    ("eval-kit", "evals"),
     ("did-it-land", "landed"),
 ]
 BET = "quote-drafting"
@@ -36,6 +36,9 @@ def main() -> int:
             record["brief"] = part["brief"]
         if key in record:
             raise SystemExit(f"{repo}: {key} already written")
+        for k, v in part.items():
+            if k not in ("schema", "bet", "brief", key) and record.get(k) != v:
+                raise SystemExit(f"{repo}: changed or invented the {k} key it read")
         record[key] = part[key]
     out = ROOT / "examples/acme/landing" / f"{BET}.json"
     out.parent.mkdir(parents=True, exist_ok=True)

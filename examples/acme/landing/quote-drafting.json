@@ -154,189 +154,6 @@
       "sha256": "decbe39590cc57b3d47125722a8d43e445d33c8f2f525c00277b94b7937dc95f"
     }
   },
-  "evals": {
-    "skill": "eval-kit",
-    "skill_version": "0.3.0",
-    "feature": "Quote drafting",
-    "version": "v1.4",
-    "as_of": "2026-11-15",
-    "status": "meets target",
-    "blocking": false,
-    "reasons": [
-      "held-out pass rate 80% meets the 80% target on a sealed holdout"
-    ],
-    "against_brief": {
-      "metric": "Quote draft acceptance rate",
-      "bar": "40%",
-      "better": "higher",
-      "by": "2026-11-15",
-      "judged": null,
-      "status": null,
-      "note": "The brief's metric, Quote draft acceptance rate, is not an eval figure. did-it-land judges it; these evals are the build check."
-    },
-    "columns": [
-      "version",
-      "run_at",
-      "cases",
-      "passed",
-      "cost_per_task",
-      "tasks",
-      "tasks_unassisted"
-    ],
-    "rows": [
-      {
-        "version": "v1.3",
-        "run_at": "2026-10-15",
-        "cases": 30,
-        "passed": 21,
-        "cost_per_task": null,
-        "tasks": 200,
-        "tasks_unassisted": 118
-      },
-      {
-        "version": "v1.4",
-        "run_at": "2026-11-15",
-        "cases": 30,
-        "passed": 24,
-        "cost_per_task": null,
-        "tasks": 200,
-        "tasks_unassisted": 143
-      }
-    ],
-    "figures": {
-      "pass_rate@v1.3": {
-        "value": 70.0,
-        "unit": "%",
-        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
-        "window": {
-          "from": "2026-10-15",
-          "to": "2026-10-15"
-        },
-        "as_of": "2026-11-15",
-        "ledger": "L1",
-        "interval_95": [
-          52.1,
-          83.3
-        ]
-      },
-      "dev_pass_rate@v1.3": {
-        "value": 74.3,
-        "unit": "%",
-        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
-        "window": {
-          "from": "2026-10-15",
-          "to": "2026-10-15"
-        },
-        "as_of": "2026-11-15",
-        "ledger": "L2"
-      },
-      "autonomy_rate@v1.3": {
-        "value": 59.0,
-        "unit": "%",
-        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
-        "window": {
-          "from": "2026-10-15",
-          "to": "2026-10-15"
-        },
-        "as_of": "2026-11-15",
-        "ledger": "L3",
-        "interval_95": [
-          52.1,
-          65.6
-        ]
-      },
-      "pass_rate@v1.4": {
-        "value": 80.0,
-        "unit": "%",
-        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
-        "window": {
-          "from": "2026-11-15",
-          "to": "2026-11-15"
-        },
-        "as_of": "2026-11-15",
-        "ledger": "L4",
-        "interval_95": [
-          62.7,
-          90.5
-        ]
-      },
-      "dev_pass_rate@v1.4": {
-        "value": 90.0,
-        "unit": "%",
-        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
-        "window": {
-          "from": "2026-11-15",
-          "to": "2026-11-15"
-        },
-        "as_of": "2026-11-15",
-        "ledger": "L5"
-      },
-      "autonomy_rate@v1.4": {
-        "value": 71.5,
-        "unit": "%",
-        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
-        "window": {
-          "from": "2026-11-15",
-          "to": "2026-11-15"
-        },
-        "as_of": "2026-11-15",
-        "ledger": "L6",
-        "interval_95": [
-          64.9,
-          77.3
-        ]
-      }
-    },
-    "promotion": {
-      "promote": true,
-      "reason": "challenger gains 10 points on held-out cases with no new failure",
-      "champion": "v1.3",
-      "challenger": "v1.4",
-      "delta": 10.0,
-      "new_failures": [],
-      "within_noise": true
-    },
-    "calibration": {
-      "calibrated": true,
-      "agreement": 100.0,
-      "false_accepts": []
-    },
-    "clusters": [
-      {
-        "id": "fc1",
-        "label": "before, changed, edited",
-        "size": 42,
-        "share": 66
-      },
-      {
-        "id": "fc2",
-        "label": "finish, left, missed",
-        "size": 15,
-        "share": 23
-      },
-      {
-        "id": "fc3",
-        "label": "added, book, expansion",
-        "size": 5,
-        "share": 8
-      },
-      {
-        "id": "fc4",
-        "label": "callout, left, missing",
-        "size": 2,
-        "share": 3
-      }
-    ],
-    "cost": {
-      "owner": "cost-budget-check",
-      "cited": false,
-      "note": "cost not checked: run cost-budget-check"
-    },
-    "illustrative": true,
-    "warnings": [
-      "cost not checked: run cost-budget-check. No cost figure is printed until it writes the cost key."
-    ]
-  },
   "cost": {
     "tool": "cost-budget-check 0.3.0",
     "budget_status": "over budget",
@@ -608,6 +425,198 @@
       },
       "as_of": "2026-11-15"
     }
+  },
+  "evals": {
+    "skill": "eval-kit",
+    "skill_version": "0.3.1",
+    "feature": "Quote drafting",
+    "version": "v1.4",
+    "as_of": "2026-11-15",
+    "status": "meets target",
+    "blocking": false,
+    "reasons": [
+      "held-out pass rate 80% meets the 80% target on a sealed holdout"
+    ],
+    "against_brief": {
+      "metric": "Quote draft acceptance rate",
+      "bar": "40%",
+      "better": "higher",
+      "by": "2026-11-15",
+      "judged": null,
+      "status": null,
+      "note": "The brief's metric, Quote draft acceptance rate, is not an eval figure. did-it-land judges it; these evals are the build check."
+    },
+    "columns": [
+      "version",
+      "run_at",
+      "cases",
+      "passed",
+      "cost_per_task",
+      "tasks",
+      "tasks_unassisted"
+    ],
+    "rows": [
+      {
+        "version": "v1.3",
+        "run_at": "2026-10-15",
+        "cases": 30,
+        "passed": 21,
+        "cost_per_task": null,
+        "tasks": 200,
+        "tasks_unassisted": 118
+      },
+      {
+        "version": "v1.4",
+        "run_at": "2026-11-15",
+        "cases": 30,
+        "passed": 24,
+        "cost_per_task": 0.0338,
+        "tasks": 200,
+        "tasks_unassisted": 143
+      }
+    ],
+    "figures": {
+      "pass_rate@v1.3": {
+        "value": 70.0,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-10-15",
+          "to": "2026-10-15"
+        },
+        "as_of": "2026-11-15",
+        "ledger": "L1",
+        "interval_95": [
+          52.1,
+          83.3
+        ]
+      },
+      "dev_pass_rate@v1.3": {
+        "value": 74.3,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-10-15",
+          "to": "2026-10-15"
+        },
+        "as_of": "2026-11-15",
+        "ledger": "L2"
+      },
+      "autonomy_rate@v1.3": {
+        "value": 59.0,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-10-15",
+          "to": "2026-10-15"
+        },
+        "as_of": "2026-11-15",
+        "ledger": "L3",
+        "interval_95": [
+          52.1,
+          65.6
+        ]
+      },
+      "pass_rate@v1.4": {
+        "value": 80.0,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-11-15",
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-15",
+        "ledger": "L4",
+        "interval_95": [
+          62.7,
+          90.5
+        ]
+      },
+      "dev_pass_rate@v1.4": {
+        "value": 90.0,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-11-15",
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-15",
+        "ledger": "L5"
+      },
+      "autonomy_rate@v1.4": {
+        "value": 71.5,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-11-15",
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-15",
+        "ledger": "L6",
+        "interval_95": [
+          64.9,
+          77.3
+        ]
+      },
+      "cost_per_task@v1.4": {
+        "value": 0.0338,
+        "unit": "$",
+        "source": "cost-budget-check 0.3.0: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+        "window": {
+          "from": "2026-11-15",
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-15",
+        "ledger": "L7"
+      }
+    },
+    "promotion": {
+      "promote": true,
+      "reason": "challenger gains 10 points on held-out cases with no new failure",
+      "champion": "v1.3",
+      "challenger": "v1.4",
+      "delta": 10.0,
+      "new_failures": [],
+      "within_noise": true
+    },
+    "calibration": {
+      "calibrated": true,
+      "agreement": 100.0,
+      "false_accepts": []
+    },
+    "clusters": [
+      {
+        "id": "fc1",
+        "label": "before, changed, edited",
+        "size": 42,
+        "share": 66
+      },
+      {
+        "id": "fc2",
+        "label": "finish, left, missed",
+        "size": 15,
+        "share": 23
+      },
+      {
+        "id": "fc3",
+        "label": "added, book, expansion",
+        "size": 5,
+        "share": 8
+      },
+      {
+        "id": "fc4",
+        "label": "callout, left, missing",
+        "size": 2,
+        "share": 3
+      }
+    ],
+    "cost": {
+      "owner": "cost-budget-check",
+      "cited": true,
+      "note": "cited from the cost key"
+    },
+    "illustrative": true,
+    "warnings": []
   },
   "landed": {
     "status": "landed",
