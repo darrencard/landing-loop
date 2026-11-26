@@ -1,0 +1,71 @@
+{
+  "name": "landing-loop",
+  "owner": {
+    "name": "Dacard"
+  },
+  "metadata": {
+    "description": "The Landing Loop: Claude skills that take a bet from landing brief to board update, with every figure computed in code and sourced."
+  },
+  "plugins": [
+    {
+      "name": "landing-loop",
+      "source": "./plugin",
+      "displayName": "Landing Loop",
+      "description": "One install for all six skills, from landing brief to board update."
+    },
+    {
+      "name": "product-engineering-update",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/product-engineering-update"
+      },
+      "displayName": "Product & Technology Leader Report",
+      "description": "Board, leadership and all-staff update with an evidence ledger. Step 5: report."
+    },
+    {
+      "name": "bet-portfolio-review",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/bet-portfolio-review"
+      },
+      "displayName": "Bet portfolio review",
+      "description": "Scores the roadmap against each bet's landing brief. Step 1: decide."
+    },
+    {
+      "name": "spec-auditor",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/spec-auditor"
+      },
+      "displayName": "Spec auditor",
+      "description": "Checks a PRD against its landing brief, pass or hold. Step 2: spec."
+    },
+    {
+      "name": "eval-kit",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/eval-kit"
+      },
+      "displayName": "Eval kit",
+      "description": "Pass rate, autonomy rate and cost per task for one AI feature. Step 3: build."
+    },
+    {
+      "name": "cost-budget-check",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/cost-budget-check"
+      },
+      "displayName": "Cost budget check",
+      "description": "Tokens per task and price per token against the brief's budget. Step 3: build."
+    },
+    {
+      "name": "did-it-land",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/did-it-land"
+      },
+      "displayName": "Did it land?",
+      "description": "Landed, watch or stalled from your own metric data. Step 4: learn."
+    }
+  ]
+}

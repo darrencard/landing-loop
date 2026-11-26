@@ -1,0 +1,8 @@
+{
+  "name": "landing-loop",
+  "version": "0.1.0",
+  "description": "One install for the Landing Loop: six Claude skills that take a bet from landing brief to board update.",
+  "author": { "name": "Dacard" },
+  "license": "MIT",
+  "dependencies": ["product-engineering-update", "bet-portfolio-review", "spec-auditor", "eval-kit", "cost-budget-check", "did-it-land"]
+}
