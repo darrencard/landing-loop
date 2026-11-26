@@ -17,7 +17,9 @@
       "name": "product-engineering-update",
       "source": {
         "source": "github",
-        "repo": "darrencard/product-engineering-update"
+        "repo": "darrencard/product-engineering-update",
+        "ref": "v0.11.0",
+        "sha": "8b843de107d080ed88e248428972b23f996d12fd"
       },
       "displayName": "Product & Technology Leader Report",
       "description": "Board, leadership and all-staff update with an evidence ledger. Step 5: report."
@@ -26,7 +28,9 @@
       "name": "bet-portfolio-review",
       "source": {
         "source": "github",
-        "repo": "darrencard/bet-portfolio-review"
+        "repo": "darrencard/bet-portfolio-review",
+        "ref": "v0.2.1",
+        "sha": "f5f0e682fc602a7f999c16aa7f7ad0bc258ed1db"
       },
       "displayName": "Bet portfolio review",
       "description": "Scores the roadmap against each bet's landing brief. Step 1: decide."
@@ -35,7 +39,9 @@
       "name": "spec-auditor",
       "source": {
         "source": "github",
-        "repo": "darrencard/spec-auditor"
+        "repo": "darrencard/spec-auditor",
+        "ref": "v0.2.0",
+        "sha": "3465b3d4ce71ad9c10896afa54c7c1a636131334"
       },
       "displayName": "Spec auditor",
       "description": "Checks a PRD against its landing brief, pass or hold. Step 2: spec."
@@ -44,7 +50,9 @@
       "name": "eval-kit",
       "source": {
         "source": "github",
-        "repo": "darrencard/eval-kit"
+        "repo": "darrencard/eval-kit",
+        "ref": "v0.2.0",
+        "sha": "e7a3a6d1b90e7ade959127fa0cd1d1a668cfcfc9"
       },
       "displayName": "Eval kit",
       "description": "Pass rate, autonomy rate and cost per task for one AI feature. Step 3: build."
@@ -53,7 +61,9 @@
       "name": "cost-budget-check",
       "source": {
         "source": "github",
-        "repo": "darrencard/cost-budget-check"
+        "repo": "darrencard/cost-budget-check",
+        "ref": "v0.2.0",
+        "sha": "9947d8360aed1454c69ae1f0484bf6533fecb1c0"
       },
       "displayName": "Cost budget check",
       "description": "Tokens per task and price per token against the brief's budget. Step 3: build."
@@ -62,7 +72,9 @@
       "name": "did-it-land",
       "source": {
         "source": "github",
-        "repo": "darrencard/did-it-land"
+        "repo": "darrencard/did-it-land",
+        "ref": "v0.2.0",
+        "sha": "8bdde877f95a3def9dfa50dbad8cc47da2cc00c2"
       },
       "displayName": "Did it land?",
       "description": "Landed, watch or stalled from your own metric data. Step 4: learn."
