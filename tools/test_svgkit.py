@@ -47,6 +47,141 @@ def sample() -> str:
     return sk.frame(body, label="Quote drafting landed: 43% against a 40% target.", height=320)
 
 
+def scorecard() -> str:
+    """One of every scorecard primitive, in one frame, as a page would print it."""
+    rows = [
+        sk.sc_row(
+            "Quote drafting",
+            picture=sk.range_line(prior=21.67, actual=43, target=40, status="landed"),
+            figure=sk.figure_line("43%", prior="21.67%", target="40%"),
+            word=sk.status_mark("landed") + sk.check_word("cost over budget"),
+        ),
+        sk.sc_row("Job scheduler", picture=sk.range_line(prior=2060, actual=2100, target=3000, status="stalled"), figure=sk.figure_line("2,100", prior="2,060", target="3,000"), word=sk.status_mark("stalled")),
+        sk.sc_row("When to undo the release", picture=sk.paired_bars(14, 28, top=28, hatch_id="t-h1"), figure=sk.figure_line("28 DAYS"), word=sk.person_call("Head of Product")),
+        sk.sc_row("Build quote drafting now", picture=sk.paired_bars(14, 7, top=28, hatch_id="t-h2"), figure=sk.figure_line("7 DAYS"), word=sk.person_call("Head of Product", due="2026-12-10")),
+        sk.sc_row("Checks", picture=sk.share_bar(11, 14), figure=sk.figure_line("11 of 14"), word=sk.check_word("HOLD", ink=True)),
+        sk.sc_row("Plan", picture=sk.pips(2, 5, dashed=1), figure=sk.figure_line("level 2 or below"), word=sk.check_word("PASS")),
+        sk.sc_note("21 areas not visible in these exports"),
+    ]
+    head = ["Project", "Before → now", "Figure", "Status"]
+    key = sk.legend("prior", "before") + sk.legend("target", "target") + sk.legend("plan", "plan") + sk.legend("actual", "actual") + sk.legend("over", "over plan")
+    return sk.sc_frame(rows, label="Quote drafting landed; job scheduler stalled.", title="Outcome scorecard", head=head, legend=key, caption="One row per project.")
+
+
+class Scorecard(unittest.TestCase):
+    PAGE = "<style>" + sk.CSS + sk.SCORECARD_CSS + "</style>"
+
+    def page(self) -> str:
+        return self.PAGE + scorecard()
+
+    def test_deterministic(self):
+        self.assertEqual(scorecard(), scorecard())
+        self.assertIsNone(re.search(r"\d\.\d{3,}", scorecard()))
+
+    def test_rows_are_html_and_pictures_hold_no_text(self):
+        out = scorecard()
+        self.assertEqual(out.count('<div class="sc-r">'), 6)
+        self.assertGreaterEqual(len(sk.svgs_in(out)), 6)
+        self.assertEqual(sk.svgs_with_text(out), [], "text inside a picture")
+        self.assertEqual(sk.scaled_svgs_in(out), [], "a picture with a viewBox scales its marks")
+        for svg in sk.svgs_in(out):
+            self.assertRegex(svg.split(">", 1)[0], r'height="\d+"', "a picture has a fixed pixel height")
+            self.assertIn('aria-hidden="true"', svg.split(">", 1)[0])
+
+    def test_four_pictures_at_their_fixed_heights(self):
+        out = scorecard()
+        heights = {cls: h for cls, h in re.findall(r'<svg class="(sc-[a-z]+)" width="[^"]+" height="([\d.]+)"', out)}
+        self.assertEqual(heights, {"sc-rl": "12", "sc-pv": "14", "sc-sh": "6", "sc-pp": "8"})
+
+    def test_labels_render_12px_and_names_14px(self):
+        sizes = set(sk.font_sizes(sk.SCORECARD_CSS))
+        self.assertEqual(sizes, {"var(--sc-m)", "var(--sc-n)"})
+        self.assertIn("--sc-m:calc(12px / var(--sc-z))", sk.SCORECARD_CSS)
+        self.assertIn("--sc-n:calc(14px / var(--sc-z))", sk.SCORECARD_CSS)
+        self.assertIn(".scg .sc-n{font-family:var(--sans);font-size:var(--sc-n)", sk.SCORECARD_CSS)
+        self.assertNotRegex(sk.SCORECARD_CSS, r"font-size:\s*\d", "a raw size bypasses the 12/14 rule")
+
+    def test_figures_are_tabular_and_right_aligned(self):
+        self.assertIn("font-variant-numeric:tabular-nums", sk.SCORECARD_CSS)
+        self.assertIn(".scg .sc-l{text-align:right}", sk.SCORECARD_CSS.replace(".scg .sc-h>:nth-child(3),", ""))
+        self.assertNotIn("<b><b>", scorecard())
+        self.assertIn('<span class="sc-l">21.67% <i>→</i> <b>43%</b> · TARGET 40%</span>', scorecard())
+
+    def test_no_box_inside_the_frame(self):
+        boxed = sk.boxed_classes(sk.CSS + sk.SCORECARD_CSS)
+        self.assertIn("sk-hdr", boxed | {"sk-hdr"})
+        self.assertEqual(sk.boxes_in_frames(self.page(), sk.CSS + sk.SCORECARD_CSS), [])
+        # The Leader Report template outlines .key i.o; the legend's own class names never collide with it.
+        self.assertEqual(sk.boxes_in_frames(self.page(), ".key i.o{outline:1px solid var(--t1)}" + sk.SCORECARD_CSS), [])
+        self.assertEqual(sk.boxes_in_frames('<div class="sc scg"><span class="chip">x</span></div>', ".chip{border:1px solid red}"), ["chip"])
+        self.assertNotRegex(sk.SCORECARD_CSS.split(".scg .sc-t")[0], r"border:\s*1px", "the frame is hairlines, not a box")
+
+    def test_no_overlap_rows_flow_in_a_grid(self):
+        self.assertNotIn("position:absolute", sk.SCORECARD_CSS)
+        self.assertIn("grid-template-columns:subgrid", sk.SCORECARD_CSS)
+        self.assertIn("@media (max-width:560px)", sk.SCORECARD_CSS)
+
+    def test_green_and_red_only_beside_their_word(self):
+        for row in re.findall(r'<div class="sc-r">.*?</div>', scorecard()):
+            for word in ("landed", "stalled"):
+                if f'class="ac {word}"' in row:
+                    self.assertIn(f'<span class="st {word}">{word}</span>', row)
+        css = sk.SCORECARD_CSS
+        for var in ("var(--landed)", "var(--stalled)"):
+            for sel in re.findall(r"([^{}]+)\{[^{}]*" + re.escape(var), css):
+                self.assertRegex(sel, r"\.(st|ac)\.(landed|stalled)")
+        with self.assertRaises(ValueError):
+            sk.status_mark("green")
+        with self.assertRaises(ValueError):
+            sk.range_line(actual=1, status="ok")
+
+    def test_brass_only_for_a_persons_call(self):
+        for sel in re.findall(r"([^{}]+)\{[^{}]*var\(--brass\)", sk.SCORECARD_CSS):
+            self.assertRegex(sel.strip(), r"\.sc-(o|pm)\b")
+        call = sk.person_call("Head of Product", due="2026-12-10")
+        self.assertTrue(call.startswith('<span class="sc-o"><svg width="8" height="10"'))
+        self.assertIn("Head of Product</span>", call)
+
+    def test_words_are_text_never_boxed_chips(self):
+        self.assertEqual(sk.check_word("HOLD", ink=True), '<span class="sc-w ink">HOLD</span>')
+        self.assertNotIn("border", re.search(r"\.scg \.sc-w\{[^}]*\}", sk.SCORECARD_CSS).group(0))
+
+    def test_range_line_target_tick_no_band(self):
+        rl = sk.range_line(prior=21.67, actual=43, target=40, status="landed")
+        self.assertIn('class="tg"', rl)
+        self.assertNotIn('class="ok"', rl)
+        self.assertIn('cx="42.71%"', rl)  # 21.67 of 43 x 1.18
+        self.assertIn('class="ac landed" cx="84.75%"', rl)
+
+    def test_paired_bars_scale_to_the_largest_and_hatch_only_the_overage(self):
+        over = sk.paired_bars(14, 28, top=28, hatch_id="h")
+        self.assertIn('<rect class="pl" x="0" y="0" width="50%"', over)
+        self.assertIn('<rect class="a" x="0" y="8" width="50%"', over)
+        self.assertIn('<rect class="ov" x="50%" y="8.5" width="50%" height="5" fill="url(#h)"/>', over)
+        under = sk.paired_bars(14, 7, top=28, hatch_id="h")
+        self.assertNotIn("url(#", under)
+        self.assertIn('width="25%"', under)
+
+    def test_share_bar_and_pips(self):
+        self.assertIn('width="78.57%"', sk.share_bar(11, 14))
+        self.assertEqual(sk.pips(2, 5, dashed=1).count('class="on"'), 2)
+        self.assertEqual(sk.pips(2, 5, dashed=1).count("dash"), 1)
+
+    def test_frame_states_its_answer_once_with_one_tag_and_one_caption(self):
+        out = scorecard()
+        self.assertTrue(out.startswith('<div class="sc scg" role="img" aria-label="Quote drafting landed; job scheduler stalled.">'))
+        self.assertEqual(out.count("sc-i"), 1)
+        self.assertEqual(out.count('class="sc-c"'), 1)
+        self.assertEqual(out.count('class="sc-h"'), 1)
+        self.assertEqual(len(sk.frames_in(self.page())), 1)
+        self.assertTrue(sk.frames_in(self.page())[0].endswith("</div>"))
+
+    def test_text_is_escaped(self):
+        out = sk.sc_row("<script>", figure=sk.figure_line("<b>"))
+        self.assertNotIn("<script>", out)
+        self.assertIn("&lt;b&gt;", out)
+
+
 class Numbers(unittest.TestCase):
     def test_fixed_formatting(self):
         cases = {0: "0", 1: "1", 1.5: "1.5", 1.25: "1.25", 1.255: "1.25", 1.256: "1.26", -0.001: "0", 2.10: "2.1", 720.0: "720", -3.5: "-3.5"}

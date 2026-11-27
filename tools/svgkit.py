@@ -16,6 +16,13 @@ lists the figures an SVG prints, so a page's tests can check them against the pa
 Output is deterministic: every coordinate goes through num(), which prints at most two decimals with no
 trailing zeros, so the same inputs give the same bytes.
 
+Scorecard rows (1.1.0, 2026-11-27): the grammar of the outcome scorecard on dacard.ai/update. A visual is HTML and
+CSS rows, not one scaled SVG: name | picture | figure | word, split by hairlines, with one mono head. Pictures are
+four, each a fixed-height SVG with no text and no viewBox, so nothing scales: range line, paired plan/actual
+bars, share bar, pips. Labels, figures and words are Geist Mono 12px; names Geist 14px. SCORECARD_CSS holds the
+rules; sc_frame(), sc_row() and the pictures write the markup. The older SVG primitives below stay for pages
+that still draw with them.
+
 Vendor this file byte-identical, pinned by landing-loop commit and sha256 (tools/SVGKIT.md).
 Standard library only. Python 3.11 or later.
 """
@@ -26,7 +33,7 @@ import html
 import re
 from collections.abc import Callable, Iterable, Sequence
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 INK = "var(--t1)"
 INK2 = "var(--t2)"
@@ -399,3 +406,265 @@ def unprinted(page: str) -> list[str]:
 
 def join(parts: Iterable[str]) -> str:
     return "".join(parts)
+
+
+
+# Scorecard rows (1.1.0): HTML and CSS rows in the grammar of the /update outcome scorecard.
+
+SC_MONO_PX = 12  # every label, figure and word, as rendered
+SC_NAME_PX = 14  # every name, as rendered
+SC_RANGE_H = 12  # the range line's height
+SC_BAR_H = 6  # each plan or actual bar; 2px between them
+SC_PIP_H = 8
+STATUSES = ("landed", "watch", "stalled")
+
+# Class names follow the Leader Report template (.sc, .sc-h, .sc-r, .sc-n, .sc-l, .sc-s, .st, .bl's .pr/.ac/.goal)
+# and its colour variables, scoped under .scg so these sizes win over the template's 10px ones on the same page.
+# Every font size here is 12px (mono) or 14px (names); a site under html{zoom:.8} sets --sc-z:.8 to keep them so.
+SCORECARD_CSS = (
+    ".scg{--sc-z:1;--sc-m:calc(12px / var(--sc-z));--sc-n:calc(14px / var(--sc-z));margin:0;padding:0;min-width:0;"
+    "border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}"
+    ".scg .sc-t{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 32px;padding:12px 0}"
+    ".scg .sc-t>span:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}"
+    ".scg .sc-t,.scg .sc-h,.scg .sc-l,.scg .sc-s,.scg .st,.scg .sc-w,.scg .sc-o,.scg .sc-x,.scg .sc-c,.scg .sc-i{"
+    "font-family:var(--mono);font-size:var(--sc-m);line-height:16px;font-weight:400;font-variant-numeric:tabular-nums}"
+    ".scg .sc-t,.scg .sc-h,.scg .sc-s,.scg .st,.scg .sc-w,.scg .sc-i{letter-spacing:.06em;text-transform:uppercase}"
+    ".scg .sc-t,.scg .sc-h,.scg .sc-x{color:var(--t3)}"
+    ".scg .sc-k{display:inline-flex;align-items:center;gap:6px}"
+    ".scg .sc-k i{display:inline-block;width:12px;height:6px;border-radius:1px;background:var(--agent-mid)}"
+    ".scg .sc-k i.k-a{background:var(--t1)}"
+    ".scg .sc-k i.k-o{background:repeating-linear-gradient(135deg,var(--t1) 0 2px,transparent 2px 4px)}"
+    ".scg .sc-k i.k-pr{width:8px;height:8px;border-radius:50%}"
+    ".scg .sc-k i.k-tg{width:1.5px;height:12px;border-radius:0;background:var(--t2)}"
+    ".scg .sc-b{display:grid;grid-template-columns:minmax(120px,.9fr) minmax(96px,1.3fr) max-content max-content;column-gap:32px}"
+    ".scg .sc-h,.scg .sc-r{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center}"
+    ".scg .sc-h{padding:0 0 10px}"
+    ".scg .sc-r{border-top:1px solid var(--line);padding:14px 0}"
+    ".scg .sc-h>:nth-child(3),.scg .sc-l{text-align:right}"
+    ".scg .sc-h>:nth-child(4),.scg .sc-s{text-align:right}"
+    ".scg .sc-n{font-family:var(--sans);font-size:var(--sc-n);line-height:1.4;color:var(--t1);min-width:0;overflow-wrap:anywhere}"
+    ".scg .sc-l{color:var(--t3);white-space:nowrap}"
+    ".scg .sc-l b{color:var(--t1);font-weight:500}.scg .sc-l i{font-style:normal}"
+    ".scg .sc-p{min-width:0;display:flex;align-items:center}"
+    ".scg .sc-p svg{display:block;width:100%;overflow:visible}"
+    ".scg .sc-s{display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap}"
+    ".scg .st{display:inline-flex;align-items:center;gap:7px}"
+    ".scg .st::before{content:'';width:7px;height:7px;border-radius:2px;background:currentColor;flex:none}"
+    ".scg .st.watch::before{width:8px;height:8px;border-radius:50%;background:none;border:1.5px solid currentColor;box-sizing:border-box}"
+    ".scg .st.landed{color:var(--landed)}.scg .st.watch{color:var(--watch)}.scg .st.stalled{color:var(--stalled)}"
+    ".scg .sc-w{color:var(--t3)}.scg .sc-w.ink{color:var(--t1)}"
+    ".scg .sc-o{display:inline;color:var(--brass);text-transform:none;letter-spacing:0}"
+    ".scg .sc-o svg{display:inline-block;margin-right:6px;vertical-align:0}"
+    ".scg .sc-x{grid-column:1/-1;border-top:1px solid var(--line);padding:12px 0}"
+    ".scg .sc-c{display:block;color:var(--t3);padding:10px 0 12px;border-top:1px solid var(--line)}"
+    ".scg .sc-i{display:inline-flex;align-items:center;gap:7px;color:var(--ill)}"
+    ".scg .sc-i::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor;flex:none}"
+    ".sc-rl .tr{fill:var(--line2)}.sc-rl .mv{fill:var(--agent-mid)}.sc-rl .tg{fill:var(--t2)}"
+    ".sc-rl .pr{fill:var(--agent-mid)}.sc-rl .ac{fill:var(--t1);stroke:var(--bg);stroke-width:2}"
+    ".sc-rl .ac.landed{fill:var(--landed)}.sc-rl .ac.stalled{fill:var(--stalled)}"
+    ".sc-rl .ac.watch{fill:var(--bg);stroke:var(--watch);stroke-width:2}"
+    ".sc-pv .pl{fill:var(--agent-mid)}.sc-pv .a{fill:var(--t1)}.sc-pv .ov{stroke:var(--t1);stroke-width:1}"
+    ".sc-pv pattern line{stroke:var(--t1);stroke-width:1.5}"
+    ".sc-sh .tr{fill:var(--line2)}.sc-sh .a{fill:var(--t1)}"
+    ".sc-pp .on{fill:var(--t2)}.sc-pp .off{fill:none;stroke:var(--t3);stroke-width:1}.sc-pp .dash{stroke-dasharray:2 2}"
+    ".sc-pm{fill:var(--brass)}"
+    "@media (max-width:560px){"
+    ".scg .sc-b{display:block}"
+    ".scg .sc-h{display:none}"
+    ".scg .sc-r{grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:'n s' 'l l' 'p p';column-gap:16px;row-gap:6px}"
+    ".scg .sc-n{grid-area:n}.scg .sc-s{grid-area:s;align-self:start;white-space:normal;max-width:168px;text-align:right}.scg .sc-l{grid-area:l;text-align:left;white-space:normal}"
+    ".scg .sc-p{grid-area:p;margin-right:64px}.scg .sc-p:empty{display:none}}"
+)
+
+
+def _pct(value: float) -> str:
+    return num(max(0.0, min(100.0, value))) + "%"
+
+
+def _svg(cls: str, height: float, body: str) -> str:
+    """A fixed-height picture: width 100% of its cell, height in pixels, no viewBox, so nothing in it scales."""
+    return f'<svg class="{cls}" width="100%" height="{num(height)}" aria-hidden="true" focusable="false">{body}</svg>'
+
+
+def sc_frame(rows: Iterable[str], *, label: str, title: str, head: Sequence[str] = (), legend: str = "", caption: str = "", illustrative: bool = True) -> str:
+    """One visual: a frame head (section label, legend, Illustrative tag top right), one mono column head, the
+    rows, and one caption line. role="img" with an aria-label that states the answer. Hairlines top and bottom,
+    never a box, so it sits inside a card or a page without a box inside a box."""
+    tag = '<span class="sc-i">Illustrative</span>' if illustrative else ""
+    top = f'<div class="sc-t"><span><span>{esc(title)}</span>{legend}</span>{tag}</div>'
+    cols = f'<div class="sc-h">{"".join(f"<span>{esc(h)}</span>" for h in head)}</div>' if head else ""
+    cap = f'<span class="sc-c">{esc(caption)}</span>' if caption else ""
+    return f'<div class="sc scg" role="img" aria-label="{esc(label)}">{top}<div class="sc-b">{cols}{"".join(rows)}</div>{cap}</div>'
+
+
+def sc_row(name: str, *, picture: str = "", figure: str = "", word: str = "") -> str:
+    """One row: name | picture | figure | word. name is plain text; the others are markup from this module."""
+    figure = figure or '<span class="sc-l"></span>'
+    return f'<div class="sc-r"><span class="sc-n">{esc(name)}</span><span class="sc-p">{picture}</span>{figure}<span class="sc-s">{word}</span></div>'
+
+
+def sc_note(text: str) -> str:
+    """One muted line in place of rows that have nothing to show, so no row is left blank."""
+    return f'<div class="sc-x">{esc(text)}</div>'
+
+
+def legend(kind: str, text: str) -> str:
+    """A key mark for the frame head: plan, actual, over (hatched), prior (dot) or target (tick)."""
+    cls = {"plan": "k-pl", "actual": "k-a", "over": "k-o", "prior": "k-pr", "target": "k-tg"}[kind]
+    return f'<span class="sc-k"><i class="{cls}"></i>{esc(text)}</span>'
+
+
+def figure_line(actual: str, *, prior: str | None = None, target: str | None = None, target_word: str = "TARGET", tail: str = "") -> str:
+    """`prior → actual · TARGET x`: the actual in ink, medium weight, the rest muted; one right-aligned column."""
+    parts = (f"{esc(prior)} <i>→</i> " if prior else "") + f"<b>{esc(actual)}</b>"
+    if target:
+        parts += f" · {esc(target_word)} {esc(target)}"
+    if tail:
+        parts += f" · {esc(tail)}"
+    return f'<span class="sc-l">{parts}</span>'
+
+
+def range_line(*, actual: float, target: float | None = None, prior: float | None = None, status: str | None = None, domain: tuple[float, float] | None = None) -> str:
+    """Prior (grey dot), actual (status dot, ink without a status), the move between them, a target tick.
+    No band. The scale runs from 0 to 1.18 times the largest value, as the Leader Report's bullet() draws it."""
+    if status is not None and status not in STATUSES:
+        raise ValueError(f"status is landed, watch or stalled, not {status!r}")
+    values = [v for v in (actual, target, prior) if v is not None]
+    lo, hi = domain or (0.0, max(values) * 1.18 or 1.0)
+    x = scale((lo, hi), (0, 100))
+    mid = SC_RANGE_H / 2
+    parts = [f'<rect class="tr" x="0" y="{num(mid - 1)}" width="100%" height="2" rx="1"/>']
+    if prior is not None:
+        a, b = sorted((x(prior), x(actual)))
+        parts.append(f'<rect class="mv" x="{_pct(a)}" y="{num(mid - 1)}" width="{_pct(b - a)}" height="2"/>')
+    if target is not None:
+        parts.append(f'<rect class="tg" x="{_pct(x(target))}" y="0" width="1.5" height="{num(SC_RANGE_H)}" transform="translate(-0.75 0)"/>')
+    if prior is not None:
+        parts.append(f'<circle class="pr" cx="{_pct(x(prior))}" cy="{num(mid)}" r="3.5"/>')
+    parts.append(f'<circle class="ac{" " + status if status else ""}" cx="{_pct(x(actual))}" cy="{num(mid)}" r="4.5"/>')
+    return _svg("sc-rl", SC_RANGE_H, "".join(parts))
+
+
+def paired_bars(plan: float, actual: float, *, top: float, hatch_id: str) -> str:
+    """Plan grey above, actual ink below, both scaled to top (the visual's largest value). The part of the actual
+    past the plan is hatched and outlined: hatching means over plan, nothing else. hatch_id must be unique on the page."""
+    x = scale((0, top or 1), (0, 100))
+    p, a = x(plan), x(actual)
+    y2 = SC_BAR_H + 2
+    pat = (
+        f'<defs><pattern id="{esc(hatch_id)}" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+        '<line x1="0" y1="0" x2="0" y2="4"/></pattern></defs>'
+    )
+    parts = [f'<rect class="pl" x="0" y="0" width="{_pct(p)}" height="{SC_BAR_H}" rx="1"/>']
+    parts.append(f'<rect class="a" x="0" y="{y2}" width="{_pct(min(a, p))}" height="{SC_BAR_H}" rx="1"/>')
+    if actual > plan:
+        parts.append(f'<rect class="ov" x="{_pct(p)}" y="{num(y2 + 0.5)}" width="{_pct(a - p)}" height="{num(SC_BAR_H - 1)}" fill="url(#{esc(hatch_id)})"/>')
+        return _svg("sc-pv", 2 * SC_BAR_H + 2, pat + "".join(parts))
+    return _svg("sc-pv", 2 * SC_BAR_H + 2, "".join(parts))
+
+
+def share_bar(part: float, whole: float) -> str:
+    """A proportion: the track in hairline grey, the share in ink. The figure prints beside it, as `13 of 15`."""
+    w = part / whole * 100 if whole else 0
+    return _svg("sc-sh", SC_BAR_H, f'<rect class="tr" x="0" y="0" width="100%" height="{SC_BAR_H}" rx="1"/><rect class="a" x="0" y="0" width="{_pct(w)}" height="{SC_BAR_H}" rx="1"/>')
+
+
+def pips(filled: int, of: int, *, dashed: int = 0) -> str:
+    """Level pips, filled to the level; `dashed` more pips after them print dashed (a band, not a known level).
+    Fixed width: 12px a pip."""
+    dots = []
+    for i in range(of):
+        cls = "on" if i < filled else "off dash" if i < filled + dashed else "off"
+        dots.append(f'<circle class="{cls}" cx="{num(4 + i * 12)}" cy="4" r="3.5"/>')
+    return f'<svg class="sc-pp" width="{num(of * 12 - 4)}" height="{SC_PIP_H}" aria-hidden="true" focusable="false">{"".join(dots)}</svg>'
+
+
+def status_mark(word: str) -> str:
+    """landed, watch or stalled with its mark. The only place green or red is painted."""
+    if word not in STATUSES:
+        raise ValueError(f"status is landed, watch or stalled, not {word!r}")
+    return f'<span class="st {word}">{word}</span>'
+
+
+def check_word(word: str, *, ink: bool = False) -> str:
+    """A check word as text, never a boxed chip: muted, or ink when it needs attention (HOLD, BELOW TARGET)."""
+    return f'<span class="sc-w{" ink" if ink else ""}">{esc(word)}</span>'
+
+
+def person_mark() -> str:
+    """A small brass person mark, 8 by 10, no text."""
+    return '<svg width="8" height="10" aria-hidden="true" focusable="false"><circle class="sc-pm" cx="4" cy="2.5" r="2.2"/><path class="sc-pm" d="M0,10 Q0,5.5 4,5.5 Q8,5.5 8,10 Z"/></svg>'
+
+
+def person_call(who: str, *, due: str | None = None) -> str:
+    """A person's call: the role in brass text with the person mark, and the date beside it in muted mono."""
+    out = f'<span class="sc-o">{person_mark()}{esc(who)}</span>'
+    return out + (f'<span class="sc-w">{esc(due)}</span>' if due else "")
+
+
+# Checks a page's tests use for scorecard rows
+
+_RULE = re.compile(r"([^{}]+)\{([^{}]*)\}")
+_PX = re.compile(r"(?<![\w.-])(\d+(?:\.\d+)?)px")
+
+
+def font_sizes(css: str, scope: str = ".scg") -> list[str]:
+    """Every font size declared by a rule whose selector is in scope: a px figure, or var(--sc-m)/var(--sc-n)."""
+    out = []
+    for sel, body in _RULE.findall(css):
+        if scope not in sel:
+            continue
+        for decl in body.split(";"):
+            prop, _, value = decl.partition(":")
+            if prop.strip() == "font-size":
+                out.append(value.strip())
+            elif prop.strip() == "font":
+                found = _PX.search(value)
+                out.append(found.group(0) if found else value.strip())
+    return out
+
+
+def svgs_with_text(page: str) -> list[str]:
+    return [svg for svg in svgs_in(page) if "<text" in svg]
+
+
+def frames_in(page: str) -> list[str]:
+    """Each scorecard frame's markup, whole."""
+    out, start = [], 0
+    while (i := page.find('<div class="sc scg"', start)) >= 0:
+        depth, j = 0, i
+        for m in re.finditer(r"<(/?)div\b", page[i:]):
+            depth += -1 if m.group(1) else 1
+            if depth == 0:
+                j = i + m.end()
+                break
+        out.append(page[i : page.index(">", j) + 1])
+        start = j
+    return out
+
+
+def scaled_svgs_in(page: str) -> list[str]:
+    """SVGs inside scorecard frames that would scale: any with a viewBox. Empty is the pass."""
+    return [svg for frame in frames_in(page) for svg in svgs_in(frame) if "viewBox" in svg.split(">", 1)[0]]
+
+
+def boxed_classes(css: str) -> set[str]:
+    """Classes that draw a full box: a rule with a border or outline on all sides that is not 0 or none."""
+    out = set()
+    for sel, body in _RULE.findall(css):
+        if re.search(r"(?:^|;)\s*(?:border|outline)\s*:\s*(?!0|none)[^;]*\d", body):
+            out |= set(re.findall(r"\.([\w-]+)\s*(?:$|,|::?[\w-]+\s*$)", sel.strip()))
+    return out
+
+
+def boxes_in_frames(page: str, css: str) -> list[str]:
+    """Elements inside a scorecard frame that carry a boxed class: a box inside a box. Empty is the pass.
+    Inline style borders count too."""
+    boxed = boxed_classes(css) - {"st", "watch", "sc-t"}
+    found = []
+    for frame in frames_in(page):
+        inner = frame.split(">", 1)[1]
+        for cls in re.findall(r'class="([^"]+)"', inner):
+            found += [c for c in cls.split() if c in boxed]
+        found += re.findall(r'style="[^"]*(?:border|outline)\s*:[^"]*"', inner)
+    return found
