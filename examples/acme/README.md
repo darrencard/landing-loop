@@ -17,7 +17,7 @@ The record reads in loop order, and the dates follow it, except `decisions`: dec
 | 2026-09-05 | 03 Build | `release` | v1.0 is ready to ship: 6 of 7 checks ready, the open-bugs check on hold under a waiver to 2026-09-19, both spec holds closed |
 | 2026-09-07 | | | Quote drafting ships |
 | 2026-11-15 | 03 Build | `cost` | 1 to 14 November: all three budget lines over budget, driver vendor-a/xl |
-| 2026-11-15 | 03 Build | `evals` | v1.4's held-out pass rate is 80%, not confirmed: inside noise (95% interval 62.7% to 90.5% on 30 cases, so its low end does not clear the 80% target). Cites cost-budget-check: $0.0338 per task |
+| 2026-11-15 | 03 Build | `evals` | v1.4's held-out pass rate is 80%, not confirmed: too close to call (95% interval 62.7% to 90.5% on 30 cases, so its low end does not clear the 80% target). Cites cost-budget-check: $0.0338 per task |
 | 2026-11-26 | 04 Learn | `landed` | Landed: 43% against the 40% bar, 41% at the date |
 | 2026-11-26 | 04 Learn | `signals` | Problem still raised: 7 signals from 7 accounts say quote drafts still miss line items |
 | 2026-11-26 | 04 Learn | `postmortem` | Two incidents; the long-draft routing to vendor-a/xl stayed in place after the first. 4 fixes, each with one owner and a due date |
@@ -25,8 +25,8 @@ The record reads in loop order, and the dates follow it, except `decisions`: dec
 
 People are named by role, never invented names: Head of Product, Quoting squad (decides the next step, as the brief says); Lead, Quoting squad; Tech lead, Quoting squad; Product manager, Quoting squad. Acme's other bets use the same forms for their own squad.
 
-Only did-it-land sets landed, watch or stalled. The build checks use their own words (meets target, not confirmed: inside noise, below target; within budget, over budget).
+Only did-it-land sets landed, watch or stalled. The build checks use their own words (meets target, not confirmed: too close to call, below target; within budget, over budget).
 
 ## Versions
 
-Each record names the skill version that wrote it: bet-portfolio-review, spec-auditor, cost-budget-check and did-it-land 0.3.2, eval-kit 0.3.4, and decision-record, release-readiness, customer-signal-digest, postmortem and board-qa-prep 0.3.1. `marketplace.json` pins exactly these releases, each by tag and commit. The Leader Report reads the record and writes none of it.
+Each record names the skill version that wrote it, as the code on that skill's main says: bet-portfolio-review, decision-record, spec-auditor and cost-budget-check 0.3.3, eval-kit 0.3.5, did-it-land 0.3.4, and release-readiness, customer-signal-digest, postmortem and board-qa-prep 0.3.2. These versions are not tagged yet. `marketplace.json` still pins the earlier releases, each by tag and commit: bet-portfolio-review, spec-auditor, cost-budget-check and did-it-land 0.3.2, eval-kit 0.3.4, and decision-record, release-readiness, customer-signal-digest, postmortem and board-qa-prep 0.3.1. The Leader Report reads the record and writes none of it.

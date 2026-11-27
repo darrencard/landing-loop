@@ -27,7 +27,7 @@ Eleven skills share one brief and one record per bet, the Product & Technology L
 | 02 Spec | spec-auditor | Checks a PRD against its brief, pass or hold | `spec` | yes |
 | 03 Build | release-readiness | Ready to ship or hold, per check and per release; a waived check still reads hold | `release` | yes |
 | 03 Build | cost-budget-check | Tokens per task and price per token, within budget or over budget | `cost` | yes |
-| 03 Build | eval-kit | Pass rate and autonomy rate for one AI feature: meets target, not confirmed: inside noise, or below target | `evals` | yes |
+| 03 Build | eval-kit | Pass rate and autonomy rate for one AI feature: meets target, not confirmed: too close to call, or below target | `evals` | yes |
 | 04 Learn | did-it-land | Landed, watch or stalled, from your own data. The only step that sets a bet's status | `landed` | yes |
 | 04 Learn | customer-signal-digest | What customers say about the bet: problem still raised or problem not raised | `signals` | yes |
 | 04 Learn | postmortem | What changed, each with evidence, and one owner and due date per fix | `postmortem` | yes |

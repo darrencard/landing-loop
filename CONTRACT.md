@@ -57,7 +57,7 @@ Rules:
 
 - Each skill writes only its own key and keeps every other key exactly as it found it.
 - Every figure inside a key carries `value`, `unit`, `source`, `window` (from, to) and `as_of`. No figure without a source.
-- A bet's status words are landed, watch or stalled only, and only did-it-land sets them (`landed.status`). Build checks use their own words: eval-kit says meets target, not confirmed: inside noise (the point estimate meets it but the 95% interval's low end does not), or below target; cost-budget-check says within budget or over budget for each budget line. Neither uses the status colours.
+- A bet's status words are landed, watch or stalled only, and only did-it-land sets them (`landed.status`). Build checks use their own words: eval-kit says meets target, not confirmed: too close to call (the point estimate meets it but the 95% interval's low end does not), or below target; did-it-land's own noise flag says inside normal ups and downs, so no two skills share a check word; cost-budget-check says within budget or over budget for each budget line. Neither uses the status colours.
 - `evals` uses the Leader Report's evals columns (`tasks`, `tasks_unassisted`, pass rate) so the report reads it unchanged.
 - `cost` states tokens per task and price per token as two figures, plus the budget from the brief.
 - `landed.status` is computed in code from the brief's bar and date, never written by the model.
