@@ -2,6 +2,8 @@
 
 Free Claude skills that take a bet from its landing brief to the board update, with every figure computed in code and sourced.
 
+A bet is a project you expect to move a number; its bar is the target its landing brief sets.
+
 **Why it matters:** most teams can say what shipped. Few can say whether it landed. The loop asks that at every step, against the same brief.
 
 ## Install
@@ -13,7 +15,7 @@ Paste into Claude Code:
 /plugin install landing-loop@landing-loop
 ```
 
-That installs every skill marked "in the bundle" below. Restart Claude Code, then paste: "Write a landing brief for one bet I'm working on, then tell me which Landing Loop step comes next."
+That installs every skill marked "in the bundle" below. Restart Claude Code, then paste: "Write a landing brief for one project I'm working on, then tell me which Landing Loop step comes next."
 
 ## The loop
 
