@@ -1,6 +1,6 @@
 # Landing Loop contract, November 2026
 
-Ten skills and the Product & Technology Leader Report work as one loop on one landing brief. Set 2026-11-26. Each skill keeps its own repo; this file is what they share.
+Eleven skills, the Product & Technology Leader Report among them, work as one loop on one landing brief. Two team skills sit outside it. Set 2026-11-26. Each skill keeps its own repo; this file is what they share.
 
 | Step | Skill | Reads | Writes (its key in the loop record) |
 |---|---|---|---|
@@ -24,13 +24,13 @@ Check words, so status words stay did-it-land's (set 2026-11-26):
 
 | Skill | Check words |
 |---|---|
-| decision-record | open, decided, dropped, past due; a decision's outcome is worked, pending or missed |
+| decision-record | open, decided, dropped, waiting longer than usual, past due (a passed decide-by date only); a decision's outcome is worked, pending or missed |
 | release-readiness | ready to ship or hold, per check and per release; a waived check still reads hold |
 | customer-signal-digest | problem still raised or problem not raised |
 | postmortem | what changed (each with evidence) and who owns each fix (one owner and a due date) |
 | board-qa-prep | answered or open for each likely question |
 
-Acme people are roles, not invented names, in every loop sample (Head of Product, Quoting squad; Lead, Quoting squad), so the samples agree with the brief.
+Acme people are roles, never invented names, in every sample (loop and team). The quote-drafting bet, which every sample follows, uses four: Head of Product, Quoting squad (decides the next step, as the brief says); Lead, Quoting squad; Tech lead, Quoting squad; Product manager, Quoting squad. Acme's other bets use the same forms for their own squad (Head of Product, Payments squad; Lead, Payments squad). A decider is a person's name or a role scoped to one team, written "<role>, <team>" (decision-record's rule).
 
 ## The brief
 
@@ -57,7 +57,7 @@ Rules:
 
 - Each skill writes only its own key and keeps every other key exactly as it found it.
 - Every figure inside a key carries `value`, `unit`, `source`, `window` (from, to) and `as_of`. No figure without a source.
-- A bet's status words are landed, watch or stalled only, and only did-it-land sets them (`landed.status`). Build checks use their own words: eval-kit says meets target or below target; cost-budget-check says within budget or over budget for each budget line. Neither uses the status colours.
+- A bet's status words are landed, watch or stalled only, and only did-it-land sets them (`landed.status`). Build checks use their own words: eval-kit says meets target, not confirmed: inside noise (the point estimate meets it but the 95% interval's low end does not), or below target; cost-budget-check says within budget or over budget for each budget line. Neither uses the status colours.
 - `evals` uses the Leader Report's evals columns (`tasks`, `tasks_unassisted`, pass rate) so the report reads it unchanged.
 - `cost` states tokens per task and price per token as two figures, plus the budget from the brief.
 - `landed.status` is computed in code from the brief's bar and date, never written by the model.

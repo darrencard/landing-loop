@@ -58,10 +58,10 @@
   },
   "decisions": {
     "tool": "decision-record 0.3.0",
-    "as_of": "2026-07-27",
+    "as_of": "2026-11-26",
     "log": {
       "path": "decisions.md",
-      "sha256": "a01557cce6febb250bc9f8533481eb5fb5fd6e80979df5ab8cb33bf48a8f53e9"
+      "sha256": "096127d5d48da4ff01f33b3671553130d0be05c82b0a7d26b1bef7b4cfca5086"
     },
     "reads": {
       "brief": true,
@@ -77,28 +77,7 @@
       "id",
       "source"
     ],
-    "rows": [
-      {
-        "ask": "Set the rollback trigger for quote drafting",
-        "options": "Roll back when wrong-price quotes pass 2% or Roll back when rejected drafts pass 30%",
-        "recommendation": "Product manager, Quoting squad, recommends the wrong-price trigger at 2%. Waiting on Lead, Quoting squad, 14 days open, past the usual 7 days to decide.",
-        "deadline": "2026-08-03",
-        "owner": "Lead, Quoting squad",
-        "days_waiting": 14,
-        "id": "D-0004",
-        "source": "Acme decide call, 2026-07-27 (illustrative)"
-      },
-      {
-        "ask": "Choose the model tier for quote drafts",
-        "options": "vendor-a/xl or vendor-a/m",
-        "recommendation": "Lead, Quoting squad, recommends vendor-a/m, to stay inside the 9,000 token budget. Waiting on Tech lead, Quoting squad, 7 days open.",
-        "deadline": "2026-08-03",
-        "owner": "Tech lead, Quoting squad",
-        "days_waiting": 7,
-        "id": "D-0005",
-        "source": "Acme decide call, 2026-07-27 (illustrative)"
-      }
-    ],
+    "rows": [],
     "decided": [
       {
         "id": "D-0001",
@@ -146,6 +125,34 @@
         "assumptions": [],
         "evidence": "Prices come from the price book in fixed code. That is my call for v1.",
         "source": "Acme decide call, 2026-07-27 (illustrative)"
+      },
+      {
+        "id": "D-0004",
+        "title": "Set the rollback trigger for quote drafting",
+        "chosen": "Roll back when wrong-price quotes pass 2%",
+        "decided_by": "Head of Product, Quoting squad",
+        "date": "2026-08-10",
+        "owner": "Tech lead, Quoting squad",
+        "review_by": "2026-11-15",
+        "reversible": "yes",
+        "success_signal": "Wrong-price quotes stay below 2% to 2026-11-15 (illustrative).",
+        "assumptions": [],
+        "evidence": "My call: we roll back quote drafting when wrong-price quotes pass 2%.",
+        "source": "Acme spec review call, 2026-08-10 (illustrative)"
+      },
+      {
+        "id": "D-0005",
+        "title": "Choose the model tier for quote drafts",
+        "chosen": "vendor-a/m",
+        "decided_by": "Tech lead, Quoting squad",
+        "date": "2026-08-10",
+        "owner": "Tech lead, Quoting squad",
+        "review_by": "2026-11-15",
+        "reversible": "yes",
+        "success_signal": "Tokens per task within the brief's 9,000 budget to 2026-11-15 (illustrative).",
+        "assumptions": [],
+        "evidence": "vendor-a/m drafts quotes in v1. Long drafts go to vendor-a/xl. That is my call.",
+        "source": "Acme spec review call, 2026-08-10 (illustrative)"
       }
     ],
     "brief": {
@@ -160,120 +167,120 @@
     },
     "figures": {
       "open": {
-        "value": 2,
+        "value": 0,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d)",
         "window": {
           "from": "2026-07-13",
-          "to": "2026-07-27"
+          "to": "2026-11-26"
         },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
       },
       "decided": {
-        "value": 3,
+        "value": 5,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d)",
         "window": {
           "from": "2026-07-13",
-          "to": "2026-07-27"
+          "to": "2026-11-26"
         },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
+      },
+      "waiting_long": {
+        "value": 0,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26"
       },
       "past_due": {
-        "value": 1,
+        "value": 0,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d); open with a decide-by date before as_of",
         "window": {
           "from": "2026-07-13",
-          "to": "2026-07-27"
+          "to": "2026-11-26"
         },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
       },
       "waiting_on_nobody": {
         "value": 0,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d)",
         "window": {
           "from": "2026-07-13",
-          "to": "2026-07-27"
+          "to": "2026-11-26"
         },
-        "as_of": "2026-07-27"
-      },
-      "oldest_open": {
-        "value": 14,
-        "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); as_of minus the opened date",
-        "window": {
-          "from": "2026-07-13",
-          "to": "2026-07-27"
-        },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
       },
       "usual_days_to_decide": {
-        "value": 7.0,
+        "value": 14.0,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); median days from opened to decided",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d); median days from opened to decided",
         "window": {
           "from": "2026-07-13",
-          "to": "2026-07-27"
+          "to": "2026-11-26"
         },
-        "as_of": "2026-07-27"
-      },
-      "days_waiting@D-0004": {
-        "value": 14,
-        "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); as_of minus the opened date",
-        "window": {
-          "from": "2026-07-13",
-          "to": "2026-07-27"
-        },
-        "as_of": "2026-07-27"
-      },
-      "days_waiting@D-0005": {
-        "value": 7,
-        "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); as_of minus the opened date",
-        "window": {
-          "from": "2026-07-20",
-          "to": "2026-07-27"
-        },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
       },
       "days_to_decide@D-0001": {
         "value": 7,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); decided date minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d); decided date minus the opened date",
         "window": {
           "from": "2026-07-20",
           "to": "2026-07-27"
         },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
       },
       "days_to_decide@D-0002": {
         "value": 14,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); decided date minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d); decided date minus the opened date",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
         },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
       },
       "days_to_decide@D-0003": {
         "value": 5,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); decided date minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d); decided date minus the opened date",
         "window": {
           "from": "2026-07-22",
           "to": "2026-07-27"
         },
-        "as_of": "2026-07-27"
+        "as_of": "2026-11-26"
+      },
+      "days_to_decide@D-0004": {
+        "value": 28,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d); decided date minus the opened date",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-08-10"
+        },
+        "as_of": "2026-11-26"
+      },
+      "days_to_decide@D-0005": {
+        "value": 21,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d); decided date minus the opened date",
+        "window": {
+          "from": "2026-07-20",
+          "to": "2026-08-10"
+        },
+        "as_of": "2026-11-26"
       }
     },
     "gaps": [],
-    "next_step": "D-0004 waits on Lead, Quoting squad: set the rollback trigger for quote drafting by 2026-08-03.",
-    "next_step_by": "Lead, Quoting squad",
-    "next_in_loop": "Next in the loop, 02 Spec: run spec-auditor on the bet's spec against this brief before build starts.",
+    "next_step": "No open decisions on this bet.",
+    "next_step_by": null,
+    "next_in_loop": "",
     "illustrative": true
   },
   "spec": {
@@ -571,7 +578,7 @@
         "id": "rollback",
         "label": "Rollback written, owned, rehearsed, with a trigger threshold",
         "readiness": "ready to ship",
-        "owner": "Platform on-call lead",
+        "owner": "Tech lead, Quoting squad",
         "reasons": [],
         "figures": {
           "test_age_days": {
@@ -609,7 +616,7 @@
         "id": "evals",
         "label": "Eval gate passes on the release commit",
         "readiness": "ready to ship",
-        "owner": "Quoting squad ML engineer",
+        "owner": "Tech lead, Quoting squad",
         "reasons": [],
         "figures": {
           "1.cases": {
@@ -1020,10 +1027,10 @@
     "feature": "Quote drafting",
     "version": "v1.4",
     "as_of": "2026-11-15",
-    "status": "meets target",
+    "status": "not confirmed: inside noise",
     "blocking": false,
     "reasons": [
-      "held-out pass rate 80% meets the 80% target on a sealed holdout"
+      "held-out pass rate 80% meets the 80% target only as a point estimate: 24 of 30 has a 95% interval of 62.7% to 90.5%, which reaches under it; a rate exactly at the target never clears it, however many cases, so it needs a rate above 80%"
     ],
     "against_brief": {
       "metric": "Quote draft acceptance rate",
@@ -1247,7 +1254,7 @@
         "as_of": "2026-11-26T09:00:00Z"
       },
       "baseline_mean": {
-        "value": 22.17,
+        "value": 21.67,
         "unit": "%",
         "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
         "window": {
@@ -1257,7 +1264,7 @@
         "as_of": "2026-11-26T09:00:00Z"
       },
       "baseline_sd": {
-        "value": 0.75,
+        "value": 3.83,
         "unit": "%",
         "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
         "window": {
@@ -1267,7 +1274,7 @@
         "as_of": "2026-11-26T09:00:00Z"
       },
       "move_z": {
-        "value": 25.02,
+        "value": 5.05,
         "unit": "sd",
         "source": "computed from Illustrative product analytics export, quote_drafts_weekly.csv",
         "window": {
@@ -1297,9 +1304,19 @@
         "as_of": "2026-11-26T09:00:00Z"
       }
     },
-    "flags": [],
-    "next_step": "Keep the metric on the scorecard, and decide whether to scale the bet.",
-    "decides": "Head of Product, Quoting squad"
+    "flags": [
+      {
+        "code": "over-cost-budget",
+        "text": "Cost is over budget, cited from cost-budget-check 0.3.1. It does not change the status."
+      }
+    ],
+    "next_step": "Keep the metric on the scorecard, and decide whether to scale the bet, given cost is over budget.",
+    "next_step_due": "2026-12-10",
+    "decides": "Head of Product, Quoting squad",
+    "cost_check": {
+      "budget_status": "over budget",
+      "cited_from": "cost-budget-check 0.3.1"
+    }
   },
   "signals": {
     "tool": "customer-signal-digest 0.3.0",
@@ -2302,7 +2319,7 @@
       {
         "key": "evals",
         "label": "03 Build, evals",
-        "word": "meets target",
+        "word": "not confirmed: inside noise",
         "text": "eval-kit, held-out pass rate for v1.4.",
         "figures": [
           {
@@ -2509,7 +2526,7 @@
         "id": "f2",
         "fix": "Give every routing change made during an incident an end date, and list the open ones in the weekly incident review.",
         "done_when": "The incident template has an end-date field, and the weekly review shows the open list.",
-        "owner": "Platform on-call lead",
+        "owner": "Product manager, Quoting squad",
         "due": "2026-12-17",
         "addresses": [
           "c1"
@@ -2531,7 +2548,7 @@
         "id": "f4",
         "fix": "Show 'price updating' and retry when the price book sync lags, instead of price pending.",
         "done_when": "A staged sync delay shows the message, and the draft fills in when the sync completes.",
-        "owner": "Price book squad lead",
+        "owner": "Product manager, Quoting squad",
         "due": "2026-12-17",
         "addresses": [
           "c4"
@@ -2566,7 +2583,7 @@
     },
     "counts": {
       "questions": {
-        "value": 17,
+        "value": 15,
         "unit": "questions",
         "source": "board-qa-prep 0.3.0: count of questions in board_qa",
         "window": {
@@ -2586,7 +2603,7 @@
         "as_of": "2026-11-26"
       },
       "open": {
-        "value": 4,
+        "value": 2,
         "unit": "questions",
         "source": "board-qa-prep 0.3.0: count of questions in board_qa",
         "window": {
@@ -2597,11 +2614,11 @@
       }
     },
     "first": [
-      "Q17",
+      "Q15",
       "Q02",
-      "Q05",
-      "Q07",
-      "Q10"
+      "Q08",
+      "Q11",
+      "Q03"
     ],
     "questions": [
       {
@@ -2620,7 +2637,7 @@
         "topic": "landed",
         "question": "Did it land?",
         "check": "answered",
-        "answer": "did-it-land says landed. Quote draft acceptance rate reads 43% [F02] to 2026-11-23, against a bar of 40% [F03] by 2026-11-15. At the date it read 41% [F04].",
+        "answer": "did-it-land says landed. Quote draft acceptance rate reads 43% [F02] to 2026-11-23, against a bar of 40% [F03] by 2026-11-15. At the date it read 41% [F04]. Flags on the read: over-cost-budget.",
         "from_keys": [
           "landed"
         ],
@@ -2634,7 +2651,7 @@
         "topic": "noise",
         "question": "Is the move real, or normal noise?",
         "check": "answered",
-        "answer": "Before launch the metric averaged 22.2% [F05], with a spread of 0.75% [F06]. By the date it sat 25 spreads above that mean [F07]. That rules out noise. It does not say what moved it: no holdout group is in the record.",
+        "answer": "Before launch the metric averaged 21.7% [F05], with a spread of 3.83% [F06]. By the date it sat 5.05 spreads above that mean [F07]. That rules out noise. It does not say what moved it: no holdout group is in the record.",
         "from_keys": [
           "landed"
         ],
@@ -2653,70 +2670,43 @@
       },
       {
         "id": "Q05",
-        "topic": "decision",
-        "question": "Do we scale it, and who decides?",
-        "check": "open",
-        "missing": "did-it-land's next step: Keep the metric on the scorecard, and decide whether to scale the bet. The decision record was last updated 2026-07-27, before did-it-land's read, so it holds no call on this yet: run decision-record.",
-        "owner": "Head of Product, Quoting squad",
-        "due": "before the board meeting",
-        "from_keys": [
-          "landed",
-          "decisions"
-        ],
-        "priority": 5
-      },
-      {
-        "id": "Q06",
         "topic": "decision-made",
         "question": "What did we decide, and who decided?",
         "check": "answered",
-        "answer": "From decision-record, as of 2026-07-27: 3 decided [F10]. Build quote drafting now, against its landing brief (Head of Product, Quoting squad, 2026-07-27); Quote drafts wait for the tradesperson's approval before they send (Head of Product, Quoting squad, 2026-07-27); Prices come from the price book, never the model (Tech lead, Quoting squad, 2026-07-27).",
+        "answer": "From decision-record, as of 2026-11-26: 5 decided [F10]. Set the rollback trigger for quote drafting (Head of Product, Quoting squad, 2026-08-10); Choose the model tier for quote drafts (Tech lead, Quoting squad, 2026-08-10); Build quote drafting now, against its landing brief (Head of Product, Quoting squad, 2026-07-27).",
         "from_keys": [
           "decisions"
         ],
         "priority": 1
       },
       {
-        "id": "Q07",
-        "topic": "decision-open",
-        "question": "Which decisions are still open, and who makes them?",
-        "check": "open",
-        "missing": "From decision-record, as of 2026-07-27: 2 open [F11], 1 past due [F12]. Set the rollback trigger for quote drafting (Lead, Quoting squad, due 2026-08-03); Choose the model tier for quote drafts (Tech lead, Quoting squad, due 2026-08-03). No later decision record says they closed.",
-        "owner": "Lead, Quoting squad",
-        "due": "before the board meeting",
-        "from_keys": [
-          "decisions"
-        ],
-        "priority": 5
-      },
-      {
-        "id": "Q08",
+        "id": "Q06",
         "topic": "quality",
         "question": "Is quality holding as more of the work runs without a person?",
         "check": "answered",
-        "answer": "v1.4's held-out pass rate is 80% [F13] on 30 cases [F15] (95% interval 62.7% to 90.5%). 71.5% of tasks finished with no person [F14]. eval-kit's build check: meets target.",
+        "answer": "v1.4's held-out pass rate is 80% [F11] on 30 cases [F13] (95% interval 62.7% to 90.5%). 71.5% of tasks finished with no person [F12]. eval-kit's build check: not confirmed: inside noise. The point estimate meets the target, but the low end of the 95% interval does not clear it.",
         "from_keys": [
           "evals"
         ],
         "priority": 2
       },
       {
-        "id": "Q09",
+        "id": "Q07",
         "topic": "eval-gain",
         "question": "Is v1.4 really better than v1.3?",
         "check": "answered",
-        "answer": "Held-out pass rate went from 70% [F16] on v1.3 to 80% [F13] on v1.4, on the same cases. eval-kit marks the gain as inside the noise for this case count, so it is not yet a proven gain.",
+        "answer": "Held-out pass rate went from 70% [F14] on v1.3 to 80% [F11] on v1.4, on the same cases. eval-kit marks the gain as inside the noise for this case count, so it is not yet a proven gain.",
         "from_keys": [
           "evals"
         ],
         "priority": 1
       },
       {
-        "id": "Q10",
+        "id": "Q08",
         "topic": "cost",
         "question": "What does each task cost, against the budget?",
         "check": "answered",
-        "answer": "$0.0338 per task [F17] from 2026-11-01 to 2026-11-14, against a budget of $0.027 [F18]: over budget by 25% [F19]. Tokens per task: 10,300 [F20] against 9,000 [F21]. Price per token: $0.00000328 [F22] against $0.000003 [F23]. cost-budget-check computes these; eval-kit cites the same cost per task.",
+        "answer": "$0.0338 per task [F15] from 2026-11-01 to 2026-11-14, against a budget of $0.027 [F16]: over budget by 25% [F17]. Tokens per task: 10,300 [F18] against 9,000 [F19]. Price per token: $0.00000328 [F20] against $0.000003 [F21]. cost-budget-check computes these; eval-kit cites the same cost per task.",
         "from_keys": [
           "cost"
         ],
@@ -2726,11 +2716,11 @@
         "priority": 5
       },
       {
-        "id": "Q11",
+        "id": "Q09",
         "topic": "cost-owner",
         "question": "Who brings cost back within budget, and by when?",
         "check": "answered",
-        "answer": "The record names the model behind most of it, vendor-a/xl: $0.963 [F24] of $1.89 [F25] over budget. The postmortem names the fix: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back. Owner: Lead, Quoting squad, due 2026-12-10.",
+        "answer": "The record names the model behind most of it, vendor-a/xl: $0.963 [F22] of $1.89 [F23] over budget. The postmortem names the fix: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back. Owner: Lead, Quoting squad, due 2026-12-10.",
         "from_keys": [
           "cost",
           "postmortem"
@@ -2738,11 +2728,11 @@
         "priority": 2
       },
       {
-        "id": "Q12",
+        "id": "Q10",
         "topic": "release",
         "question": "Was it ready to ship when it shipped?",
         "check": "answered",
-        "answer": "release-readiness said ready to ship for Acme quote drafting v1.0 on 2026-09-05: 6 [F26] of 7 [F27] checks ready to ship. Open bugs within the severity limits read hold under a waiver from Head of Product, Quoting squad until 2026-09-19. Every spec-auditor hold was closed before release (rollback, eval-plan).",
+        "answer": "release-readiness said ready to ship for Acme quote drafting v1.0 on 2026-09-05: 6 [F24] of 7 [F25] checks ready to ship. Open bugs within the severity limits read hold under a waiver from Head of Product, Quoting squad until 2026-09-19. Every spec-auditor hold was closed before release (rollback, eval-plan).",
         "from_keys": [
           "release",
           "spec"
@@ -2750,7 +2740,7 @@
         "priority": 2
       },
       {
-        "id": "Q13",
+        "id": "Q11",
         "topic": "release",
         "question": "Was the waived check closed before its waiver ran out?",
         "check": "open",
@@ -2763,40 +2753,40 @@
         "priority": 4
       },
       {
-        "id": "Q14",
+        "id": "Q12",
         "topic": "signals",
         "question": "What are customers saying about it?",
         "check": "answered",
-        "answer": "customer-signal-digest says problem still raised. It read 21 signals [F28] from 16 accounts [F29] from 2026-09-07 to 2026-11-24. 7 signals [F30] from 7 accounts [F31] say the problem is still there. The top problem theme: Quote drafts miss line items.",
+        "answer": "customer-signal-digest says problem still raised. It read 21 signals [F26] from 16 accounts [F27] from 2026-09-07 to 2026-11-24. 7 signals [F28] from 7 accounts [F29] say the problem is still there. The top problem theme: Quote drafts miss line items.",
         "from_keys": [
           "signals"
         ],
         "priority": 1
       },
       {
-        "id": "Q15",
+        "id": "Q13",
         "topic": "postmortem",
         "question": "What went wrong, and who owns each fix?",
         "check": "answered",
-        "answer": "The learning review of 2026-11-26 covers 2 incidents [F32] from 2026-09-07 to 2026-11-26. Each change it lists cites its evidence. 4 fixes [F33], each with one owner and a due date: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back (Lead, Quoting squad, due 2026-12-10); Give every routing change made during an incident an end date, and list the open ones in the weekly incident review (Platform on-call lead, due 2026-12-17); Put the cost-budget-check result beside the eval-kit result on every quote drafting release candidate (Tech lead, Quoting squad, due 2027-01-08); Show 'price updating' and retry when the price book sync lags, instead of price pending (Price book squad lead, due 2026-12-17).",
+        "answer": "The learning review of 2026-11-26 covers 2 incidents [F30] from 2026-09-07 to 2026-11-26. Each change it lists cites its evidence. 4 fixes [F31], each with one owner and a due date: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back (Lead, Quoting squad, due 2026-12-10); Give every routing change made during an incident an end date, and list the open ones in the weekly incident review (Product manager, Quoting squad, due 2026-12-17); Put the cost-budget-check result beside the eval-kit result on every quote drafting release candidate (Tech lead, Quoting squad, due 2027-01-08); Show 'price updating' and retry when the price book sync lags, instead of price pending (Product manager, Quoting squad, due 2026-12-17).",
         "from_keys": [
           "postmortem"
         ],
         "priority": 2
       },
       {
-        "id": "Q16",
+        "id": "Q14",
         "topic": "portfolio",
         "question": "Why this bet, over the others?",
         "check": "answered",
-        "answer": "bet-portfolio-review ranked it 4 of 8 bets, 1 needs work first [F34] on 2026-07-27. Its brief scored 14 points of 14 [F35].",
+        "answer": "bet-portfolio-review ranked it 4 of 8 bets, 1 needs work first [F32] on 2026-07-27. Its brief scored 14 points of 14 [F33].",
         "from_keys": [
           "portfolio"
         ],
         "priority": 1
       },
       {
-        "id": "Q17",
+        "id": "Q15",
         "topic": "past",
         "question": "Is any customer data sent to the model provider?",
         "check": "open",
@@ -2856,7 +2846,7 @@
         "from": "landed/figures/at_date"
       },
       "F05": {
-        "value": 22.17,
+        "value": 21.67,
         "unit": "%",
         "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
         "window": {
@@ -2867,7 +2857,7 @@
         "from": "landed/figures/baseline_mean"
       },
       "F06": {
-        "value": 0.75,
+        "value": 3.83,
         "unit": "%",
         "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
         "window": {
@@ -2878,7 +2868,7 @@
         "from": "landed/figures/baseline_sd"
       },
       "F07": {
-        "value": 25.02,
+        "value": 5.05,
         "unit": "sd",
         "source": "computed from Illustrative product analytics export, quote_drafts_weekly.csv",
         "window": {
@@ -2911,39 +2901,17 @@
         "from": "landed/figures/outcome_to"
       },
       "F10": {
-        "value": 3,
+        "value": 5,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 096127d5d48d)",
         "window": {
           "from": "2026-07-13",
-          "to": "2026-07-27"
+          "to": "2026-11-26"
         },
-        "as_of": "2026-07-27",
+        "as_of": "2026-11-26",
         "from": "decisions/figures/decided"
       },
       "F11": {
-        "value": 2,
-        "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
-        "window": {
-          "from": "2026-07-13",
-          "to": "2026-07-27"
-        },
-        "as_of": "2026-07-27",
-        "from": "decisions/figures/open"
-      },
-      "F12": {
-        "value": 1,
-        "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
-        "window": {
-          "from": "2026-07-13",
-          "to": "2026-07-27"
-        },
-        "as_of": "2026-07-27",
-        "from": "decisions/figures/past_due"
-      },
-      "F13": {
         "value": 80.0,
         "unit": "%",
         "source": "quote-drafting.csv (sha256 ee43a12a2395)",
@@ -2958,7 +2926,7 @@
         ],
         "from": "evals/figures/pass_rate@v1.4"
       },
-      "F14": {
+      "F12": {
         "value": 71.5,
         "unit": "%",
         "source": "quote-drafting.csv (sha256 ee43a12a2395)",
@@ -2973,7 +2941,7 @@
         ],
         "from": "evals/figures/autonomy_rate@v1.4"
       },
-      "F15": {
+      "F13": {
         "value": 30,
         "unit": "held-out cases",
         "source": "eval-kit 0.3.3: evals.rows, v1.4, cases",
@@ -2984,7 +2952,7 @@
         "as_of": "2026-11-15",
         "from": "evals/rows/v1.4/cases"
       },
-      "F16": {
+      "F14": {
         "value": 70.0,
         "unit": "%",
         "source": "quote-drafting.csv (sha256 ee43a12a2395)",
@@ -2999,7 +2967,7 @@
         ],
         "from": "evals/figures/pass_rate@v1.3"
       },
-      "F17": {
+      "F15": {
         "value": 0.033759,
         "unit": "USD per task",
         "source": "cost-budget-check 0.3.1: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
@@ -3010,7 +2978,7 @@
         "as_of": "2026-11-15",
         "from": "cost/lines/cost_per_task/actual"
       },
-      "F18": {
+      "F16": {
         "value": 0.027,
         "unit": "USD per task",
         "source": "landing brief quote-drafting.md (tokens per task x price per token)",
@@ -3021,7 +2989,7 @@
         "as_of": "2026-11-15",
         "from": "cost/lines/cost_per_task/budget"
       },
-      "F19": {
+      "F17": {
         "value": 0.2503333333333333,
         "unit": "share over budget",
         "source": "cost-budget-check 0.3.1: actual / budget - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
@@ -3032,7 +3000,7 @@
         "as_of": "2026-11-15",
         "from": "cost/lines/cost_per_task/against_budget"
       },
-      "F20": {
+      "F18": {
         "value": 10300.0,
         "unit": "tokens per task",
         "source": "cost-budget-check 0.3.1: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
@@ -3043,7 +3011,7 @@
         "as_of": "2026-11-15",
         "from": "cost/lines/tokens_per_task/actual"
       },
-      "F21": {
+      "F19": {
         "value": 9000.0,
         "unit": "tokens per task",
         "source": "landing brief quote-drafting.md",
@@ -3054,7 +3022,7 @@
         "as_of": "2026-11-15",
         "from": "cost/lines/tokens_per_task/budget"
       },
-      "F22": {
+      "F20": {
         "value": 3.2775728155339805e-06,
         "unit": "USD per token",
         "source": "cost-budget-check 0.3.1: priced cost / tokens; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
@@ -3065,7 +3033,7 @@
         "as_of": "2026-11-15",
         "from": "cost/lines/price_per_token/actual"
       },
-      "F23": {
+      "F21": {
         "value": 3e-06,
         "unit": "USD per token",
         "source": "landing brief quote-drafting.md",
@@ -3076,7 +3044,7 @@
         "as_of": "2026-11-15",
         "from": "cost/lines/price_per_token/budget"
       },
-      "F24": {
+      "F22": {
         "value": 0.9626399999999999,
         "unit": "USD",
         "source": "cost-budget-check 0.3.1: model cost - model token share x budgeted cost; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
@@ -3087,7 +3055,7 @@
         "as_of": "2026-11-15",
         "from": "cost/driver/over_budget"
       },
-      "F25": {
+      "F23": {
         "value": 1.8925200000000002,
         "unit": "USD",
         "source": "cost-budget-check 0.3.1: priced cost - tasks x budgeted cost per task; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
@@ -3098,7 +3066,7 @@
         "as_of": "2026-11-15",
         "from": "cost/over_budget"
       },
-      "F26": {
+      "F24": {
         "value": 6,
         "unit": "checks ready to ship",
         "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
@@ -3109,7 +3077,7 @@
         "as_of": "2026-09-05",
         "from": "release/counts/ready"
       },
-      "F27": {
+      "F25": {
         "value": 7,
         "unit": "checks",
         "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
@@ -3120,7 +3088,7 @@
         "as_of": "2026-09-05",
         "from": "release/counts/total"
       },
-      "F28": {
+      "F26": {
         "value": 21,
         "unit": "signals",
         "source": "customer-signal-digest 0.3.0: signals in the window after duplicates were merged; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
@@ -3131,7 +3099,7 @@
         "as_of": "2026-11-26",
         "from": "signals/figures/signals"
       },
-      "F29": {
+      "F27": {
         "value": 16,
         "unit": "accounts",
         "source": "customer-signal-digest 0.3.0: distinct accounts named on those signals; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
@@ -3142,7 +3110,7 @@
         "as_of": "2026-11-26",
         "from": "signals/figures/accounts"
       },
-      "F30": {
+      "F28": {
         "value": 7,
         "unit": "signals",
         "source": "customer-signal-digest 0.3.0: signals in themes on the problem side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
@@ -3153,7 +3121,7 @@
         "as_of": "2026-11-26",
         "from": "signals/figures/problem_signals"
       },
-      "F31": {
+      "F29": {
         "value": 7,
         "unit": "accounts",
         "source": "customer-signal-digest 0.3.0: distinct accounts on the problem side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
@@ -3164,7 +3132,7 @@
         "as_of": "2026-11-26",
         "from": "signals/figures/problem_accounts"
       },
-      "F32": {
+      "F30": {
         "value": 2,
         "unit": "incidents",
         "source": "PagerDuty (acme): PagerDuty incidents, created_at to resolved_at, services Quote drafting (pagerduty-incidents.json, retrieved 2026-11-26); incidents started in the window",
@@ -3175,7 +3143,7 @@
         "as_of": "2026-11-26",
         "from": "postmortem/figures/incidents"
       },
-      "F33": {
+      "F31": {
         "value": 4,
         "unit": "fixes",
         "source": "review.json, checked by postmortem 0.3.0",
@@ -3186,7 +3154,7 @@
         "as_of": "2026-11-26",
         "from": "postmortem/figures/fixes"
       },
-      "F34": {
+      "F32": {
         "value": 4,
         "unit": "rank of 8 bets, 1 needs work first",
         "source": "bets.csv",
@@ -3197,7 +3165,7 @@
         "as_of": "2026-07-27",
         "from": "portfolio/rank"
       },
-      "F35": {
+      "F33": {
         "value": 14,
         "unit": "points of 14",
         "source": "briefs/quote-drafting.md",
