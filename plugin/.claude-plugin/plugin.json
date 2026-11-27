@@ -1,7 +1,7 @@
 {
   "name": "landing-loop",
-  "version": "0.3.2",
-  "description": "One install for the Landing Loop: six Claude skills that take a bet from landing brief to board update.",
+  "version": "0.4.0",
+  "description": "One install for all 13 Landing Loop skills: eleven that take a bet from landing brief to board update, and two that read the team.",
   "author": {
     "name": "Dacard"
   },
@@ -9,9 +9,16 @@
   "dependencies": [
     "product-engineering-update",
     "bet-portfolio-review",
+    "decision-record",
     "spec-auditor",
-    "eval-kit",
+    "release-readiness",
     "cost-budget-check",
-    "did-it-land"
+    "eval-kit",
+    "did-it-land",
+    "customer-signal-digest",
+    "postmortem",
+    "board-qa-prep",
+    "team-operations-read",
+    "ai-native-hiring-loop"
   ]
 }

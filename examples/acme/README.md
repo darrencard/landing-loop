@@ -29,4 +29,4 @@ Only did-it-land sets landed, watch or stalled. The build checks use their own w
 
 ## Versions
 
-Each record names the skill version that wrote it, as that skill's code says: bet-portfolio-review, spec-auditor, cost-budget-check and did-it-land 0.3.1, eval-kit 0.3.3, and decision-record, release-readiness, customer-signal-digest, postmortem and board-qa-prep 0.3.0. `marketplace.json` pins the released versions, so it lags the record until those releases are cut. The Leader Report reads the record and writes none of it.
+Each record names the skill version that wrote it, as that skill's code says: bet-portfolio-review, spec-auditor, cost-budget-check and did-it-land 0.3.1, eval-kit 0.3.3, and decision-record, release-readiness, customer-signal-digest, postmortem and board-qa-prep 0.3.0. `marketplace.json` pins exactly these releases, each by tag and commit. The Leader Report reads the record and writes none of it.

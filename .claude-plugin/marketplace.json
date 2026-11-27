@@ -11,7 +11,7 @@
       "name": "landing-loop",
       "source": "./plugin",
       "displayName": "Landing Loop",
-      "description": "One install for all six skills, from landing brief to board update."
+      "description": "One install for all 13 skills, from landing brief to board update."
     },
     {
       "name": "product-engineering-update",
@@ -29,55 +29,132 @@
       "source": {
         "source": "github",
         "repo": "darrencard/bet-portfolio-review",
-        "ref": "v0.3.0",
-        "sha": "3f8d10c49f3a038dfa9ff3281e978ce1264cbbac"
+        "ref": "v0.3.1",
+        "sha": "8eb1f4aa71b381b16a19156f453b95d831bec076"
       },
       "displayName": "Bet portfolio review",
       "description": "Scores the roadmap against each bet's landing brief. Step 01: decide."
+    },
+    {
+      "name": "decision-record",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/decision-record",
+        "ref": "v0.3.0",
+        "sha": "e7ff9b4bdcb58bdeb63e37d28a03c933acaff102"
+      },
+      "displayName": "Decision record",
+      "description": "Logs each call with who made it, and what still waits. Step 01: decide."
     },
     {
       "name": "spec-auditor",
       "source": {
         "source": "github",
         "repo": "darrencard/spec-auditor",
-        "ref": "v0.3.0",
-        "sha": "6f971c3157c4417b46df55ff50c3967692df542c"
+        "ref": "v0.3.1",
+        "sha": "c80d583f65f373811aee373383fea4e9dcd7f520"
       },
       "displayName": "Spec auditor",
       "description": "Checks a PRD against its landing brief, pass or hold. Step 02: spec."
     },
     {
-      "name": "eval-kit",
+      "name": "release-readiness",
       "source": {
         "source": "github",
-        "repo": "darrencard/eval-kit",
-        "ref": "v0.3.2",
-        "sha": "0f1708a3c591c38c11da36a0e19a66b0ad665db8"
+        "repo": "darrencard/release-readiness",
+        "ref": "v0.3.0",
+        "sha": "2d1c09079b4086f176912a5bd10b75bc8e1a2c83"
       },
-      "displayName": "Eval kit",
-      "description": "Pass rate and autonomy rate for one AI feature. Step 03: build."
+      "displayName": "Release readiness",
+      "description": "Ready to ship or hold, check by check. Step 03: build."
     },
     {
       "name": "cost-budget-check",
       "source": {
         "source": "github",
         "repo": "darrencard/cost-budget-check",
-        "ref": "v0.3.0",
-        "sha": "c7ee98fe6f1484e6e399adc51511a75b21663a80"
+        "ref": "v0.3.1",
+        "sha": "509252896237031d5cbc0bb92cb98b2565e1538c"
       },
       "displayName": "Cost budget check",
       "description": "Tokens per task and price per token against the brief's budget, within budget or over budget. Step 03: build."
+    },
+    {
+      "name": "eval-kit",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/eval-kit",
+        "ref": "v0.3.3",
+        "sha": "de0689a1f2b028bf981fcd5316622960faaccb7e"
+      },
+      "displayName": "Eval kit",
+      "description": "Pass rate and autonomy rate for one AI feature. Step 03: build."
     },
     {
       "name": "did-it-land",
       "source": {
         "source": "github",
         "repo": "darrencard/did-it-land",
-        "ref": "v0.3.0",
-        "sha": "a628bd41d4e3b950e982a993314d1145f81adc5b"
+        "ref": "v0.3.1",
+        "sha": "f2b9fe1b8b5faa7819195d6cedd9db9086c807da"
       },
       "displayName": "Did it land?",
       "description": "Landed, watch or stalled from your own metric data. Step 04: learn."
+    },
+    {
+      "name": "customer-signal-digest",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/customer-signal-digest",
+        "ref": "v0.3.0",
+        "sha": "752b803f7fdabf4cdaf62538e95508b11cb6bf6b"
+      },
+      "displayName": "Customer signal digest",
+      "description": "Whether customers still raise the problem. Step 04: learn."
+    },
+    {
+      "name": "postmortem",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/postmortem",
+        "ref": "v0.3.0",
+        "sha": "98af6359f09178d126928352fa9ba5785852c219"
+      },
+      "displayName": "Postmortem",
+      "description": "What changed, with evidence, and one owner per fix. Step 04: learn."
+    },
+    {
+      "name": "board-qa-prep",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/board-qa-prep",
+        "ref": "v0.3.0",
+        "sha": "8cf0a1aac094f6134424db8f4837268f07bea5c2"
+      },
+      "displayName": "Board Q&A prep",
+      "description": "The board's likely questions, answered from the record or open. Step 05: report."
+    },
+    {
+      "name": "team-operations-read",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/team-operations-read",
+        "ref": "v0.3.0",
+        "sha": "facdc7d50521801821ff990af512ee6d59937eea"
+      },
+      "displayName": "Team operations read",
+      "description": "How the team works, against Team Operations. For the team."
+    },
+    {
+      "name": "ai-native-hiring-loop",
+      "source": {
+        "source": "github",
+        "repo": "darrencard/ai-native-hiring-loop",
+        "ref": "v0.3.0",
+        "sha": "3f752478faf28c5d088d7815ac9900a0d29577cf"
+      },
+      "displayName": "AI-native hiring loop",
+      "description": "A fair hiring loop for AI-fluent roles, scored in code. For the team."
     }
   ]
 }
