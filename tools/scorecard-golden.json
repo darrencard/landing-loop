@@ -1,0 +1,100 @@
+{
+  "svgkit": "1.2.0",
+  "fixture": {
+    "title": "Scorecard",
+    "label": "Quote drafting landed; payment links is on watch; two calls, one over plan.",
+    "head": [
+      "Project",
+      "",
+      "Before → now · target",
+      "Status"
+    ],
+    "caption": "One frame, every row type.",
+    "range_rows": [
+      {
+        "name": "Quote drafting",
+        "prior": 21.67,
+        "actual": 43,
+        "target": 40,
+        "shown": [
+          "21.67%",
+          "43%",
+          "40%"
+        ],
+        "status": "landed",
+        "check": "cost over budget"
+      },
+      {
+        "name": "Payment links",
+        "prior": 16.92,
+        "actual": 18.1,
+        "target": 18,
+        "shown": [
+          "16.92%",
+          "18.1%",
+          "18%"
+        ],
+        "status": "watch"
+      }
+    ],
+    "bar_rows": [
+      {
+        "name": "When to undo the release",
+        "plan": 14,
+        "actual": 28,
+        "who": "Head of Product"
+      },
+      {
+        "name": "Prices from the price book",
+        "plan": 14,
+        "actual": 5,
+        "who": "Tech lead"
+      }
+    ]
+  },
+  "structure": [
+    "sc.scg",
+    "sc.scg/sc-t",
+    "sc.scg/sc-t/sc-k",
+    "sc.scg/sc-t/sc-k",
+    "sc.scg/sc-t/sc-i",
+    "sc.scg/sc-b",
+    "sc.scg/sc-b/sc-h",
+    "sc.scg/sc-b/sc-r",
+    "sc.scg/sc-b/sc-r/sc-n",
+    "sc.scg/sc-b/sc-r/sc-p",
+    "sc.scg/sc-b/sc-r/sc-p/sc-rl",
+    "sc.scg/sc-b/sc-r/sc-p/sc-rl/landed",
+    "sc.scg/sc-b/sc-r/sc-l",
+    "sc.scg/sc-b/sc-r/sc-s",
+    "sc.scg/sc-b/sc-r/sc-s/landed.st",
+    "sc.scg/sc-b/sc-r/sc-s/sc-w",
+    "sc.scg/sc-b/sc-r",
+    "sc.scg/sc-b/sc-r/sc-n",
+    "sc.scg/sc-b/sc-r/sc-p",
+    "sc.scg/sc-b/sc-r/sc-p/sc-rl",
+    "sc.scg/sc-b/sc-r/sc-p/sc-rl/watch",
+    "sc.scg/sc-b/sc-r/sc-l",
+    "sc.scg/sc-b/sc-r/sc-s",
+    "sc.scg/sc-b/sc-r/sc-s/st.watch",
+    "sc.scg/sc-b/sc-r",
+    "sc.scg/sc-b/sc-r/sc-n",
+    "sc.scg/sc-b/sc-r/sc-p",
+    "sc.scg/sc-b/sc-r/sc-p/sc-pv",
+    "sc.scg/sc-b/sc-r/sc-l",
+    "sc.scg/sc-b/sc-r/sc-s",
+    "sc.scg/sc-b/sc-r/sc-s/sc-o",
+    "sc.scg/sc-b/sc-r/sc-s/sc-o/sc-pm",
+    "sc.scg/sc-b/sc-r/sc-s/sc-o/sc-pm",
+    "sc.scg/sc-b/sc-r",
+    "sc.scg/sc-b/sc-r/sc-n",
+    "sc.scg/sc-b/sc-r/sc-p",
+    "sc.scg/sc-b/sc-r/sc-p/sc-pv",
+    "sc.scg/sc-b/sc-r/sc-l",
+    "sc.scg/sc-b/sc-r/sc-s",
+    "sc.scg/sc-b/sc-r/sc-s/sc-o",
+    "sc.scg/sc-b/sc-r/sc-s/sc-o/sc-pm",
+    "sc.scg/sc-b/sc-r/sc-s/sc-o/sc-pm",
+    "sc.scg/sc-c"
+  ]
+}

@@ -1,13 +1,19 @@
 """Tests for svgkit. Run from the repo root: python3 -m unittest discover -s tools -p "test_*.py" """
 
+import json
 import re
 import sys
 import unittest
+import warnings
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import scorecard_golden  # noqa: E402
 import svgkit as sk  # noqa: E402
+
+# The legacy primitives warn on every call; the tests that cover them still run, quietly.
+warnings.filterwarnings("ignore", category=DeprecationWarning, message="svgkit\\.")
 
 HEX = re.compile(r"#[0-9A-Fa-f]{3,8}\b")
 
@@ -119,7 +125,9 @@ class Scorecard(unittest.TestCase):
     def test_no_overlap_rows_flow_in_a_grid(self):
         self.assertNotIn("position:absolute", sk.SCORECARD_CSS)
         self.assertIn("grid-template-columns:subgrid", sk.SCORECARD_CSS)
-        self.assertIn("@media (max-width:560px)", sk.SCORECARD_CSS)
+        self.assertIn("container:sc / inline-size", sk.SCORECARD_CSS)
+        self.assertIn("@container sc (max-width:799.98px){", sk.SCORECARD_CSS, "the site's row kit stacks under an 800px frame too")
+        self.assertNotIn("@media", sk.SCORECARD_CSS)
 
     def test_green_and_red_only_beside_their_word(self):
         for row in re.findall(r'<div class="sc-r">.*?</div>', scorecard()):
@@ -180,6 +188,76 @@ class Scorecard(unittest.TestCase):
         out = sk.sc_row("<script>", figure=sk.figure_line("<b>"))
         self.assertNotIn("<script>", out)
         self.assertIn("&lt;b&gt;", out)
+
+
+class ScorecardOneTwo(unittest.TestCase):
+    """1.2.0: one scale per frame, marks drawn apart, the word column, the golden structure, legacy deprecated."""
+
+    def test_frame_domain_is_one_scale_from_the_rows_own_values(self):
+        rows = [(21.67, 43, 40), (2060, 2100, 3000), (16.92, 18.1, 18)]
+        lo, hi = sk.frame_domain(rows)
+        ratios = [v / t for p, a, t in rows for v in (p, a, t)]
+        span = max(ratios) - min(ratios)
+        self.assertAlmostEqual(lo, min(ratios) - span * 0.06)
+        self.assertAlmostEqual(hi, max(ratios) + span * 0.06)
+        self.assertEqual(sk.frame_domain([], relative=True), (0.0, 1.0))
+        absolute = sk.frame_domain([(1, 2, 3)], relative=False)
+        self.assertAlmostEqual(absolute[0], 0.88)
+
+    def test_every_target_tick_lines_up_on_a_relative_scale(self):
+        dom = sk.frame_domain([(21.67, 43, 40), (2060, 2100, 3000)])
+        ticks = {re.search(r'class="tg" x="([^"]+)"', sk.range_line(prior=p, actual=a, target=t, domain=dom, relative=True)).group(1) for p, a, t in [(21.67, 43, 40), (2060, 2100, 3000)]}
+        self.assertEqual(len(ticks), 1)
+
+    def test_close_marks_are_drawn_apart_in_value_order_and_equal_ones_are_not(self):
+        dom = sk.frame_domain([(21.67, 43, 40), (2060, 2100, 3000), (16.92, 18.1, 18)])
+        job = sk.range_line(prior=2060, actual=2100, target=3000, status="stalled", domain=dom, relative=True)
+        self.assertIn('class="pr" cx="', job)
+        self.assertRegex(job, r'class="pr"[^>]*transform="translate\(-4 0\)"')
+        self.assertRegex(job, r'class="ac stalled"[^>]*transform="translate\(4 0\)"')
+        links = sk.range_line(prior=16.92, actual=18.1, target=18, status="watch", domain=dom, relative=True)
+        self.assertRegex(links, r'class="ac watch"[^>]*transform="translate\(4 0\)"', "18.1% sits on the right of the 18% tick")
+        same = sk.range_line(prior=5, actual=5, target=9, domain=(0, 10))
+        self.assertNotIn("translate(4", same)
+        far = sk.range_line(prior=1, actual=9, target=5, domain=(0, 10))
+        self.assertNotIn('transform="translate(4', far)
+
+    def test_a_lower_actual_moves_left(self):
+        out = sk.range_line(prior=40.6, actual=40.3, target=30, domain=(0, 50))
+        self.assertRegex(out, r'class="ac"[^>]*transform="translate\(-4 0\)"')
+
+    def test_word_column_wraps_at_word_max(self):
+        self.assertIn("fit-content(var(--sc-wmax,180px))", sk.SCORECARD_CSS)
+        self.assertIn('style="--sc-wmax:220px"', sk.sc_frame([], label="x", title="t", word_max=220))
+        self.assertNotIn("--sc-wmax:", sk.sc_frame([], label="x", title="t"))
+        self.assertIn(".scg .st{white-space:nowrap}", sk.SCORECARD_CSS, "status words never wrap")
+
+    def test_the_golden_structure_is_current(self):
+        committed = json.loads(scorecard_golden.GOLDEN.read_text(encoding="utf-8"))
+        self.assertEqual(committed, scorecard_golden.golden(), "run python3 tools/scorecard_golden.py, then copy the JSON to the site")
+        self.assertEqual(committed["svgkit"], sk.VERSION)
+        self.assertEqual(committed["structure"][0], "sc.scg")
+        self.assertIn("sc.scg/sc-b/sc-r/sc-p/sc-rl", committed["structure"])
+        self.assertIn("sc.scg/sc-b/sc-r/sc-s/sc-o/sc-pm", committed["structure"])
+
+    def test_structure_ignores_tags_and_other_classes(self):
+        a = '<div class="sc scg x"><p class="sc-c y">t</p></div>'
+        b = '<figure class="scg sc"><span class="sc-c">u</span></figure>'
+        self.assertEqual(sk.structure(a), sk.structure(b))
+
+    def test_legacy_primitives_warn_and_leave_a_mark(self):
+        for name in sk.LEGACY:
+            self.assertTrue(getattr(getattr(sk, name), "deprecated", False), name)
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            out = sk.frame("", label="x", height=1)
+        self.assertTrue(any(issubclass(w.category, DeprecationWarning) for w in caught))
+        self.assertEqual(sk.legacy_in(out), ['class="sk-wide"'])
+        self.assertEqual(sk.legacy_in(scorecard()), [])
+        with warnings.catch_warnings():
+            warnings.simplefilter("error", DeprecationWarning)
+            scorecard()  # the scorecard rows never call a legacy primitive
+            sk.page_header("x", date="d", version="v", illustrative=True)
 
 
 class Numbers(unittest.TestCase):

@@ -20,8 +20,13 @@ Scorecard rows (1.1.0, 2026-11-27): the grammar of the outcome scorecard on daca
 CSS rows, not one scaled SVG: name | picture | figure | word, split by hairlines, with one mono head. Pictures are
 four, each a fixed-height SVG with no text and no viewBox, so nothing scales: range line, paired plan/actual
 bars, share bar, pips. Labels, figures and words are Geist Mono 12px; names Geist 14px. SCORECARD_CSS holds the
-rules; sc_frame(), sc_row() and the pictures write the markup. The older SVG primitives below stay for pages
-that still draw with them.
+rules; sc_frame(), sc_row() and the pictures write the markup.
+
+1.2.0: one scale per frame (frame_domain(), with a minimum visible gap between marks that differ), the stacking
+breakpoint as a container query (a frame under 800px wide stacks its rows, as the site's row kit does), and a
+word column that wraps at word_max instead of squeezing the name. The SVG primitives from 1.0.0 are deprecated:
+each call warns, and legacy_in() finds their output on a page. tools/SCORECARD-ROLLOUT.md is the adoption recipe;
+tools/scorecard-golden.json is the class structure the site's row kit must match.
 
 Vendor this file byte-identical, pinned by landing-loop commit and sha256 (tools/SVGKIT.md).
 Standard library only. Python 3.11 or later.
@@ -29,11 +34,13 @@ Standard library only. Python 3.11 or later.
 
 from __future__ import annotations
 
+import functools
 import html
 import re
+import warnings
 from collections.abc import Callable, Iterable, Sequence
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 
 INK = "var(--t1)"
 INK2 = "var(--t2)"
@@ -422,7 +429,7 @@ STATUSES = ("landed", "watch", "stalled")
 # and its colour variables, scoped under .scg so these sizes win over the template's 10px ones on the same page.
 # Every font size here is 12px (mono) or 14px (names); a site under html{zoom:.8} sets --sc-z:.8 to keep them so.
 SCORECARD_CSS = (
-    ".scg{--sc-z:1;--sc-m:calc(12px / var(--sc-z));--sc-n:calc(14px / var(--sc-z));margin:0;padding:0;min-width:0;"
+    ".scg{--sc-z:1;--sc-m:calc(12px / var(--sc-z));--sc-n:calc(14px / var(--sc-z));container:sc / inline-size;margin:0;padding:0;min-width:0;"
     "border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}"
     ".scg .sc-t{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 32px;padding:12px 0}"
     ".scg .sc-t>span:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}"
@@ -436,7 +443,7 @@ SCORECARD_CSS = (
     ".scg .sc-k i.k-o{background:repeating-linear-gradient(135deg,var(--t1) 0 2px,transparent 2px 4px)}"
     ".scg .sc-k i.k-pr{width:8px;height:8px;border-radius:50%}"
     ".scg .sc-k i.k-tg{width:1.5px;height:12px;border-radius:0;background:var(--t2)}"
-    ".scg .sc-b{display:grid;grid-template-columns:minmax(120px,.9fr) minmax(96px,1.3fr) max-content max-content;column-gap:32px}"
+    ".scg .sc-b{display:grid;grid-template-columns:minmax(120px,.9fr) minmax(96px,1.3fr) max-content fit-content(var(--sc-wmax,180px));column-gap:32px}"
     ".scg .sc-h,.scg .sc-r{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center}"
     ".scg .sc-h{padding:0 0 10px}"
     ".scg .sc-r{border-top:1px solid var(--line);padding:14px 0}"
@@ -447,7 +454,8 @@ SCORECARD_CSS = (
     ".scg .sc-l b{color:var(--t1);font-weight:500}.scg .sc-l i{font-style:normal}"
     ".scg .sc-p{min-width:0;display:flex;align-items:center}"
     ".scg .sc-p svg{display:block;width:100%;overflow:visible}"
-    ".scg .sc-s{display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap}"
+    ".scg .sc-s{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:0;text-align:right}"
+    ".scg .st{white-space:nowrap}"
     ".scg .st{display:inline-flex;align-items:center;gap:7px}"
     ".scg .st::before{content:'';width:7px;height:7px;border-radius:2px;background:currentColor;flex:none}"
     ".scg .st.watch::before{width:8px;height:8px;border-radius:50%;background:none;border:1.5px solid currentColor;box-sizing:border-box}"
@@ -468,11 +476,11 @@ SCORECARD_CSS = (
     ".sc-sh .tr{fill:var(--line2)}.sc-sh .a{fill:var(--t1)}"
     ".sc-pp .on{fill:var(--t2)}.sc-pp .off{fill:none;stroke:var(--t3);stroke-width:1}.sc-pp .dash{stroke-dasharray:2 2}"
     ".sc-pm{fill:var(--brass)}"
-    "@media (max-width:560px){"
+    "@container sc (max-width:799.98px){"
     ".scg .sc-b{display:block}"
     ".scg .sc-h{display:none}"
     ".scg .sc-r{grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:'n s' 'l l' 'p p';column-gap:16px;row-gap:6px}"
-    ".scg .sc-n{grid-area:n}.scg .sc-s{grid-area:s;align-self:start;white-space:normal;max-width:168px;text-align:right}.scg .sc-l{grid-area:l;text-align:left;white-space:normal}"
+    ".scg .sc-n{grid-area:n}.scg .sc-s{grid-area:s;align-self:start;max-width:var(--sc-wmax,180px)}.scg .sc-l{grid-area:l;text-align:left;white-space:normal}"
     ".scg .sc-p{grid-area:p;margin-right:64px}.scg .sc-p:empty{display:none}}"
 )
 
@@ -486,15 +494,28 @@ def _svg(cls: str, height: float, body: str) -> str:
     return f'<svg class="{cls}" width="100%" height="{num(height)}" aria-hidden="true" focusable="false">{body}</svg>'
 
 
-def sc_frame(rows: Iterable[str], *, label: str, title: str, head: Sequence[str] = (), legend: str = "", caption: str = "", illustrative: bool = True) -> str:
+def sc_frame(
+    rows: Iterable[str],
+    *,
+    label: str,
+    title: str,
+    head: Sequence[str] = (),
+    legend: str = "",
+    caption: str = "",
+    illustrative: bool = True,
+    word_max: int | None = None,
+) -> str:
     """One visual: a frame head (section label, legend, Illustrative tag top right), one mono column head, the
     rows, and one caption line. role="img" with an aria-label that states the answer. Hairlines top and bottom,
-    never a box, so it sits inside a card or a page without a box inside a box."""
+    never a box, so it sits inside a card or a page without a box inside a box. The word column wraps at word_max
+pixels (default 180), so a long role ("Head of Product, Quoting squad") takes two lines instead of squeezing the
+name. A frame under 800px wide stacks its rows."""
     tag = '<span class="sc-i">Illustrative</span>' if illustrative else ""
     top = f'<div class="sc-t"><span><span>{esc(title)}</span>{legend}</span>{tag}</div>'
     cols = f'<div class="sc-h">{"".join(f"<span>{esc(h)}</span>" for h in head)}</div>' if head else ""
     cap = f'<span class="sc-c">{esc(caption)}</span>' if caption else ""
-    return f'<div class="sc scg" role="img" aria-label="{esc(label)}">{top}<div class="sc-b">{cols}{"".join(rows)}</div>{cap}</div>'
+    wmax = f' style="--sc-wmax:{int(word_max)}px"' if word_max else ""
+    return f'<div class="sc scg" role="img" aria-label="{esc(label)}"{wmax}>{top}<div class="sc-b">{cols}{"".join(rows)}</div>{cap}</div>'
 
 
 def sc_row(name: str, *, picture: str = "", figure: str = "", word: str = "") -> str:
@@ -524,24 +545,77 @@ def figure_line(actual: str, *, prior: str | None = None, target: str | None = N
     return f'<span class="sc-l">{parts}</span>'
 
 
-def range_line(*, actual: float, target: float | None = None, prior: float | None = None, status: str | None = None, domain: tuple[float, float] | None = None) -> str:
-    """Prior (grey dot), actual (status dot, ink without a status), the move between them, a target tick.
-    No band. The scale runs from 0 to 1.18 times the largest value, as the Leader Report's bullet() draws it."""
+MIN_GAP_PCT = 2.5  # marks closer than this share of the line are drawn apart
+MIN_GAP_PX = 4  # by this many pixels each, in the order of their values
+
+
+def frame_domain(rows: Iterable[tuple[float | None, float, float]], *, relative: bool = True, pad: float = 0.06) -> tuple[float, float]:
+    """One scale for every range line in a frame. rows are (prior, actual, target). relative (the default) reads each
+    value as a share of its row's target, so rows in different units share one scale and every target tick lines
+    up; pass the result to range_line(domain=..., relative=True). The domain runs from the smallest value to the
+    largest, padded by pad of the span each side: close values read apart, and nothing is invented."""
+    values: list[float] = []
+    for prior, actual, target in rows:
+        base = target if relative and target else 1.0
+        values += [v / base for v in (prior, actual, target) if v is not None]
+    if not values:
+        return (0.0, 1.0)
+    lo, hi = min(values), max(values)
+    room = (hi - lo) * pad or abs(hi) * 0.1 or 1.0
+    return (lo - room, hi + room)
+
+
+def range_line(
+    *,
+    actual: float,
+    target: float | None = None,
+    prior: float | None = None,
+    status: str | None = None,
+    domain: tuple[float, float] | None = None,
+    relative: bool = False,
+) -> str:
+    """Prior (grey dot), actual (status dot, ink without a status), the move between them, a target tick. No band.
+
+    domain: the frame's one scale, from frame_domain(); relative must match how it was built. Without a domain the
+    row scales alone, 0 to 1.18 times its largest value, as the Leader Report's bullet() draws it. Two marks whose
+    values differ but sit within MIN_GAP_PCT of the line are drawn MIN_GAP_PX apart each way, in value order, so
+    2,060 → 2,100 and 18.1% against a target of 18% read apart. Equal values stay on the same spot."""
     if status is not None and status not in STATUSES:
         raise ValueError(f"status is landed, watch or stalled, not {status!r}")
+    base = target if relative and target else 1.0
     values = [v for v in (actual, target, prior) if v is not None]
     lo, hi = domain or (0.0, max(values) * 1.18 or 1.0)
     x = scale((lo, hi), (0, 100))
+    at = {k: x(v / base) for k, v in (("prior", prior), ("actual", actual), ("target", target)) if v is not None}
+    raw = {"prior": prior, "actual": actual, "target": target}
+    shift = {"prior": 0.0, "actual": 0.0}
+
+    def apart(a: str, b: str, move_b_only: bool) -> None:
+        if a not in at or b not in at or raw[a] == raw[b] or abs(at[a] - at[b]) >= MIN_GAP_PCT:
+            return
+        sign = 1 if raw[b] > raw[a] else -1  # b sits on its own side of a, in value order
+        if move_b_only:
+            shift[b] = sign * max(abs(shift[b]), MIN_GAP_PX)
+        else:
+            shift[b] += sign * MIN_GAP_PX
+            shift[a] -= sign * MIN_GAP_PX
+
+    apart("prior", "actual", move_b_only=False)
+    apart("target", "actual", move_b_only=True)
+
+    def nudge(k: str) -> str:
+        return f' transform="translate({num(shift[k])} 0)"' if shift.get(k) else ""
+
     mid = SC_RANGE_H / 2
     parts = [f'<rect class="tr" x="0" y="{num(mid - 1)}" width="100%" height="2" rx="1"/>']
     if prior is not None:
-        a, b = sorted((x(prior), x(actual)))
+        a, b = sorted((at["prior"], at["actual"]))
         parts.append(f'<rect class="mv" x="{_pct(a)}" y="{num(mid - 1)}" width="{_pct(b - a)}" height="2"/>')
     if target is not None:
-        parts.append(f'<rect class="tg" x="{_pct(x(target))}" y="0" width="1.5" height="{num(SC_RANGE_H)}" transform="translate(-0.75 0)"/>')
+        parts.append(f'<rect class="tg" x="{_pct(at["target"])}" y="0" width="1.5" height="{num(SC_RANGE_H)}" transform="translate(-0.75 0)"/>')
     if prior is not None:
-        parts.append(f'<circle class="pr" cx="{_pct(x(prior))}" cy="{num(mid)}" r="3.5"/>')
-    parts.append(f'<circle class="ac{" " + status if status else ""}" cx="{_pct(x(actual))}" cy="{num(mid)}" r="4.5"/>')
+        parts.append(f'<circle class="pr" cx="{_pct(at["prior"])}" cy="{num(mid)}" r="3.5"{nudge("prior")}/>')
+    parts.append(f'<circle class="ac{" " + status if status else ""}" cx="{_pct(at["actual"])}" cy="{num(mid)}" r="4.5"{nudge("actual")}/>')
     return _svg("sc-rl", SC_RANGE_H, "".join(parts))
 
 
@@ -668,3 +742,82 @@ def boxes_in_frames(page: str, css: str) -> list[str]:
             found += [c for c in cls.split() if c in boxed]
         found += re.findall(r'style="[^"]*(?:border|outline)\s*:[^"]*"', inner)
     return found
+
+
+# The class structure of a frame, for the golden test the site's row kit shares (tools/scorecard-golden.json)
+
+STRUCTURE_CLASS = re.compile(r"^(sc|scg|sc-[a-z]+|st|landed|watch|stalled|ink)$")
+
+
+def structure(markup: str) -> list[str]:
+    """The frame's skeleton: one line per element that carries a scorecard class, as the path of scorecard classes
+    from the frame down ("sc.scg/sc-b/sc-r/sc-p/sc-rl"). Tags, other classes, text and attributes are ignored, so an
+    HTML row kit (the site's rows.tsx) and this module can be checked for the same structure."""
+    from html.parser import HTMLParser
+
+    out: list[str] = []
+
+    class Walk(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__()
+            self.stack: list[tuple[str, str | None]] = []
+
+        def _label(self, attrs: list[tuple[str, str | None]]) -> str | None:
+            cls = next((v for k, v in attrs if k in ("class", "classname")), None) or ""
+            kept = sorted(c for c in cls.split() if STRUCTURE_CLASS.match(c))
+            return ".".join(kept) or None
+
+        def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            label = self._label(attrs)
+            if label:
+                out.append("/".join([x for _, x in self.stack if x] + [label]))
+            if tag not in ("rect", "circle", "path", "line", "br", "img", "input", "meta"):
+                self.stack.append((tag, label))
+
+        def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            label = self._label(attrs)
+            if label:
+                out.append("/".join([x for _, x in self.stack if x] + [label]))
+
+        def handle_endtag(self, tag: str) -> None:
+            for i in range(len(self.stack) - 1, -1, -1):
+                if self.stack[i][0] == tag:
+                    del self.stack[i:]
+                    break
+
+    Walk().feed(markup)
+    return out
+
+
+# Legacy (1.0.0) SVG primitives: deprecated in 1.2.0. They still draw, byte for byte, but each call warns, so a
+# skill's tests can turn the warning into a failure, and legacy_in() finds their output on a page.
+
+LEGACY = (
+    "frame", "icon", "figure", "defs", "hatch_pattern", "label", "value", "status_word", "line_series", "point",
+    "hollow", "rule", "target_line", "target_tick", "zone", "hatched", "deadline", "range_bar", "hbar", "dot_grid",
+    "timeline_row", "tile", "gate", "chip", "chip_width", "spark", "person",
+)  # fmt: skip
+LEGACY_MARKERS = ('class="sk-wide"', 'class="sk-tall"', 'class="sk-one"', 'class="sk-icon"', 'class="sk-st"', 'class="sk-l"', 'class="sk-v"', '<figure class="sk')
+
+
+def _deprecated(fn: Callable[..., str]) -> Callable[..., str]:
+    @functools.wraps(fn)
+    def wrapper(*args: object, **kwargs: object) -> str:
+        warnings.warn(
+            f"svgkit.{fn.__name__} is a legacy SVG primitive, deprecated in 1.2.0: draw scorecard rows (tools/SCORECARD-ROLLOUT.md)",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return fn(*args, **kwargs)
+
+    wrapper.deprecated = True  # type: ignore[attr-defined]
+    return wrapper
+
+
+for _name in LEGACY:
+    globals()[_name] = _deprecated(globals()[_name])
+
+
+def legacy_in(page: str) -> list[str]:
+    """Marks of the legacy primitives on a page (their classes). Empty is the pass."""
+    return [m for m in LEGACY_MARKERS if m in page]
