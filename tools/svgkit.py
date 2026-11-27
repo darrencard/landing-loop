@@ -40,7 +40,7 @@ import re
 import warnings
 from collections.abc import Callable, Iterable, Sequence
 
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 
 INK = "var(--t1)"
 INK2 = "var(--t2)"
@@ -467,7 +467,7 @@ SCORECARD_CSS = (
     ".scg .sc-c{display:block;color:var(--t3);padding:10px 0 12px;border-top:1px solid var(--line)}"
     ".scg .sc-i{display:inline-flex;align-items:center;gap:7px;color:var(--ill)}"
     ".scg .sc-i::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor;flex:none}"
-    ".sc-rl .tr{fill:var(--line2)}.sc-rl .mv{fill:var(--agent-mid)}.sc-rl .tg{fill:var(--t2)}"
+    ".sc-rl .tr{fill:var(--line2)}.sc-rl .mv{fill:var(--agent-mid)}.sc-rl .tg{fill:var(--t2)}.sc-rl .iv{fill:var(--t3)}"
     ".sc-rl .pr{fill:var(--agent-mid)}.sc-rl .ac{fill:var(--t1);stroke:var(--bg);stroke-width:2}"
     ".sc-rl .ac.landed{fill:var(--landed)}.sc-rl .ac.stalled{fill:var(--stalled)}"
     ".sc-rl .ac.watch{fill:var(--bg);stroke:var(--watch);stroke-width:2}"
@@ -549,15 +549,19 @@ MIN_GAP_PCT = 2.5  # marks closer than this share of the line are drawn apart
 MIN_GAP_PX = 4  # by this many pixels each, in the order of their values
 
 
-def frame_domain(rows: Iterable[tuple[float | None, float, float]], *, relative: bool = True, pad: float = 0.06) -> tuple[float, float]:
+def frame_domain(rows: Iterable[tuple], *, relative: bool = True, pad: float = 0.06) -> tuple[float, float]:
     """One scale for every range line in a frame. rows are (prior, actual, target). relative (the default) reads each
     value as a share of its row's target, so rows in different units share one scale and every target tick lines
     up; pass the result to range_line(domain=..., relative=True). The domain runs from the smallest value to the
-    largest, padded by pad of the span each side: close values read apart, and nothing is invented."""
+    largest, padded by pad of the span each side: close values read apart, and nothing is invented. A row may add a
+    fourth item, its likely range (lo, hi), so the interval's ends fit on the scale too."""
     values: list[float] = []
-    for prior, actual, target in rows:
+    for row in rows:
+        prior, actual, target = row[0], row[1], row[2]
+        interval = row[3] if len(row) > 3 else None
         base = target if relative and target else 1.0
-        values += [v / base for v in (prior, actual, target) if v is not None]
+        ends = tuple(interval) if interval else ()
+        values += [v / base for v in (prior, actual, target, *ends) if v is not None]
     if not values:
         return (0.0, 1.0)
     lo, hi = min(values), max(values)
@@ -573,8 +577,12 @@ def range_line(
     status: str | None = None,
     domain: tuple[float, float] | None = None,
     relative: bool = False,
+    interval: tuple[float, float] | None = None,
 ) -> str:
     """Prior (grey dot), actual (status dot, ink without a status), the move between them, a target tick. No band.
+
+    interval: the likely range (lo, hi) of the actual, drawn as a thin grey segment with 6px end caps through the
+    dot. Its ends must print as figures in the row. Without it the output is byte-identical to 1.2.0.
 
     domain: the frame's one scale, from frame_domain(); relative must match how it was built. Without a domain the
     row scales alone, 0 to 1.18 times its largest value, as the Leader Report's bullet() draws it. Two marks whose
@@ -583,7 +591,7 @@ def range_line(
     if status is not None and status not in STATUSES:
         raise ValueError(f"status is landed, watch or stalled, not {status!r}")
     base = target if relative and target else 1.0
-    values = [v for v in (actual, target, prior) if v is not None]
+    values = [v for v in (actual, target, prior, *(interval or ())) if v is not None]
     lo, hi = domain or (0.0, max(values) * 1.18 or 1.0)
     x = scale((lo, hi), (0, 100))
     at = {k: x(v / base) for k, v in (("prior", prior), ("actual", actual), ("target", target)) if v is not None}
@@ -608,6 +616,11 @@ def range_line(
 
     mid = SC_RANGE_H / 2
     parts = [f'<rect class="tr" x="0" y="{num(mid - 1)}" width="100%" height="2" rx="1"/>']
+    if interval is not None:
+        i0, i1 = sorted(x(v / base) for v in interval)
+        parts.append(f'<rect class="iv" x="{_pct(i0)}" y="{num(mid - 1)}" width="{_pct(i1 - i0)}" height="2"/>')
+        for e in (i0, i1):
+            parts.append(f'<rect class="iv" x="{_pct(e)}" y="{num(mid - 3)}" width="1" height="6" transform="translate(-0.5 0)"/>')
     if prior is not None:
         a, b = sorted((at["prior"], at["actual"]))
         parts.append(f'<rect class="mv" x="{_pct(a)}" y="{num(mid - 1)}" width="{_pct(b - a)}" height="2"/>')

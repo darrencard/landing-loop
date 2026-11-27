@@ -101,3 +101,6 @@ Copy these into the skill's page tests (did-it-land `evals/test_loop_live_html.p
 ## The site
 
 The site's row kit is `components/skills/visuals/rows.tsx` in dacard-v0. It mirrors svgkit with the same class names, and `rows.test.tsx` checks its class structure against `tools/scorecard-golden.json`. When svgkit's markup changes, run `python3 tools/scorecard_golden.py`, copy the JSON to `components/skills/visuals/scorecard-golden.json` in the site, and make the site test pass. The site's browser check is `scripts/scorecard-rows.browser.js`. Site sizes are `calc(Npx / var(--zoom))`, so they render 12 and 14px under the 80% zoom above 768px.
+
+
+**svgkit 1.3.0:** eval-kit passes `interval=(lo, hi)` to `range_line` for each version row and prints `RANGE 62.7 TO 90.5%` in the figure column. Other skills need no change; re-vendor only when you next touch the repo.

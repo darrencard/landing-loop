@@ -80,3 +80,6 @@ Get both values with `git -C landing-loop log -1 --format=%H -- tools/svgkit.py`
 | Deprecated (1.2.0) | every name in `LEGACY` |
 
 Tests: `python3 -m unittest discover -s tools -p "test_*.py"`.
+
+## 1.3.0 (2026-11-27)
+`range_line(..., interval=(lo, hi))` draws the likely range of the actual: a thin grey segment (`.sc-rl .iv`) with 6px end caps through the dot, on the frame's shared scale. `frame_domain` rows may carry a fourth item, the interval, so its ends fit the scale. Print the interval's ends as figures in the row. Without an interval the output is byte-identical to 1.2.0.

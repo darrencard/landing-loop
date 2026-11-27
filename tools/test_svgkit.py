@@ -161,6 +161,19 @@ class Scorecard(unittest.TestCase):
         self.assertIn('cx="42.71%"', rl)  # 21.67 of 43 x 1.18
         self.assertIn('class="ac landed" cx="84.75%"', rl)
 
+    def test_range_line_interval_draws_the_likely_range_with_end_caps(self):
+        dom = sk.frame_domain([(None, 80, 80, (62.7, 90.5)), (None, 70, 80, (52.1, 83.3))], relative=False)
+        self.assertLess(dom[0], 52.1)
+        self.assertGreater(dom[1], 90.5)
+        rl = sk.range_line(actual=80, target=80, domain=dom, interval=(62.7, 90.5))
+        self.assertEqual(rl.count('class="iv"'), 3)  # the segment and its two caps
+        self.assertNotIn("<text", rl)
+        self.assertIn(".sc-rl .iv{fill:var(--t3)}", sk.SCORECARD_CSS)
+
+    def test_range_line_without_interval_is_unchanged(self):
+        self.assertNotIn('class="iv"', sk.range_line(prior=21.67, actual=43, target=40, status="landed"))
+        self.assertEqual(sk.frame_domain([(1, 2, 3)]), sk.frame_domain([(1, 2, 3, None)]))
+
     def test_paired_bars_scale_to_the_largest_and_hatch_only_the_overage(self):
         over = sk.paired_bars(14, 28, top=28, hatch_id="h")
         self.assertIn('<rect class="pl" x="0" y="0" width="50%"', over)
