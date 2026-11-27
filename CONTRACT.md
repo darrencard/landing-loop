@@ -1,20 +1,40 @@
-
 # Landing Loop contract, November 2026
 
-Five skills and the Product & Technology Leader Report work as one loop on one landing brief. Set 2026-11-26. Each skill keeps its own repo; this file is what they share.
+Ten skills and the Product & Technology Leader Report work as one loop on one landing brief. Set 2026-11-26. Each skill keeps its own repo; this file is what they share.
 
 | Step | Skill | Reads | Writes (its key in the loop record) |
 |---|---|---|---|
 | 01 Decide | bet-portfolio-review | briefs, roadmap | `portfolio` |
+| 01 Decide | decision-record | brief, `portfolio` | `decisions` |
 | 02 Spec | spec-auditor | brief, spec | `spec` |
-| 03 Build | eval-kit | brief, traces | `evals` |
+| 03 Build | release-readiness | brief, `spec`, checks | `release` |
 | 03 Build | cost-budget-check | brief, usage | `cost` |
+| 03 Build | eval-kit | brief, traces, `cost` | `evals` |
 | 04 Learn | did-it-land | brief, metric, the record so far | `landed` |
+| 04 Learn | customer-signal-digest | brief, feedback, `landed` | `signals` |
+| 04 Learn | postmortem | brief, incidents, the record so far | `postmortem` |
 | 05 Report | Leader Report | the record | slides and ledger rows |
+| 05 Report | board-qa-prep | the record | `board_qa` |
+
+Record order (tools/sample.py in landing-loop): portfolio, decisions, spec, release, cost, evals, landed, signals, postmortem, board_qa. A skill reads only keys earlier in this order.
+
+Outside the loop (team-level, no bet record): team-operations-read and ai-native-hiring-loop. They read the team, not a bet, and write no key. Set 2026-11-26.
+
+Check words, so status words stay did-it-land's (set 2026-11-26):
+
+| Skill | Check words |
+|---|---|
+| decision-record | open, decided, dropped, past due; a decision's outcome is worked, pending or missed |
+| release-readiness | ready to ship or hold, per check and per release; a waived check still reads hold |
+| customer-signal-digest | problem still raised or problem not raised |
+| postmortem | what changed (each with evidence) and who owns each fix (one owner and a due date) |
+| board-qa-prep | answered or open for each likely question |
+
+Acme people are roles, not invented names, in every loop sample (Head of Product, Quoting squad; Quoting squad lead), so the samples agree with the brief.
 
 ## The brief
 
-One format: the Linear project template in `product-engineering-update/skills/landing-brief/assets/project-template.md`, parsed by that skill's `scripts/landing_brief.py`. Vendor the parser at a pinned commit SHA (every skill in the loop does). Never fork the format.
+One format: the Linear project template in `product-engineering-update/skills/landing-brief/assets/project-template.md`, parsed by that skill's `scripts/landing_brief.py`. Vendor the parser at a pinned commit SHA (as spec-auditor and bet-portfolio-review already do). Never fork the format.
 
 ## The loop record
 

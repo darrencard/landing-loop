@@ -6,7 +6,7 @@
     "sha256": "decbe39590cc57b3d47125722a8d43e445d33c8f2f525c00277b94b7937dc95f"
   },
   "portfolio": {
-    "tool": "bet-portfolio-review 0.3.0",
+    "tool": "bet-portfolio-review 0.3.1",
     "as_of": "2026-07-27",
     "rank": {
       "value": 4,
@@ -56,9 +56,229 @@
     "brief_problems": [],
     "next_step": "Next in the loop, 02 Spec: run spec-auditor on the bet's spec against this brief before build starts."
   },
+  "decisions": {
+    "tool": "decision-record 0.3.0",
+    "as_of": "2026-07-27",
+    "log": {
+      "path": "decisions.md",
+      "sha256": "42c46365e3dc4467516b31ff0d51424ca14f309399d848f2269ca57440bf9be8"
+    },
+    "reads": {
+      "brief": true,
+      "portfolio": true
+    },
+    "columns": [
+      "ask",
+      "options",
+      "recommendation",
+      "deadline",
+      "owner",
+      "days_waiting",
+      "id",
+      "source"
+    ],
+    "rows": [
+      {
+        "ask": "Set the rollback trigger for quote drafting",
+        "options": "Roll back when wrong-price quotes pass 2% or Roll back when rejected drafts pass 30%",
+        "recommendation": "The Quoting squad product manager recommends the wrong-price trigger at 2%. Waiting on Quoting squad lead, 14 days open, past the usual 7 days to decide.",
+        "deadline": "2026-08-03",
+        "owner": "Quoting squad lead",
+        "days_waiting": 14,
+        "id": "D-0004",
+        "source": "Acme decide call, 2026-07-27 (illustrative)"
+      },
+      {
+        "ask": "Choose the model tier for quote drafts",
+        "options": "vendor-a/xl or vendor-a/m",
+        "recommendation": "The Quoting squad lead recommends vendor-a/m, to stay inside the 9,000 token budget. Waiting on Quoting squad tech lead, 7 days open.",
+        "deadline": "2026-08-03",
+        "owner": "Quoting squad tech lead",
+        "days_waiting": 7,
+        "id": "D-0005",
+        "source": "Acme decide call, 2026-07-27 (illustrative)"
+      }
+    ],
+    "decided": [
+      {
+        "id": "D-0001",
+        "title": "Build quote drafting now, against its landing brief",
+        "chosen": "Build quote drafting now",
+        "decided_by": "Head of Product, Quoting squad",
+        "date": "2026-07-27",
+        "owner": "Quoting squad lead",
+        "review_by": "2026-11-15",
+        "reversible": "yes",
+        "success_signal": "Quote draft acceptance rate at 40% or higher by 2026-11-15, as the landing brief sets.",
+        "assumptions": [
+          "Tradespeople accept a draft they can edit",
+          "9,000 tokens per task is enough for a full quote"
+        ],
+        "evidence": "My call: we build quote drafting now, against the brief as written, and we review it on 15 November.",
+        "source": "Acme decide call, 2026-07-27 (illustrative)"
+      },
+      {
+        "id": "D-0002",
+        "title": "Quote drafts wait for the tradesperson's approval before they send",
+        "chosen": "Approve before send",
+        "decided_by": "Head of Product, Quoting squad",
+        "date": "2026-07-27",
+        "owner": "Quoting squad lead",
+        "review_by": "2026-11-15",
+        "reversible": "yes",
+        "success_signal": "Wrong-line-item complaints below 5 a month by 2026-11-15 (illustrative).",
+        "assumptions": [
+          "Most wrong line items are caught when the tradesperson reads the draft"
+        ],
+        "evidence": "Decided: every drafted quote waits for the tradesperson to approve it before it sends.",
+        "source": "Acme decide call, 2026-07-27 (illustrative)"
+      },
+      {
+        "id": "D-0003",
+        "title": "Prices come from the price book, never the model",
+        "chosen": "Prices from the price book",
+        "decided_by": "Quoting squad tech lead",
+        "date": "2026-07-27",
+        "owner": "Quoting squad lead",
+        "review_by": "2026-11-15",
+        "reversible": "yes",
+        "success_signal": "No sent quote carries a price that differs from the price book, checked weekly to 2026-11-15 (illustrative).",
+        "assumptions": [],
+        "evidence": "Prices come from the price book in fixed code. That is my call for v1.",
+        "source": "Acme decide call, 2026-07-27 (illustrative)"
+      }
+    ],
+    "brief": {
+      "metric": "Quote draft acceptance rate",
+      "bar": "40%",
+      "better": "higher",
+      "by": "2026-11-15",
+      "decides": "Head of Product, Quoting squad",
+      "tested_by": [
+        "D-0001"
+      ]
+    },
+    "figures": {
+      "open": {
+        "value": 2,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "decided": {
+        "value": 3,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "past_due": {
+        "value": 1,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "waiting_on_nobody": {
+        "value": 0,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "oldest_open": {
+        "value": 14,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); as_of minus the opened date",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "usual_days_to_decide": {
+        "value": 7.0,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); median days from opened to decided",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "days_waiting@D-0004": {
+        "value": 14,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); as_of minus the opened date",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "days_waiting@D-0005": {
+        "value": 7,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); as_of minus the opened date",
+        "window": {
+          "from": "2026-07-20",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "days_to_decide@D-0001": {
+        "value": 7,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); decided date minus the opened date",
+        "window": {
+          "from": "2026-07-20",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "days_to_decide@D-0002": {
+        "value": 14,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); decided date minus the opened date",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      },
+      "days_to_decide@D-0003": {
+        "value": 5,
+        "unit": "days",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); decided date minus the opened date",
+        "window": {
+          "from": "2026-07-22",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27"
+      }
+    },
+    "gaps": [],
+    "next_step": "D-0004 waits on Quoting squad lead: set the rollback trigger for quote drafting by 2026-08-03.",
+    "next_step_by": "Quoting squad lead",
+    "next_in_loop": "Next in the loop, 02 Spec: run spec-auditor on the bet's spec against this brief before build starts.",
+    "illustrative": true
+  },
   "spec": {
     "tool": "spec-auditor",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "as_of": "2026-08-03",
     "source": {
       "kind": "file",
@@ -73,7 +293,7 @@
       "hold": {
         "value": 2,
         "unit": "findings",
-        "source": "spec-auditor 0.3.0, audit of examples/acme/specs/quote-drafting.md",
+        "source": "spec-auditor 0.3.1, audit of examples/acme/specs/quote-drafting.md",
         "window": {
           "from": "2026-08-03",
           "to": "2026-08-03"
@@ -83,7 +303,7 @@
       "note": {
         "value": 1,
         "unit": "findings",
-        "source": "spec-auditor 0.3.0, audit of examples/acme/specs/quote-drafting.md",
+        "source": "spec-auditor 0.3.1, audit of examples/acme/specs/quote-drafting.md",
         "window": {
           "from": "2026-08-03",
           "to": "2026-08-03"
@@ -93,7 +313,7 @@
       "pass": {
         "value": 11,
         "unit": "findings",
-        "source": "spec-auditor 0.3.0, audit of examples/acme/specs/quote-drafting.md",
+        "source": "spec-auditor 0.3.1, audit of examples/acme/specs/quote-drafting.md",
         "window": {
           "from": "2026-08-03",
           "to": "2026-08-03"
@@ -154,15 +374,383 @@
       "sha256": "decbe39590cc57b3d47125722a8d43e445d33c8f2f525c00277b94b7937dc95f"
     }
   },
+  "release": {
+    "tool": "release-readiness 0.3.0",
+    "as_of": "2026-09-05",
+    "release": "Acme quote drafting v1.0",
+    "commit": "5e1c0a9d3b72f4e8",
+    "readiness": "ready to ship",
+    "counts": {
+      "ready": {
+        "value": 6,
+        "unit": "checks ready to ship",
+        "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
+        "window": {
+          "from": "2026-09-05",
+          "to": "2026-09-05"
+        },
+        "as_of": "2026-09-05"
+      },
+      "waived": {
+        "value": 1,
+        "unit": "checks on hold under a waiver",
+        "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
+        "window": {
+          "from": "2026-09-05",
+          "to": "2026-09-05"
+        },
+        "as_of": "2026-09-05"
+      },
+      "hold": {
+        "value": 0,
+        "unit": "checks on hold",
+        "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
+        "window": {
+          "from": "2026-09-05",
+          "to": "2026-09-05"
+        },
+        "as_of": "2026-09-05"
+      },
+      "total": {
+        "value": 7,
+        "unit": "checks",
+        "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
+        "window": {
+          "from": "2026-09-05",
+          "to": "2026-09-05"
+        },
+        "as_of": "2026-09-05"
+      }
+    },
+    "checks": [
+      {
+        "id": "ci",
+        "label": "CI passes on the release commit",
+        "readiness": "ready to ship",
+        "owner": "Quoting squad tech lead",
+        "reasons": [],
+        "figures": {
+          "required": {
+            "value": 5,
+            "unit": "checks",
+            "source": "examples/acme/inputs/ci.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "passed": {
+            "value": 5,
+            "unit": "checks",
+            "source": "examples/acme/inputs/ci.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          }
+        }
+      },
+      {
+        "id": "bugs",
+        "label": "Open bugs within the severity limits",
+        "readiness": "hold",
+        "owner": "Quoting squad lead",
+        "reasons": [
+          "2 open major bugs against a limit of 1: #3101 (Quoting squad tech lead), #3104 (Quoting squad tech lead)."
+        ],
+        "figures": {
+          "open.blocker": {
+            "value": 0,
+            "unit": "bugs",
+            "source": "examples/acme/inputs/bugs.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "open.critical": {
+            "value": 0,
+            "unit": "bugs",
+            "source": "examples/acme/inputs/bugs.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "open.major": {
+            "value": 2,
+            "unit": "bugs",
+            "source": "examples/acme/inputs/bugs.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "open.minor": {
+            "value": 1,
+            "unit": "bugs",
+            "source": "examples/acme/inputs/bugs.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "open.trivial": {
+            "value": 0,
+            "unit": "bugs",
+            "source": "examples/acme/inputs/bugs.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "open.untriaged": {
+            "value": 0,
+            "unit": "bugs",
+            "source": "examples/acme/inputs/bugs.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          }
+        },
+        "waiver": {
+          "approved_by": "Head of Product, Quoting squad",
+          "reason": "Both open major bugs change the draft's wording only. Prices come from the price book in fixed code. Fixes ship in v1.0.1.",
+          "expires": "2026-09-19"
+        }
+      },
+      {
+        "id": "flags",
+        "label": "Every change behind a flag with an off switch",
+        "readiness": "ready to ship",
+        "owner": "Quoting squad tech lead",
+        "reasons": [],
+        "figures": {
+          "total": {
+            "value": 1,
+            "unit": "flags",
+            "source": "examples/acme/inputs/flags.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "off_switch": {
+            "value": 1,
+            "unit": "flags",
+            "source": "examples/acme/inputs/flags.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "top_rollout": {
+            "value": 10,
+            "unit": "%",
+            "source": "examples/acme/inputs/flags.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          }
+        }
+      },
+      {
+        "id": "rollback",
+        "label": "Rollback written, owned, rehearsed, with a trigger threshold",
+        "readiness": "ready to ship",
+        "owner": "Platform on-call lead",
+        "reasons": [],
+        "figures": {
+          "test_age_days": {
+            "value": 8,
+            "unit": "days",
+            "source": "examples/acme/inputs/release.json",
+            "window": {
+              "from": "2026-08-28",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          }
+        }
+      },
+      {
+        "id": "brief",
+        "label": "Landing brief complete, and its date still ahead",
+        "readiness": "ready to ship",
+        "owner": "Head of Product, Quoting squad",
+        "reasons": [],
+        "figures": {
+          "days_to_date": {
+            "value": 71,
+            "unit": "days",
+            "source": "examples/acme/briefs/quote-drafting.md",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-11-15"
+            },
+            "as_of": "2026-09-05"
+          }
+        }
+      },
+      {
+        "id": "evals",
+        "label": "Eval gate passes on the release commit",
+        "readiness": "ready to ship",
+        "owner": "Quoting squad ML engineer",
+        "reasons": [],
+        "figures": {
+          "1.cases": {
+            "value": 200,
+            "unit": "cases",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-04",
+              "to": "2026-09-04"
+            },
+            "as_of": "2026-09-05"
+          },
+          "1.passed": {
+            "value": 186,
+            "unit": "cases",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-04",
+              "to": "2026-09-04"
+            },
+            "as_of": "2026-09-05"
+          },
+          "1.needed": {
+            "value": 180,
+            "unit": "cases",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-04",
+              "to": "2026-09-04"
+            },
+            "as_of": "2026-09-05"
+          },
+          "2.cases": {
+            "value": 150,
+            "unit": "cases",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-04",
+              "to": "2026-09-04"
+            },
+            "as_of": "2026-09-05"
+          },
+          "2.passed": {
+            "value": 150,
+            "unit": "cases",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-04",
+              "to": "2026-09-04"
+            },
+            "as_of": "2026-09-05"
+          },
+          "2.needed": {
+            "value": 150,
+            "unit": "cases",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-04",
+              "to": "2026-09-04"
+            },
+            "as_of": "2026-09-05"
+          },
+          "total": {
+            "value": 2,
+            "unit": "evals",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "passing": {
+            "value": 2,
+            "unit": "evals",
+            "source": "examples/acme/inputs/evals.csv",
+            "window": {
+              "from": "2026-09-05",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          }
+        }
+      },
+      {
+        "id": "spec",
+        "label": "Spec holds from spec-auditor are closed",
+        "readiness": "ready to ship",
+        "owner": "Quoting squad lead",
+        "reasons": [],
+        "figures": {
+          "holds": {
+            "value": 2,
+            "unit": "findings",
+            "source": "examples/acme/landing/quote-drafting.json, spec key (spec-auditor 0.3.1, 2026-08-03)",
+            "window": {
+              "from": "2026-08-03",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          },
+          "closed": {
+            "value": 2,
+            "unit": "findings",
+            "source": "examples/acme/landing/quote-drafting.json, spec key (spec-auditor 0.3.1, 2026-08-03)",
+            "window": {
+              "from": "2026-08-03",
+              "to": "2026-09-05"
+            },
+            "as_of": "2026-09-05"
+          }
+        }
+      }
+    ],
+    "spec_holds": [
+      {
+        "finding": "rollback",
+        "message": "The rollback plan has no trigger threshold.",
+        "closed_by": "rollback",
+        "closed": true
+      },
+      {
+        "finding": "eval-plan",
+        "message": "The eval plan has no time it runs.",
+        "closed_by": "evals",
+        "closed": true
+      }
+    ],
+    "decides": "Head of Product, Quoting squad",
+    "next_step": "Ship, and close each waived check before its waiver runs out (the first on 2026-09-19). After launch, did-it-land reads quote draft acceptance rate against the 40% bar set for 2026-11-15.",
+    "illustrative": true
+  },
   "cost": {
-    "tool": "cost-budget-check 0.3.0",
+    "tool": "cost-budget-check 0.3.1",
     "budget_status": "over budget",
     "lines": {
       "price_per_token": {
         "actual": {
           "value": 3.2775728155339805e-06,
           "unit": "USD per token",
-          "source": "cost-budget-check 0.3.0: priced cost / tokens; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: priced cost / tokens; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -182,7 +770,7 @@
         "against_budget": {
           "value": 0.09252427184466017,
           "unit": "share over budget",
-          "source": "cost-budget-check 0.3.0: actual / budget - 1; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+          "source": "cost-budget-check 0.3.1: actual / budget - 1; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -193,7 +781,7 @@
         "prior": {
           "value": 2.5178571428571425e-06,
           "unit": "USD per token",
-          "source": "cost-budget-check 0.3.0: priced cost / tokens, 2026-10-18..2026-10-31; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: priced cost / tokens, 2026-10-18..2026-10-31; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-10-18",
             "to": "2026-10-31"
@@ -203,7 +791,7 @@
         "change": {
           "value": 0.301731047304276,
           "unit": "share change since the prior window",
-          "source": "cost-budget-check 0.3.0: this window / prior window - 1; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: this window / prior window - 1; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -215,7 +803,7 @@
         "actual": {
           "value": 10300.0,
           "unit": "tokens per task",
-          "source": "cost-budget-check 0.3.0: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -235,7 +823,7 @@
         "against_budget": {
           "value": 0.14444444444444438,
           "unit": "share over budget",
-          "source": "cost-budget-check 0.3.0: actual / budget - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+          "source": "cost-budget-check 0.3.1: actual / budget - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -246,7 +834,7 @@
         "prior": {
           "value": 8400.0,
           "unit": "tokens per task",
-          "source": "cost-budget-check 0.3.0: tokens / tasks, 2026-10-18..2026-10-31; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: tokens / tasks, 2026-10-18..2026-10-31; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-10-18",
             "to": "2026-10-31"
@@ -256,7 +844,7 @@
         "change": {
           "value": 0.22619047619047628,
           "unit": "share change since the prior window",
-          "source": "cost-budget-check 0.3.0: this window / prior window - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: this window / prior window - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -268,7 +856,7 @@
         "actual": {
           "value": 0.033759,
           "unit": "USD per task",
-          "source": "cost-budget-check 0.3.0: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -288,7 +876,7 @@
         "against_budget": {
           "value": 0.2503333333333333,
           "unit": "share over budget",
-          "source": "cost-budget-check 0.3.0: actual / budget - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+          "source": "cost-budget-check 0.3.1: actual / budget - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -299,7 +887,7 @@
         "prior": {
           "value": 0.02115,
           "unit": "USD per task",
-          "source": "cost-budget-check 0.3.0: priced cost / tasks, 2026-10-18..2026-10-31; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: priced cost / tasks, 2026-10-18..2026-10-31; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-10-18",
             "to": "2026-10-31"
@@ -309,7 +897,7 @@
         "change": {
           "value": 0.5961702127659574,
           "unit": "share change since the prior window",
-          "source": "cost-budget-check 0.3.0: this window / prior window - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+          "source": "cost-budget-check 0.3.1: this window / prior window - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
           "window": {
             "from": "2026-11-01",
             "to": "2026-11-14"
@@ -322,7 +910,7 @@
     "tokens_per_task": {
       "value": 10300.0,
       "unit": "tokens per task",
-      "source": "cost-budget-check 0.3.0: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+      "source": "cost-budget-check 0.3.1: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
       "window": {
         "from": "2026-11-01",
         "to": "2026-11-14"
@@ -332,7 +920,7 @@
     "price_per_token": {
       "value": 3.2775728155339805e-06,
       "unit": "USD per token",
-      "source": "cost-budget-check 0.3.0: priced cost / tokens; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+      "source": "cost-budget-check 0.3.1: priced cost / tokens; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
       "window": {
         "from": "2026-11-01",
         "to": "2026-11-14"
@@ -342,7 +930,7 @@
     "cost_per_task": {
       "value": 0.033759,
       "unit": "USD per task",
-      "source": "cost-budget-check 0.3.0: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+      "source": "cost-budget-check 0.3.1: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
       "window": {
         "from": "2026-11-01",
         "to": "2026-11-14"
@@ -385,7 +973,7 @@
     "priced_cost": {
       "value": 9.45252,
       "unit": "USD",
-      "source": "cost-budget-check 0.3.0: sum of tokens x rate per token type; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+      "source": "cost-budget-check 0.3.1: sum of tokens x rate per token type; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
       "window": {
         "from": "2026-11-01",
         "to": "2026-11-14"
@@ -395,7 +983,7 @@
     "over_budget": {
       "value": 1.8925200000000002,
       "unit": "USD",
-      "source": "cost-budget-check 0.3.0: priced cost - tasks x budgeted cost per task; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+      "source": "cost-budget-check 0.3.1: priced cost - tasks x budgeted cost per task; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
       "window": {
         "from": "2026-11-01",
         "to": "2026-11-14"
@@ -407,7 +995,7 @@
       "over_budget": {
         "value": 0.9626399999999999,
         "unit": "USD",
-        "source": "cost-budget-check 0.3.0: model cost - model token share x budgeted cost; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+        "source": "cost-budget-check 0.3.1: model cost - model token share x budgeted cost; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
         "window": {
           "from": "2026-11-01",
           "to": "2026-11-14"
@@ -428,7 +1016,7 @@
   },
   "evals": {
     "skill": "eval-kit",
-    "skill_version": "0.3.2",
+    "skill_version": "0.3.3",
     "feature": "Quote drafting",
     "version": "v1.4",
     "as_of": "2026-11-15",
@@ -561,7 +1149,7 @@
       "cost_per_task@v1.4": {
         "value": 0.0338,
         "unit": "$",
-        "source": "cost-budget-check 0.3.0: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+        "source": "cost-budget-check 0.3.1: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
         "window": {
           "from": "2026-11-15",
           "to": "2026-11-15"
@@ -621,7 +1209,7 @@
   "landed": {
     "status": "landed",
     "reason": "Past the bar of 40% by 2026-11-15.",
-    "computed_by": "did-it-land 0.3.0",
+    "computed_by": "did-it-land 0.3.1",
     "as_of": "2026-11-26T09:00:00Z",
     "metric": "Quote draft acceptance rate",
     "better": "higher",
@@ -712,5 +1300,1915 @@
     "flags": [],
     "next_step": "Keep the metric on the scorecard, and decide whether to scale the bet.",
     "decides": "Head of Product, Quoting squad"
+  },
+  "signals": {
+    "tool": "customer-signal-digest 0.3.0",
+    "as_of": "2026-11-26",
+    "window": {
+      "from": "2026-09-07",
+      "to": "2026-11-24"
+    },
+    "illustrative": true,
+    "check": "problem still raised",
+    "check_reason": "7 signals from 7 accounts say the problem is still there, 5 of them in the last 30 days.",
+    "bet_status": {
+      "status": "landed",
+      "printed_from": "landed.status",
+      "computed_by": "did-it-land 0.3.1",
+      "metric": "Quote draft acceptance rate",
+      "current": {
+        "value": 43.0,
+        "unit": "%",
+        "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-23"
+        },
+        "as_of": "2026-11-26T09:00:00Z"
+      }
+    },
+    "brief": {
+      "path": "quote-drafting.md",
+      "problem": "Tradespeople spend evenings writing quotes by hand, so quotes go out late and lose the job.",
+      "metric": "Quote draft acceptance rate",
+      "bar": "40%",
+      "better": "higher",
+      "by": "2026-11-15"
+    },
+    "figures": {
+      "signals": {
+        "value": 21,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: signals in the window after duplicates were merged; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "accounts": {
+        "value": 16,
+        "unit": "accounts",
+        "source": "customer-signal-digest 0.3.0: distinct accounts named on those signals; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "on_bet_signals": {
+        "value": 12,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: signals in themes tied to quote-drafting; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "on_bet_share": {
+        "value": 57.1,
+        "unit": "%",
+        "source": "customer-signal-digest 0.3.0: signals in themes tied to quote-drafting / all signals; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "problem_signals": {
+        "value": 7,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: signals in themes on the problem side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "problem_accounts": {
+        "value": 7,
+        "unit": "accounts",
+        "source": "customer-signal-digest 0.3.0: distinct accounts on the problem side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "problem_last_30_days": {
+        "value": 5,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: problem-side signals in the last 30 days; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-10-28",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "problem_prior_30_days": {
+        "value": 2,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: problem-side signals in the 30 days before; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-28",
+          "to": "2026-10-27"
+        },
+        "as_of": "2026-11-26"
+      },
+      "praise_signals": {
+        "value": 5,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: signals in themes on the praise side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "praise_accounts": {
+        "value": 5,
+        "unit": "accounts",
+        "source": "customer-signal-digest 0.3.0: distinct accounts on the praise side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      }
+    },
+    "themes": [
+      {
+        "id": "quote-line-items",
+        "name": "Quote drafts miss line items",
+        "side": "problem",
+        "rank": {
+          "value": 1,
+          "unit": "rank of 6 themes",
+          "source": "customer-signal-digest 0.3.0: reach, frequency and recency, ranked in code; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        },
+        "figures": {
+          "signals": {
+            "value": 7,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: deduplicated signals in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "accounts": {
+            "value": 7,
+            "unit": "accounts",
+            "source": "customer-signal-digest 0.3.0: distinct accounts in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "last_30_days": {
+            "value": 5,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the last 30 days; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-10-28",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "prior_30_days": {
+            "value": 2,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the 30 days before; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-28",
+              "to": "2026-10-27"
+            },
+            "as_of": "2026-11-26"
+          },
+          "arr": {
+            "value": 111600.0,
+            "unit": "ARR",
+            "source": "customer-signal-digest 0.3.0: summed ARR of 7 accounts, from the accounts file; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          }
+        },
+        "talk_to": [
+          "9010",
+          "9003",
+          "9001",
+          "9007",
+          "9012",
+          "9005",
+          "9008"
+        ],
+        "quotes": [
+          {
+            "text": "Quote drafts keep missing line items. I check every one by hand now.",
+            "ids": [
+              "nps:N-01"
+            ],
+            "created": "2026-11-21",
+            "illustrative": true
+          },
+          {
+            "text": "The quote draft left off the materials for the boiler swap. Copper pipe and fittings were missing.",
+            "ids": [
+              "intercom:215001",
+              "zendesk:4101"
+            ],
+            "created": "2026-11-20",
+            "illustrative": true
+          },
+          {
+            "text": "Spoke with [NAME]. Their estimators stopped using AI quote drafts because line items for materials go missing. They re-key every quote.",
+            "ids": [
+              "calls:C-301"
+            ],
+            "created": "2026-11-19",
+            "illustrative": true
+          }
+        ]
+      },
+      {
+        "id": "quotes-same-day",
+        "name": "Quotes go out the same day",
+        "side": "praise",
+        "rank": {
+          "value": 2,
+          "unit": "rank of 6 themes",
+          "source": "customer-signal-digest 0.3.0: reach, frequency and recency, ranked in code; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        },
+        "figures": {
+          "signals": {
+            "value": 5,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: deduplicated signals in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "accounts": {
+            "value": 5,
+            "unit": "accounts",
+            "source": "customer-signal-digest 0.3.0: distinct accounts in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "last_30_days": {
+            "value": 2,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the last 30 days; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-10-28",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "prior_30_days": {
+            "value": 2,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the 30 days before; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-28",
+              "to": "2026-10-27"
+            },
+            "as_of": "2026-11-26"
+          },
+          "arr": {
+            "value": 44400.0,
+            "unit": "ARR",
+            "source": "customer-signal-digest 0.3.0: summed ARR of 5 accounts, from the accounts file; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          }
+        },
+        "talk_to": [
+          "9013",
+          "9002",
+          "9011",
+          "9015",
+          "9014"
+        ],
+        "quotes": [
+          {
+            "text": "Love that quotes go out the same day now. Customers notice.",
+            "ids": [
+              "intercom:215006"
+            ],
+            "created": "2026-11-16",
+            "illustrative": true
+          },
+          {
+            "text": "Drafting a quote takes minutes now, not my evenings.",
+            "ids": [
+              "nps:N-08"
+            ],
+            "created": "2026-11-09",
+            "illustrative": true
+          },
+          {
+            "text": "Quotes go out the same day now. Got my evenings back.",
+            "ids": [
+              "nps:N-07"
+            ],
+            "created": "2026-10-20",
+            "illustrative": true
+          }
+        ]
+      },
+      {
+        "id": "chaser-paid-invoices",
+        "name": "Invoice chasers go to customers who already paid",
+        "side": "other",
+        "rank": {
+          "value": 3,
+          "unit": "rank of 6 themes",
+          "source": "customer-signal-digest 0.3.0: reach, frequency and recency, ranked in code; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        },
+        "figures": {
+          "signals": {
+            "value": 4,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: deduplicated signals in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "accounts": {
+            "value": 4,
+            "unit": "accounts",
+            "source": "customer-signal-digest 0.3.0: distinct accounts in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "last_30_days": {
+            "value": 4,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the last 30 days; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-10-28",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "prior_30_days": {
+            "value": 0,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the 30 days before; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-28",
+              "to": "2026-10-27"
+            },
+            "as_of": "2026-11-26"
+          },
+          "arr": {
+            "value": 33600.0,
+            "unit": "ARR",
+            "source": "customer-signal-digest 0.3.0: summed ARR of 4 accounts, from the accounts file; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          }
+        },
+        "talk_to": [
+          "9006",
+          "9002",
+          "9011",
+          "9014"
+        ],
+        "quotes": [
+          {
+            "text": "Reminders go out to customers who already paid. Stop the chase once paid please.",
+            "ids": [
+              "nps:N-04"
+            ],
+            "created": "2026-11-23",
+            "illustrative": true
+          },
+          {
+            "text": "Reminder went to a customer who already paid Your invoice chaser emailed my customer a reminder even though they already paid by card ending 4242 last week. Very embarrassing. My name is [NAME].",
+            "ids": [
+              "zendesk:4102"
+            ],
+            "created": "2026-11-18",
+            "illustrative": true
+          },
+          {
+            "text": "Chasing emails keep going to clients who already paid. Please stop the reminder once the payment matches.",
+            "ids": [
+              "intercom:215004"
+            ],
+            "created": "2026-11-10",
+            "illustrative": true
+          }
+        ]
+      },
+      {
+        "id": "offline-sync",
+        "name": "Mobile app loses job notes offline",
+        "side": "other",
+        "rank": {
+          "value": 4,
+          "unit": "rank of 6 themes",
+          "source": "customer-signal-digest 0.3.0: reach, frequency and recency, ranked in code; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        },
+        "figures": {
+          "signals": {
+            "value": 2,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: deduplicated signals in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "accounts": {
+            "value": 2,
+            "unit": "accounts",
+            "source": "customer-signal-digest 0.3.0: distinct accounts in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "last_30_days": {
+            "value": 1,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the last 30 days; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-10-28",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "prior_30_days": {
+            "value": 1,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the 30 days before; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-28",
+              "to": "2026-10-27"
+            },
+            "as_of": "2026-11-26"
+          },
+          "arr": {
+            "value": 20400.0,
+            "unit": "ARR",
+            "source": "customer-signal-digest 0.3.0: summed ARR of 2 accounts, from the accounts file; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          }
+        },
+        "talk_to": [
+          "9006",
+          "9009"
+        ],
+        "quotes": [
+          {
+            "text": "The mobile app goes offline in basements and loses job notes. Email me at [EMAIL]",
+            "ids": [
+              "nps:N-03"
+            ],
+            "created": "2026-11-08",
+            "illustrative": true
+          },
+          {
+            "text": "Job notes lost offline Mobile app lost my job notes when I went offline in a basement. They never synced.",
+            "ids": [
+              "zendesk:4105"
+            ],
+            "created": "2026-10-22",
+            "illustrative": true
+          }
+        ]
+      },
+      {
+        "id": "accounting-export",
+        "name": "Accounting export puts the wrong tax code on labour",
+        "side": "other",
+        "rank": {
+          "value": 5,
+          "unit": "rank of 6 themes",
+          "source": "customer-signal-digest 0.3.0: reach, frequency and recency, ranked in code; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        },
+        "figures": {
+          "signals": {
+            "value": 2,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: deduplicated signals in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "accounts": {
+            "value": 1,
+            "unit": "accounts",
+            "source": "customer-signal-digest 0.3.0: distinct accounts in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "last_30_days": {
+            "value": 1,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the last 30 days; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-10-28",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "prior_30_days": {
+            "value": 1,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the 30 days before; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-28",
+              "to": "2026-10-27"
+            },
+            "as_of": "2026-11-26"
+          },
+          "arr": {
+            "value": 12000.0,
+            "unit": "ARR",
+            "source": "customer-signal-digest 0.3.0: summed ARR of 1 accounts, from the accounts file; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          }
+        },
+        "talk_to": [
+          "9004"
+        ],
+        "quotes": [
+          {
+            "text": "[NAME] walked through the accounting export. Tax code on labour lines is wrong every month and the bookkeeper fixes the ledger by hand.",
+            "ids": [
+              "calls:C-302"
+            ],
+            "created": "2026-11-10",
+            "illustrative": true
+          },
+          {
+            "text": "Accounting export tax code wrong The accounting export puts the wrong tax code on every labour line. Our bookkeeper has to fix it by hand each month.",
+            "ids": [
+              "zendesk:4104"
+            ],
+            "created": "2026-10-02",
+            "illustrative": true
+          }
+        ]
+      },
+      {
+        "id": "unnamed-1",
+        "name": "Unnamed: app, dark, early",
+        "side": "other",
+        "rank": {
+          "value": 6,
+          "unit": "rank of 6 themes",
+          "source": "customer-signal-digest 0.3.0: reach, frequency and recency, ranked in code; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        },
+        "figures": {
+          "signals": {
+            "value": 1,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: deduplicated signals in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "accounts": {
+            "value": 1,
+            "unit": "accounts",
+            "source": "customer-signal-digest 0.3.0: distinct accounts in this theme; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "last_30_days": {
+            "value": 0,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the last 30 days; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-10-28",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          },
+          "prior_30_days": {
+            "value": 0,
+            "unit": "signals",
+            "source": "customer-signal-digest 0.3.0: signals in the 30 days before; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-28",
+              "to": "2026-10-27"
+            },
+            "as_of": "2026-11-26"
+          },
+          "arr": {
+            "value": 3600.0,
+            "unit": "ARR",
+            "source": "customer-signal-digest 0.3.0: summed ARR of 1 accounts, from the accounts file; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-24"
+            },
+            "as_of": "2026-11-26"
+          }
+        },
+        "talk_to": [
+          "9016"
+        ],
+        "quotes": [
+          {
+            "text": "Dark mode Could the mobile app have a dark mode for early starts?",
+            "ids": [
+              "zendesk:4106"
+            ],
+            "created": "2026-09-15",
+            "illustrative": true
+          }
+        ]
+      }
+    ],
+    "inputs": [
+      {
+        "system": "Zendesk",
+        "files": [
+          "zendesk-page-1.json",
+          "zendesk-page-2.json"
+        ],
+        "how": "Live: API pages saved as returned",
+        "signals": {
+          "value": 9,
+          "unit": "signals",
+          "source": "customer-signal-digest 0.3.0: read from Zendesk; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        }
+      },
+      {
+        "system": "Intercom",
+        "files": [
+          "intercom-conversations.json"
+        ],
+        "how": "Live: API pages saved as returned",
+        "signals": {
+          "value": 4,
+          "unit": "signals",
+          "source": "customer-signal-digest 0.3.0: read from Intercom; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        }
+      },
+      {
+        "system": "CSV (calls)",
+        "files": [
+          "calls.csv"
+        ],
+        "how": "CSV fallback",
+        "signals": {
+          "value": 5,
+          "unit": "signals",
+          "source": "customer-signal-digest 0.3.0: read from CSV (calls); Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        }
+      },
+      {
+        "system": "CSV (nps)",
+        "files": [
+          "nps.csv"
+        ],
+        "how": "CSV fallback",
+        "signals": {
+          "value": 7,
+          "unit": "signals",
+          "source": "customer-signal-digest 0.3.0: read from CSV (nps); Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+          "window": {
+            "from": "2026-09-07",
+            "to": "2026-11-24"
+          },
+          "as_of": "2026-11-26"
+        }
+      }
+    ],
+    "left_out": {
+      "nps rows with no text": {
+        "value": 1,
+        "unit": "rows",
+        "source": "customer-signal-digest 0.3.0: left out: nps rows with no text; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "signals before 2026-09-07 or undated": {
+        "value": 1,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: left out: signals before 2026-09-07 or undated; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      },
+      "signals after 2026-11-24": {
+        "value": 1,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: left out: signals after 2026-11-24; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26"
+      }
+    },
+    "duplicates_merged": {
+      "value": 2,
+      "unit": "signals",
+      "source": "customer-signal-digest 0.3.0: signals merged into another as the same complaint; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+      "window": {
+        "from": "2026-09-07",
+        "to": "2026-11-24"
+      },
+      "as_of": "2026-11-26"
+    },
+    "redacted_spans": {
+      "value": 16,
+      "unit": "spans",
+      "source": "customer-signal-digest 0.3.0: personal-data spans replaced before grouping; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+      "window": {
+        "from": "2026-09-07",
+        "to": "2026-11-24"
+      },
+      "as_of": "2026-11-26"
+    },
+    "next_step": "Talk to the 7 accounts on the problem side, highest ARR first (9010, 9003, 9001, 9007, 9012, 9005, 9008), before deciding whether to scale the bet.",
+    "decides": "Head of Product, Quoting squad"
+  },
+  "postmortem": {
+    "tool": "postmortem 0.3.0",
+    "as_of": "2026-11-26",
+    "review": "learning review",
+    "landed_status": {
+      "printed": "landed",
+      "from": "landed.status",
+      "computed_by": "did-it-land 0.3.1"
+    },
+    "window": {
+      "from": "2026-09-07",
+      "to": "2026-11-26"
+    },
+    "brief": {
+      "title": "Quote drafting",
+      "metric": "Quote draft acceptance rate",
+      "bar": "40%",
+      "by": "2026-11-15",
+      "decides": "Head of Product, Quoting squad"
+    },
+    "brief_unchanged": true,
+    "author": "Quoting squad lead",
+    "review_on": "2026-12-17",
+    "summary": "Two incidents touched quote drafting after launch. To stop the first, long drafts were sent to a larger model, and that routing stayed in place. It is the main driver of the cost running over the brief's budget in early November. Prices stayed in fixed code throughout, as the brief's line says.",
+    "figures": {
+      "incidents": {
+        "value": 2,
+        "unit": "incidents",
+        "source": "PagerDuty (acme): PagerDuty incidents, created_at to resolved_at, services Quote drafting (pagerduty-incidents.json, retrieved 2026-11-26); incidents started in the window",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26"
+      },
+      "fixes_owned": {
+        "value": 4,
+        "unit": "fixes",
+        "source": "review.json, checked by postmortem 0.3.0",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26"
+      },
+      "fixes": {
+        "value": 4,
+        "unit": "fixes",
+        "source": "review.json, checked by postmortem 0.3.0",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26"
+      }
+    },
+    "incidents": [
+      {
+        "id": "2141",
+        "severity": "P2",
+        "started_at": "2026-10-30T14:05:00+00:00",
+        "restored_at": "2026-10-30T15:17:00+00:00",
+        "time_to_restore": {
+          "value": 72,
+          "unit": "minutes",
+          "source": "PagerDuty (acme): PagerDuty incidents, created_at to resolved_at, services Quote drafting (pagerduty-incidents.json, retrieved 2026-11-26); restored_at - started_at",
+          "window": {
+            "from": "2026-10-30T14:05:00+00:00",
+            "to": "2026-10-30T15:17:00+00:00"
+          },
+          "as_of": "2026-11-26"
+        }
+      },
+      {
+        "id": "2203",
+        "severity": "P3",
+        "started_at": "2026-11-18T09:40:00+00:00",
+        "restored_at": "2026-11-18T10:02:00+00:00",
+        "time_to_restore": {
+          "value": 22,
+          "unit": "minutes",
+          "source": "PagerDuty (acme): PagerDuty incidents, created_at to resolved_at, services Quote drafting (pagerduty-incidents.json, retrieved 2026-11-26); restored_at - started_at",
+          "window": {
+            "from": "2026-11-18T09:40:00+00:00",
+            "to": "2026-11-18T10:02:00+00:00"
+          },
+          "as_of": "2026-11-26"
+        }
+      }
+    ],
+    "context": [
+      {
+        "key": "portfolio",
+        "label": "01 Decide",
+        "word": null,
+        "text": "Brief score at the portfolio review.",
+        "figures": [
+          {
+            "value": 14,
+            "unit": "points of 14",
+            "source": "briefs/quote-drafting.md",
+            "window": {
+              "from": "2026-07-27",
+              "to": "2026-07-27"
+            },
+            "as_of": "2026-07-27"
+          }
+        ]
+      },
+      {
+        "key": "spec",
+        "label": "02 Spec",
+        "word": "hold",
+        "text": "spec-auditor's verdict on the PRD.",
+        "figures": [
+          {
+            "value": 2,
+            "unit": "findings",
+            "source": "spec-auditor 0.3.1, audit of examples/acme/specs/quote-drafting.md",
+            "window": {
+              "from": "2026-08-03",
+              "to": "2026-08-03"
+            },
+            "as_of": "2026-08-03"
+          }
+        ]
+      },
+      {
+        "key": "cost",
+        "label": "03 Build, cost",
+        "word": "over budget",
+        "text": "cost-budget-check, actual against the brief's budget.",
+        "figures": [
+          {
+            "value": 10300.0,
+            "unit": "tokens per task",
+            "source": "cost-budget-check 0.3.1: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          },
+          {
+            "value": 9000.0,
+            "unit": "tokens per task",
+            "source": "landing brief quote-drafting.md",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          },
+          {
+            "value": 0.033759,
+            "unit": "USD per task",
+            "source": "cost-budget-check 0.3.1: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          },
+          {
+            "value": 0.027,
+            "unit": "USD per task",
+            "source": "landing brief quote-drafting.md (tokens per task x price per token)",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          }
+        ]
+      },
+      {
+        "key": "evals",
+        "label": "03 Build, evals",
+        "word": "meets target",
+        "text": "eval-kit, held-out pass rate for v1.4.",
+        "figures": [
+          {
+            "value": 80.0,
+            "unit": "%",
+            "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+            "window": {
+              "from": "2026-11-15",
+              "to": "2026-11-15"
+            },
+            "as_of": "2026-11-15",
+            "ledger": "L4",
+            "interval_95": [
+              62.7,
+              90.5
+            ]
+          }
+        ]
+      },
+      {
+        "key": "landed",
+        "label": "04 Learn, did-it-land",
+        "word": null,
+        "text": "did-it-land's read: now, at the date, and the bar.",
+        "figures": [
+          {
+            "value": 43.0,
+            "unit": "%",
+            "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-23"
+            },
+            "as_of": "2026-11-26T09:00:00Z"
+          },
+          {
+            "value": 41.0,
+            "unit": "%",
+            "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
+            "window": {
+              "from": "2026-09-07",
+              "to": "2026-11-09"
+            },
+            "as_of": "2026-11-26T09:00:00Z"
+          },
+          {
+            "value": 40.0,
+            "unit": "%",
+            "source": "landing brief: quote-drafting.md",
+            "window": {
+              "from": null,
+              "to": "2026-11-15"
+            },
+            "as_of": "2026-11-26T09:00:00Z"
+          }
+        ]
+      }
+    ],
+    "what_changed": [
+      {
+        "id": "c1",
+        "change": "Long drafts now go to a larger model, vendor-a/xl. The routing was added to stop the timeouts in incident 2141 and had no end date, so it stayed after the incident closed.",
+        "evidence": [
+          "incident:2141",
+          "record:cost/driver/over_budget"
+        ],
+        "cited": {
+          "incident:2141": {
+            "value": 72,
+            "unit": "minutes",
+            "source": "PagerDuty (acme): PagerDuty incidents, created_at to resolved_at, services Quote drafting (pagerduty-incidents.json, retrieved 2026-11-26); restored_at - started_at",
+            "window": {
+              "from": "2026-10-30T14:05:00+00:00",
+              "to": "2026-10-30T15:17:00+00:00"
+            },
+            "as_of": "2026-11-26"
+          },
+          "record:cost/driver/over_budget": {
+            "value": 0.9626399999999999,
+            "unit": "USD",
+            "source": "cost-budget-check 0.3.1: model cost - model token share x budgeted cost; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          }
+        }
+      },
+      {
+        "id": "c2",
+        "change": "Tokens per task rose past the brief's budget once the routing was in place.",
+        "evidence": [
+          "record:cost/lines/tokens_per_task/prior",
+          "record:cost/lines/tokens_per_task/actual",
+          "record:cost/lines/tokens_per_task/budget"
+        ],
+        "cited": {
+          "record:cost/lines/tokens_per_task/prior": {
+            "value": 8400.0,
+            "unit": "tokens per task",
+            "source": "cost-budget-check 0.3.1: tokens / tasks, 2026-10-18..2026-10-31; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+            "window": {
+              "from": "2026-10-18",
+              "to": "2026-10-31"
+            },
+            "as_of": "2026-11-15"
+          },
+          "record:cost/lines/tokens_per_task/actual": {
+            "value": 10300.0,
+            "unit": "tokens per task",
+            "source": "cost-budget-check 0.3.1: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          },
+          "record:cost/lines/tokens_per_task/budget": {
+            "value": 9000.0,
+            "unit": "tokens per task",
+            "source": "landing brief quote-drafting.md",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          }
+        }
+      },
+      {
+        "id": "c3",
+        "change": "The eval run checks quality only. v1.4 met its eval target while cost per task ran over budget, and nothing put the two side by side before ship.",
+        "evidence": [
+          "record:evals/figures/pass_rate@v1.4",
+          "record:cost/lines/cost_per_task/actual"
+        ],
+        "cited": {
+          "record:evals/figures/pass_rate@v1.4": {
+            "value": 80.0,
+            "unit": "%",
+            "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+            "window": {
+              "from": "2026-11-15",
+              "to": "2026-11-15"
+            },
+            "as_of": "2026-11-15",
+            "ledger": "L4",
+            "interval_95": [
+              62.7,
+              90.5
+            ]
+          },
+          "record:cost/lines/cost_per_task/actual": {
+            "value": 0.033759,
+            "unit": "USD per task",
+            "source": "cost-budget-check 0.3.1: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+            "window": {
+              "from": "2026-11-01",
+              "to": "2026-11-14"
+            },
+            "as_of": "2026-11-15"
+          }
+        }
+      },
+      {
+        "id": "c4",
+        "change": "When the price book sync lagged, drafts showed price pending. No draft priced a job itself, because prices come from the price book in fixed code.",
+        "evidence": [
+          "incident:2203"
+        ],
+        "cited": {
+          "incident:2203": {
+            "value": 22,
+            "unit": "minutes",
+            "source": "PagerDuty (acme): PagerDuty incidents, created_at to resolved_at, services Quote drafting (pagerduty-incidents.json, retrieved 2026-11-26); restored_at - started_at",
+            "window": {
+              "from": "2026-11-18T09:40:00+00:00",
+              "to": "2026-11-18T10:02:00+00:00"
+            },
+            "as_of": "2026-11-26"
+          }
+        }
+      }
+    ],
+    "what_went_well": [
+      "The line held: the model drafts the text and fixed code sets every price.",
+      "The timeouts were stopped the same afternoon they were reported."
+    ],
+    "fixes": [
+      {
+        "id": "f1",
+        "fix": "Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back.",
+        "done_when": "cost-budget-check reads tokens per task within budget for a full two-week window.",
+        "owner": "Quoting squad lead",
+        "due": "2026-12-10",
+        "addresses": [
+          "c1",
+          "c2"
+        ],
+        "kind": "prevent"
+      },
+      {
+        "id": "f2",
+        "fix": "Give every routing change made during an incident an end date, and list the open ones in the weekly incident review.",
+        "done_when": "The incident template has an end-date field, and the weekly review shows the open list.",
+        "owner": "Platform on-call lead",
+        "due": "2026-12-17",
+        "addresses": [
+          "c1"
+        ],
+        "kind": "process"
+      },
+      {
+        "id": "f3",
+        "fix": "Put the cost-budget-check result beside the eval-kit result on every quote drafting release candidate.",
+        "done_when": "The next release candidate's checklist links both, and a build over budget is held for a decision.",
+        "owner": "Quoting squad tech lead",
+        "due": "2027-01-08",
+        "addresses": [
+          "c3"
+        ],
+        "kind": "detect"
+      },
+      {
+        "id": "f4",
+        "fix": "Show 'price updating' and retry when the price book sync lags, instead of price pending.",
+        "done_when": "A staged sync delay shows the message, and the draft fills in when the sync completes.",
+        "owner": "Price book squad lead",
+        "due": "2026-12-17",
+        "addresses": [
+          "c4"
+        ],
+        "kind": "mitigate"
+      }
+    ],
+    "check": "what changed: 4 listed, each with its evidence. Who owns each fix: 4 of 4 with one owner and a due date.",
+    "illustrative": true
+  },
+  "board_qa": {
+    "tool": "board-qa-prep 0.3.0",
+    "as_of": "2026-11-26",
+    "bet_title": "Quote drafting",
+    "read": [
+      "portfolio",
+      "decisions",
+      "spec",
+      "release",
+      "cost",
+      "evals",
+      "landed",
+      "signals",
+      "postmortem"
+    ],
+    "not_in_record": [],
+    "brief": {
+      "path": "briefs/quote-drafting.md",
+      "complete": true,
+      "problems": [],
+      "unchanged": true
+    },
+    "counts": {
+      "questions": {
+        "value": 17,
+        "unit": "questions",
+        "source": "board-qa-prep 0.3.0: count of questions in board_qa",
+        "window": {
+          "from": "2026-11-26",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26"
+      },
+      "answered": {
+        "value": 13,
+        "unit": "questions",
+        "source": "board-qa-prep 0.3.0: count of questions in board_qa",
+        "window": {
+          "from": "2026-11-26",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26"
+      },
+      "open": {
+        "value": 4,
+        "unit": "questions",
+        "source": "board-qa-prep 0.3.0: count of questions in board_qa",
+        "window": {
+          "from": "2026-11-26",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26"
+      }
+    },
+    "first": [
+      "Q17",
+      "Q02",
+      "Q05",
+      "Q07",
+      "Q10"
+    ],
+    "questions": [
+      {
+        "id": "Q01",
+        "topic": "brief",
+        "question": "What did we bet on, and how will we know it worked?",
+        "check": "answered",
+        "answer": "Tradespeople spend evenings writing quotes by hand, so quotes go out late and lose the job. The bar: Quote draft acceptance rate at 40% or higher by 2026-11-15 [F01]. Head of Product, Quoting squad decides the next step.",
+        "from_keys": [
+          "brief"
+        ],
+        "priority": 1
+      },
+      {
+        "id": "Q02",
+        "topic": "landed",
+        "question": "Did it land?",
+        "check": "answered",
+        "answer": "did-it-land says landed. Quote draft acceptance rate reads 43% [F02] to 2026-11-23, against a bar of 40% [F03] by 2026-11-15. At the date it read 41% [F04].",
+        "from_keys": [
+          "landed"
+        ],
+        "asked_last_time": [
+          "Are customers actually using the quote drafts?"
+        ],
+        "priority": 6
+      },
+      {
+        "id": "Q03",
+        "topic": "noise",
+        "question": "Is the move real, or normal noise?",
+        "check": "answered",
+        "answer": "Before launch the metric averaged 22.2% [F05], with a spread of 0.75% [F06]. By the date it sat 25 spreads above that mean [F07]. That rules out noise. It does not say what moved it: no holdout group is in the record.",
+        "from_keys": [
+          "landed"
+        ],
+        "priority": 2
+      },
+      {
+        "id": "Q04",
+        "topic": "outcome",
+        "question": "Did the result the metric should move, move too?",
+        "check": "answered",
+        "answer": "The outcome series (Illustrative CRM export, quotes_won_weekly.csv) went from 31 [F08] on 2026-08-31 to 36 [F09] on 2026-11-23. It moved the same way as the metric; the record does not show why.",
+        "from_keys": [
+          "landed"
+        ],
+        "priority": 2
+      },
+      {
+        "id": "Q05",
+        "topic": "decision",
+        "question": "Do we scale it, and who decides?",
+        "check": "open",
+        "missing": "did-it-land's next step: Keep the metric on the scorecard, and decide whether to scale the bet. The decision record was last updated 2026-07-27, before did-it-land's read, so it holds no call on this yet: run decision-record.",
+        "owner": "Head of Product, Quoting squad",
+        "due": "before the board meeting",
+        "from_keys": [
+          "landed",
+          "decisions"
+        ],
+        "priority": 5
+      },
+      {
+        "id": "Q06",
+        "topic": "decision-made",
+        "question": "What did we decide, and who decided?",
+        "check": "answered",
+        "answer": "From decision-record, as of 2026-07-27: 3 decided [F10]. Build quote drafting now, against its landing brief (Head of Product, Quoting squad, 2026-07-27); Quote drafts wait for the tradesperson's approval before they send (Head of Product, Quoting squad, 2026-07-27); Prices come from the price book, never the model (Quoting squad tech lead, 2026-07-27).",
+        "from_keys": [
+          "decisions"
+        ],
+        "priority": 1
+      },
+      {
+        "id": "Q07",
+        "topic": "decision-open",
+        "question": "Which decisions are still open, and who makes them?",
+        "check": "open",
+        "missing": "From decision-record, as of 2026-07-27: 2 open [F11], 1 past due [F12]. Set the rollback trigger for quote drafting (Quoting squad lead, due 2026-08-03); Choose the model tier for quote drafts (Quoting squad tech lead, due 2026-08-03). No later decision record says they closed.",
+        "owner": "Quoting squad lead",
+        "due": "before the board meeting",
+        "from_keys": [
+          "decisions"
+        ],
+        "priority": 5
+      },
+      {
+        "id": "Q08",
+        "topic": "quality",
+        "question": "Is quality holding as more of the work runs without a person?",
+        "check": "answered",
+        "answer": "v1.4's held-out pass rate is 80% [F13] on 30 cases [F15] (95% interval 62.7% to 90.5%). 71.5% of tasks finished with no person [F14]. eval-kit's build check: meets target.",
+        "from_keys": [
+          "evals"
+        ],
+        "priority": 2
+      },
+      {
+        "id": "Q09",
+        "topic": "eval-gain",
+        "question": "Is v1.4 really better than v1.3?",
+        "check": "answered",
+        "answer": "Held-out pass rate went from 70% [F16] on v1.3 to 80% [F13] on v1.4, on the same cases. eval-kit marks the gain as inside the noise for this case count, so it is not yet a proven gain.",
+        "from_keys": [
+          "evals"
+        ],
+        "priority": 1
+      },
+      {
+        "id": "Q10",
+        "topic": "cost",
+        "question": "What does each task cost, against the budget?",
+        "check": "answered",
+        "answer": "$0.0338 per task [F17] from 2026-11-01 to 2026-11-14, against a budget of $0.027 [F18]: over budget by 25% [F19]. Tokens per task: 10,300 [F20] against 9,000 [F21]. Price per token: $0.00000328 [F22] against $0.000003 [F23]. cost-budget-check computes these; eval-kit cites the same cost per task.",
+        "from_keys": [
+          "cost"
+        ],
+        "asked_last_time": [
+          "What does the AI cost us per quote?"
+        ],
+        "priority": 5
+      },
+      {
+        "id": "Q11",
+        "topic": "cost-owner",
+        "question": "Who brings cost back within budget, and by when?",
+        "check": "answered",
+        "answer": "The record names the model behind most of it, vendor-a/xl: $0.963 [F24] of $1.89 [F25] over budget. The postmortem names the fix: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back. Owner: Quoting squad lead, due 2026-12-10.",
+        "from_keys": [
+          "cost",
+          "postmortem"
+        ],
+        "priority": 2
+      },
+      {
+        "id": "Q12",
+        "topic": "release",
+        "question": "Was it ready to ship when it shipped?",
+        "check": "answered",
+        "answer": "release-readiness said ready to ship for Acme quote drafting v1.0 on 2026-09-05: 6 [F26] of 7 [F27] checks ready to ship. Open bugs within the severity limits read hold under a waiver from Head of Product, Quoting squad until 2026-09-19. Every spec-auditor hold was closed before release (rollback, eval-plan).",
+        "from_keys": [
+          "release",
+          "spec"
+        ],
+        "priority": 2
+      },
+      {
+        "id": "Q13",
+        "topic": "release",
+        "question": "Was the waived check closed before its waiver ran out?",
+        "check": "open",
+        "missing": "Open bugs within the severity limits: waived by Head of Product, Quoting squad until 2026-09-19. No later release check in the record says it closed.",
+        "owner": "Quoting squad lead",
+        "due": "before the board meeting",
+        "from_keys": [
+          "release"
+        ],
+        "priority": 4
+      },
+      {
+        "id": "Q14",
+        "topic": "signals",
+        "question": "What are customers saying about it?",
+        "check": "answered",
+        "answer": "customer-signal-digest says problem still raised. It read 21 signals [F28] from 16 accounts [F29] from 2026-09-07 to 2026-11-24. 7 signals [F30] from 7 accounts [F31] say the problem is still there. The top problem theme: Quote drafts miss line items.",
+        "from_keys": [
+          "signals"
+        ],
+        "priority": 1
+      },
+      {
+        "id": "Q15",
+        "topic": "postmortem",
+        "question": "What went wrong, and who owns each fix?",
+        "check": "answered",
+        "answer": "The learning review of 2026-11-26 covers 2 incidents [F32] from 2026-09-07 to 2026-11-26. Each change it lists cites its evidence. 4 fixes [F33], each with one owner and a due date: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back (Quoting squad lead, due 2026-12-10); Give every routing change made during an incident an end date, and list the open ones in the weekly incident review (Platform on-call lead, due 2026-12-17); Put the cost-budget-check result beside the eval-kit result on every quote drafting release candidate (Quoting squad tech lead, due 2027-01-08); Show 'price updating' and retry when the price book sync lags, instead of price pending (Price book squad lead, due 2026-12-17).",
+        "from_keys": [
+          "postmortem"
+        ],
+        "priority": 2
+      },
+      {
+        "id": "Q16",
+        "topic": "portfolio",
+        "question": "Why this bet, over the others?",
+        "check": "answered",
+        "answer": "bet-portfolio-review ranked it 4 of 8 bets, 1 needs work first [F34] on 2026-07-27. Its brief scored 14 points of 14 [F35].",
+        "from_keys": [
+          "portfolio"
+        ],
+        "priority": 1
+      },
+      {
+        "id": "Q17",
+        "topic": "past",
+        "question": "Is any customer data sent to the model provider?",
+        "check": "open",
+        "missing": "Nothing in the record answers it, so it needs a person's answer.",
+        "owner": "Head of Product, Quoting squad",
+        "due": "before the board meeting",
+        "from_keys": [],
+        "asked_last_time": [
+          "Is any customer data sent to the model provider?"
+        ],
+        "priority": 7
+      }
+    ],
+    "figures": {
+      "F01": {
+        "value": 40.0,
+        "unit": "%",
+        "source": "landing brief briefs/quote-drafting.md (landing_brief.py)",
+        "window": {
+          "from": null,
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-26",
+        "from": "brief/bar"
+      },
+      "F02": {
+        "value": 43.0,
+        "unit": "%",
+        "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-23"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/current"
+      },
+      "F03": {
+        "value": 40.0,
+        "unit": "%",
+        "source": "landing brief: quote-drafting.md",
+        "window": {
+          "from": null,
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/bar"
+      },
+      "F04": {
+        "value": 41.0,
+        "unit": "%",
+        "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-09"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/at_date"
+      },
+      "F05": {
+        "value": 22.17,
+        "unit": "%",
+        "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
+        "window": {
+          "from": "2026-07-27",
+          "to": "2026-08-31"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/baseline_mean"
+      },
+      "F06": {
+        "value": 0.75,
+        "unit": "%",
+        "source": "Illustrative product analytics export, quote_drafts_weekly.csv",
+        "window": {
+          "from": "2026-07-27",
+          "to": "2026-08-31"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/baseline_sd"
+      },
+      "F07": {
+        "value": 25.02,
+        "unit": "sd",
+        "source": "computed from Illustrative product analytics export, quote_drafts_weekly.csv",
+        "window": {
+          "from": "2026-07-27",
+          "to": "2026-11-09"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/move_z"
+      },
+      "F08": {
+        "value": 31.0,
+        "unit": "number",
+        "source": "Illustrative CRM export, quotes_won_weekly.csv",
+        "window": {
+          "from": "2026-08-31",
+          "to": "2026-08-31"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/outcome_from"
+      },
+      "F09": {
+        "value": 36.0,
+        "unit": "number",
+        "source": "Illustrative CRM export, quotes_won_weekly.csv",
+        "window": {
+          "from": "2026-08-31",
+          "to": "2026-11-23"
+        },
+        "as_of": "2026-11-26T09:00:00Z",
+        "from": "landed/figures/outcome_to"
+      },
+      "F10": {
+        "value": 3,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27",
+        "from": "decisions/figures/decided"
+      },
+      "F11": {
+        "value": 2,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27",
+        "from": "decisions/figures/open"
+      },
+      "F12": {
+        "value": 1,
+        "unit": "decisions",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "window": {
+          "from": "2026-07-13",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27",
+        "from": "decisions/figures/past_due"
+      },
+      "F13": {
+        "value": 80.0,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-11-15",
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-15",
+        "interval_95": [
+          62.7,
+          90.5
+        ],
+        "from": "evals/figures/pass_rate@v1.4"
+      },
+      "F14": {
+        "value": 71.5,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-11-15",
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-15",
+        "interval_95": [
+          64.9,
+          77.3
+        ],
+        "from": "evals/figures/autonomy_rate@v1.4"
+      },
+      "F15": {
+        "value": 30,
+        "unit": "held-out cases",
+        "source": "eval-kit 0.3.3: evals.rows, v1.4, cases",
+        "window": {
+          "from": "2026-11-15",
+          "to": "2026-11-15"
+        },
+        "as_of": "2026-11-15",
+        "from": "evals/rows/v1.4/cases"
+      },
+      "F16": {
+        "value": 70.0,
+        "unit": "%",
+        "source": "quote-drafting.csv (sha256 ee43a12a2395)",
+        "window": {
+          "from": "2026-10-15",
+          "to": "2026-10-15"
+        },
+        "as_of": "2026-11-15",
+        "interval_95": [
+          52.1,
+          83.3
+        ],
+        "from": "evals/figures/pass_rate@v1.3"
+      },
+      "F17": {
+        "value": 0.033759,
+        "unit": "USD per task",
+        "source": "cost-budget-check 0.3.1: priced cost / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/lines/cost_per_task/actual"
+      },
+      "F18": {
+        "value": 0.027,
+        "unit": "USD per task",
+        "source": "landing brief quote-drafting.md (tokens per task x price per token)",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/lines/cost_per_task/budget"
+      },
+      "F19": {
+        "value": 0.2503333333333333,
+        "unit": "share over budget",
+        "source": "cost-budget-check 0.3.1: actual / budget - 1; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/lines/cost_per_task/against_budget"
+      },
+      "F20": {
+        "value": 10300.0,
+        "unit": "tokens per task",
+        "source": "cost-budget-check 0.3.1: tokens / tasks; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/lines/tokens_per_task/actual"
+      },
+      "F21": {
+        "value": 9000.0,
+        "unit": "tokens per task",
+        "source": "landing brief quote-drafting.md",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/lines/tokens_per_task/budget"
+      },
+      "F22": {
+        "value": 3.2775728155339805e-06,
+        "unit": "USD per token",
+        "source": "cost-budget-check 0.3.1: priced cost / tokens; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15)",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/lines/price_per_token/actual"
+      },
+      "F23": {
+        "value": 3e-06,
+        "unit": "USD per token",
+        "source": "landing brief quote-drafting.md",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/lines/price_per_token/budget"
+      },
+      "F24": {
+        "value": 0.9626399999999999,
+        "unit": "USD",
+        "source": "cost-budget-check 0.3.1: model cost - model token share x budgeted cost; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/driver/over_budget"
+      },
+      "F25": {
+        "value": 1.8925200000000002,
+        "unit": "USD",
+        "source": "cost-budget-check 0.3.1: priced cost - tasks x budgeted cost per task; distinct task ids in gateway.jsonl; gateway.jsonl; pricing.json (Illustrative prices for the Acme sample. Not any provider's list price., retrieved 2026-10-15); quote-drafting.md",
+        "window": {
+          "from": "2026-11-01",
+          "to": "2026-11-14"
+        },
+        "as_of": "2026-11-15",
+        "from": "cost/over_budget"
+      },
+      "F26": {
+        "value": 6,
+        "unit": "checks ready to ship",
+        "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
+        "window": {
+          "from": "2026-09-05",
+          "to": "2026-09-05"
+        },
+        "as_of": "2026-09-05",
+        "from": "release/counts/ready"
+      },
+      "F27": {
+        "value": 7,
+        "unit": "checks",
+        "source": "release-readiness 0.3.0: count of the checks above; examples/acme/inputs/release.json",
+        "window": {
+          "from": "2026-09-05",
+          "to": "2026-09-05"
+        },
+        "as_of": "2026-09-05",
+        "from": "release/counts/total"
+      },
+      "F28": {
+        "value": 21,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: signals in the window after duplicates were merged; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26",
+        "from": "signals/figures/signals"
+      },
+      "F29": {
+        "value": 16,
+        "unit": "accounts",
+        "source": "customer-signal-digest 0.3.0: distinct accounts named on those signals; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26",
+        "from": "signals/figures/accounts"
+      },
+      "F30": {
+        "value": 7,
+        "unit": "signals",
+        "source": "customer-signal-digest 0.3.0: signals in themes on the problem side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26",
+        "from": "signals/figures/problem_signals"
+      },
+      "F31": {
+        "value": 7,
+        "unit": "accounts",
+        "source": "customer-signal-digest 0.3.0: distinct accounts on the problem side; Zendesk: zendesk-page-1.json, zendesk-page-2.json; Intercom: intercom-conversations.json; CSV (calls): calls.csv; CSV (nps): nps.csv (illustrative)",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-24"
+        },
+        "as_of": "2026-11-26",
+        "from": "signals/figures/problem_accounts"
+      },
+      "F32": {
+        "value": 2,
+        "unit": "incidents",
+        "source": "PagerDuty (acme): PagerDuty incidents, created_at to resolved_at, services Quote drafting (pagerduty-incidents.json, retrieved 2026-11-26); incidents started in the window",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26",
+        "from": "postmortem/figures/incidents"
+      },
+      "F33": {
+        "value": 4,
+        "unit": "fixes",
+        "source": "review.json, checked by postmortem 0.3.0",
+        "window": {
+          "from": "2026-09-07",
+          "to": "2026-11-26"
+        },
+        "as_of": "2026-11-26",
+        "from": "postmortem/figures/fixes"
+      },
+      "F34": {
+        "value": 4,
+        "unit": "rank of 8 bets, 1 needs work first",
+        "source": "bets.csv",
+        "window": {
+          "from": "2026-07-27",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27",
+        "from": "portfolio/rank"
+      },
+      "F35": {
+        "value": 14,
+        "unit": "points of 14",
+        "source": "briefs/quote-drafting.md",
+        "window": {
+          "from": "2026-07-27",
+          "to": "2026-07-27"
+        },
+        "as_of": "2026-07-27",
+        "from": "portfolio/brief_score"
+      }
+    },
+    "illustrative": true
   }
 }

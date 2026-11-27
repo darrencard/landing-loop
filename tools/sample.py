@@ -2,10 +2,10 @@
 
 Each skill renders its sample in its own repo and writes only its key into
 examples/acme/landing/quote-drafting.json (CONTRACT.md). This script merges
-those five files in loop order into one record and fails if two skills write
+those ten files in loop order into one record and fails if two skills write
 the same key or read different briefs.
 
-Usage: python3 tools/sample.py <dir with the five skill repos> (default: ~)
+Usage: python3 tools/sample.py <dir with the ten skill repos> (default: ~)
 """
 
 import json
@@ -14,10 +14,15 @@ from pathlib import Path
 
 ORDER = [
     ("bet-portfolio-review", "portfolio"),
+    ("decision-record", "decisions"),
     ("spec-auditor", "spec"),
+    ("release-readiness", "release"),
     ("cost-budget-check", "cost"),
     ("eval-kit", "evals"),
     ("did-it-land", "landed"),
+    ("customer-signal-digest", "signals"),
+    ("postmortem", "postmortem"),
+    ("board-qa-prep", "board_qa"),
 ]
 BET = "quote-drafting"
 ROOT = Path(__file__).resolve().parent.parent
