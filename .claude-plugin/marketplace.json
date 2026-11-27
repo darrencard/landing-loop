@@ -29,8 +29,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/bet-portfolio-review",
-        "ref": "v0.3.3",
-        "sha": "d2265bb11d6c033112febeacb08015010aa06a3e"
+        "ref": "v0.3.4",
+        "sha": "7be2a8d38978c0da165bf174caa875ec6057360e"
       },
       "displayName": "Bet portfolio review",
       "description": "Scores the roadmap against each bet's landing brief. Step 01: decide."
@@ -40,8 +40,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/decision-record",
-        "ref": "v0.3.3",
-        "sha": "dfabfae831fb287c62b866d407b640270ce46f59"
+        "ref": "v0.3.4",
+        "sha": "b6d48140d81a2d7f2899bd927183529faad1326b"
       },
       "displayName": "Decision record",
       "description": "Logs each call with who made it, and what still waits. Step 01: decide."
@@ -51,8 +51,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/spec-auditor",
-        "ref": "v0.3.3",
-        "sha": "9655afd016b6bf3c69b5a88f703cc3c69e45df79"
+        "ref": "v0.3.4",
+        "sha": "09707091c33e70f3f4ef02de63c5b90e798850a3"
       },
       "displayName": "Spec auditor",
       "description": "Checks a PRD against its landing brief, pass or hold. Step 02: spec."
@@ -62,8 +62,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/release-readiness",
-        "ref": "v0.3.2",
-        "sha": "f2137922e7df63e0eb9ea169e7e2890a178e90e5"
+        "ref": "v0.3.3",
+        "sha": "2b78848208204155dae9fef5f7f67ba2288edb1d"
       },
       "displayName": "Release readiness",
       "description": "Ready to ship or hold, check by check. Step 03: build."
@@ -73,8 +73,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/cost-budget-check",
-        "ref": "v0.3.3",
-        "sha": "212ab21f5dbf7d84f23b6f655087bcd3311ccd92"
+        "ref": "v0.3.4",
+        "sha": "e9b460ae320de2e8a924374866e274cd4832623f"
       },
       "displayName": "Cost budget check",
       "description": "Tokens per task and price per token against the brief's budget, within budget or over budget. Step 03: build."
@@ -84,8 +84,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/eval-kit",
-        "ref": "v0.3.5",
-        "sha": "901af1095b6faa0e5aea7b4cc6f504e8f90ea79d"
+        "ref": "v0.3.6",
+        "sha": "bdc45c22ab44c324b5fa3ec0db641ac424dead3b"
       },
       "displayName": "Eval kit",
       "description": "Pass rate and autonomy rate for one AI feature. Step 03: build."
@@ -95,8 +95,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/did-it-land",
-        "ref": "v0.3.4",
-        "sha": "72ccfb43b6120a731595ad3a81f9a1153ed8c1cb"
+        "ref": "v0.3.5",
+        "sha": "c3b09c7aba2c08369209adacfc558b9634563dde"
       },
       "displayName": "Did it land?",
       "description": "Landed, watch or stalled from your own metric data. Step 04: learn."
@@ -106,8 +106,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/customer-signal-digest",
-        "ref": "v0.3.2",
-        "sha": "67a1a9b110f57b73729c48c2c86d0b25f06d5c77"
+        "ref": "v0.3.3",
+        "sha": "3676622ab74f73b3a96099496b13b2e3b7ac7f1d"
       },
       "displayName": "Customer signal digest",
       "description": "Whether customers still raise the problem. Step 04: learn."
@@ -117,8 +117,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/postmortem",
-        "ref": "v0.3.2",
-        "sha": "7b48b7eab129334adb42ce1f2ebce26969bd6d59"
+        "ref": "v0.3.3",
+        "sha": "83a71d911390a6dd8998f13c1952ebd709bb8fe0"
       },
       "displayName": "Postmortem",
       "description": "What changed, with evidence, and one owner per fix. Step 04: learn."
@@ -128,8 +128,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/board-qa-prep",
-        "ref": "v0.3.2",
-        "sha": "9110f087ea819623dc9961a0b70ebb1ce86bc39d"
+        "ref": "v0.3.3",
+        "sha": "001ae49d70d089a68d7f8eaa54e73873b835db14"
       },
       "displayName": "Board Q&A prep",
       "description": "The board's likely questions, answered from the record or open. Step 05: report."
@@ -139,8 +139,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/team-operations-read",
-        "ref": "v0.3.2",
-        "sha": "f30b786db07a8e4ab7f342a9a61f90f04418f3a7"
+        "ref": "v0.3.3",
+        "sha": "2d434e3d7367b89ce03ae466f63ececf903689fd"
       },
       "displayName": "Team operations read",
       "description": "How the team works, against Team Operations. For the team."
@@ -150,8 +150,8 @@
       "source": {
         "source": "github",
         "repo": "darrencard/ai-native-hiring-loop",
-        "ref": "v0.3.2",
-        "sha": "966377882a368547854dc3b10dfc67c8ad185578"
+        "ref": "v0.3.3",
+        "sha": "71a36738f4e3fc32d9a043ec178d5906d48525cf"
       },
       "displayName": "AI-native hiring loop",
       "description": "A fair hiring loop for AI-fluent roles, scored in code. For the team."
