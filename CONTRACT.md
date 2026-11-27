@@ -30,7 +30,7 @@ Check words, so status words stay did-it-land's (set 2026-11-26):
 | postmortem | what changed (each with evidence) and who owns each fix (one owner and a due date) |
 | board-qa-prep | answered or open for each likely question |
 
-Acme people are roles, not invented names, in every loop sample (Head of Product, Quoting squad; Quoting squad lead), so the samples agree with the brief.
+Acme people are roles, not invented names, in every loop sample (Head of Product, Quoting squad; Lead, Quoting squad), so the samples agree with the brief.
 
 ## The brief
 

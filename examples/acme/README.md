@@ -23,7 +23,7 @@ The record reads in loop order, and the dates follow it. Each step writes only i
 | 2026-11-26 | 04 Learn | `postmortem` | Two incidents; the long-draft routing to vendor-a/xl stayed in place after the first. 4 fixes, each with one owner and a due date |
 | 2026-11-26 | 05 Report | `board_qa` | 17 likely board questions: 13 answered from the record, 4 open with an owner |
 
-People are named by role (Head of Product, Quoting squad; Quoting squad lead), as the brief names who decides.
+People are named by role (Head of Product, Quoting squad; Lead, Quoting squad), as the brief names who decides.
 
 Only did-it-land sets landed, watch or stalled. The build checks use their own words (meets target, within budget, over budget).
 

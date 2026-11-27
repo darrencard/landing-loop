@@ -48,7 +48,7 @@
       },
       "as_of": "2026-07-27"
     },
-    "owner": "Quoting squad lead",
+    "owner": "Lead, Quoting squad",
     "decides": "Head of Product, Quoting squad",
     "gaps": [
       "no-result"
@@ -61,7 +61,7 @@
     "as_of": "2026-07-27",
     "log": {
       "path": "decisions.md",
-      "sha256": "42c46365e3dc4467516b31ff0d51424ca14f309399d848f2269ca57440bf9be8"
+      "sha256": "a01557cce6febb250bc9f8533481eb5fb5fd6e80979df5ab8cb33bf48a8f53e9"
     },
     "reads": {
       "brief": true,
@@ -81,9 +81,9 @@
       {
         "ask": "Set the rollback trigger for quote drafting",
         "options": "Roll back when wrong-price quotes pass 2% or Roll back when rejected drafts pass 30%",
-        "recommendation": "The Quoting squad product manager recommends the wrong-price trigger at 2%. Waiting on Quoting squad lead, 14 days open, past the usual 7 days to decide.",
+        "recommendation": "Product manager, Quoting squad, recommends the wrong-price trigger at 2%. Waiting on Lead, Quoting squad, 14 days open, past the usual 7 days to decide.",
         "deadline": "2026-08-03",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "days_waiting": 14,
         "id": "D-0004",
         "source": "Acme decide call, 2026-07-27 (illustrative)"
@@ -91,9 +91,9 @@
       {
         "ask": "Choose the model tier for quote drafts",
         "options": "vendor-a/xl or vendor-a/m",
-        "recommendation": "The Quoting squad lead recommends vendor-a/m, to stay inside the 9,000 token budget. Waiting on Quoting squad tech lead, 7 days open.",
+        "recommendation": "Lead, Quoting squad, recommends vendor-a/m, to stay inside the 9,000 token budget. Waiting on Tech lead, Quoting squad, 7 days open.",
         "deadline": "2026-08-03",
-        "owner": "Quoting squad tech lead",
+        "owner": "Tech lead, Quoting squad",
         "days_waiting": 7,
         "id": "D-0005",
         "source": "Acme decide call, 2026-07-27 (illustrative)"
@@ -106,7 +106,7 @@
         "chosen": "Build quote drafting now",
         "decided_by": "Head of Product, Quoting squad",
         "date": "2026-07-27",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "review_by": "2026-11-15",
         "reversible": "yes",
         "success_signal": "Quote draft acceptance rate at 40% or higher by 2026-11-15, as the landing brief sets.",
@@ -123,7 +123,7 @@
         "chosen": "Approve before send",
         "decided_by": "Head of Product, Quoting squad",
         "date": "2026-07-27",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "review_by": "2026-11-15",
         "reversible": "yes",
         "success_signal": "Wrong-line-item complaints below 5 a month by 2026-11-15 (illustrative).",
@@ -137,9 +137,9 @@
         "id": "D-0003",
         "title": "Prices come from the price book, never the model",
         "chosen": "Prices from the price book",
-        "decided_by": "Quoting squad tech lead",
+        "decided_by": "Tech lead, Quoting squad",
         "date": "2026-07-27",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "review_by": "2026-11-15",
         "reversible": "yes",
         "success_signal": "No sent quote carries a price that differs from the price book, checked weekly to 2026-11-15 (illustrative).",
@@ -162,7 +162,7 @@
       "open": {
         "value": 2,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -172,7 +172,7 @@
       "decided": {
         "value": 3,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -182,7 +182,7 @@
       "past_due": {
         "value": 1,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -192,7 +192,7 @@
       "waiting_on_nobody": {
         "value": 0,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -202,7 +202,7 @@
       "oldest_open": {
         "value": 14,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); as_of minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); as_of minus the opened date",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -212,7 +212,7 @@
       "usual_days_to_decide": {
         "value": 7.0,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); median days from opened to decided",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); median days from opened to decided",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -222,7 +222,7 @@
       "days_waiting@D-0004": {
         "value": 14,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); as_of minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); as_of minus the opened date",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -232,7 +232,7 @@
       "days_waiting@D-0005": {
         "value": 7,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); as_of minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); as_of minus the opened date",
         "window": {
           "from": "2026-07-20",
           "to": "2026-07-27"
@@ -242,7 +242,7 @@
       "days_to_decide@D-0001": {
         "value": 7,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); decided date minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); decided date minus the opened date",
         "window": {
           "from": "2026-07-20",
           "to": "2026-07-27"
@@ -252,7 +252,7 @@
       "days_to_decide@D-0002": {
         "value": 14,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); decided date minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); decided date minus the opened date",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -262,7 +262,7 @@
       "days_to_decide@D-0003": {
         "value": 5,
         "unit": "days",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc); decided date minus the opened date",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe); decided date minus the opened date",
         "window": {
           "from": "2026-07-22",
           "to": "2026-07-27"
@@ -271,8 +271,8 @@
       }
     },
     "gaps": [],
-    "next_step": "D-0004 waits on Quoting squad lead: set the rollback trigger for quote drafting by 2026-08-03.",
-    "next_step_by": "Quoting squad lead",
+    "next_step": "D-0004 waits on Lead, Quoting squad: set the rollback trigger for quote drafting by 2026-08-03.",
+    "next_step_by": "Lead, Quoting squad",
     "next_in_loop": "Next in the loop, 02 Spec: run spec-auditor on the bet's spec against this brief before build starts.",
     "illustrative": true
   },
@@ -427,7 +427,7 @@
         "id": "ci",
         "label": "CI passes on the release commit",
         "readiness": "ready to ship",
-        "owner": "Quoting squad tech lead",
+        "owner": "Tech lead, Quoting squad",
         "reasons": [],
         "figures": {
           "required": {
@@ -456,9 +456,9 @@
         "id": "bugs",
         "label": "Open bugs within the severity limits",
         "readiness": "hold",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "reasons": [
-          "2 open major bugs against a limit of 1: #3101 (Quoting squad tech lead), #3104 (Quoting squad tech lead)."
+          "2 open major bugs against a limit of 1: #3101 (Tech lead, Quoting squad), #3104 (Tech lead, Quoting squad)."
         ],
         "figures": {
           "open.blocker": {
@@ -532,7 +532,7 @@
         "id": "flags",
         "label": "Every change behind a flag with an off switch",
         "readiness": "ready to ship",
-        "owner": "Quoting squad tech lead",
+        "owner": "Tech lead, Quoting squad",
         "reasons": [],
         "figures": {
           "total": {
@@ -698,7 +698,7 @@
         "id": "spec",
         "label": "Spec holds from spec-auditor are closed",
         "readiness": "ready to ship",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "reasons": [],
         "figures": {
           "holds": {
@@ -2145,7 +2145,7 @@
       "decides": "Head of Product, Quoting squad"
     },
     "brief_unchanged": true,
-    "author": "Quoting squad lead",
+    "author": "Lead, Quoting squad",
     "review_on": "2026-12-17",
     "summary": "Two incidents touched quote drafting after launch. To stop the first, long drafts were sent to a larger model, and that routing stayed in place. It is the main driver of the cost running over the brief's budget in early November. Prices stayed in fixed code throughout, as the brief's line says.",
     "figures": {
@@ -2497,7 +2497,7 @@
         "id": "f1",
         "fix": "Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back.",
         "done_when": "cost-budget-check reads tokens per task within budget for a full two-week window.",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "due": "2026-12-10",
         "addresses": [
           "c1",
@@ -2520,7 +2520,7 @@
         "id": "f3",
         "fix": "Put the cost-budget-check result beside the eval-kit result on every quote drafting release candidate.",
         "done_when": "The next release candidate's checklist links both, and a build over budget is held for a decision.",
-        "owner": "Quoting squad tech lead",
+        "owner": "Tech lead, Quoting squad",
         "due": "2027-01-08",
         "addresses": [
           "c3"
@@ -2670,7 +2670,7 @@
         "topic": "decision-made",
         "question": "What did we decide, and who decided?",
         "check": "answered",
-        "answer": "From decision-record, as of 2026-07-27: 3 decided [F10]. Build quote drafting now, against its landing brief (Head of Product, Quoting squad, 2026-07-27); Quote drafts wait for the tradesperson's approval before they send (Head of Product, Quoting squad, 2026-07-27); Prices come from the price book, never the model (Quoting squad tech lead, 2026-07-27).",
+        "answer": "From decision-record, as of 2026-07-27: 3 decided [F10]. Build quote drafting now, against its landing brief (Head of Product, Quoting squad, 2026-07-27); Quote drafts wait for the tradesperson's approval before they send (Head of Product, Quoting squad, 2026-07-27); Prices come from the price book, never the model (Tech lead, Quoting squad, 2026-07-27).",
         "from_keys": [
           "decisions"
         ],
@@ -2681,8 +2681,8 @@
         "topic": "decision-open",
         "question": "Which decisions are still open, and who makes them?",
         "check": "open",
-        "missing": "From decision-record, as of 2026-07-27: 2 open [F11], 1 past due [F12]. Set the rollback trigger for quote drafting (Quoting squad lead, due 2026-08-03); Choose the model tier for quote drafts (Quoting squad tech lead, due 2026-08-03). No later decision record says they closed.",
-        "owner": "Quoting squad lead",
+        "missing": "From decision-record, as of 2026-07-27: 2 open [F11], 1 past due [F12]. Set the rollback trigger for quote drafting (Lead, Quoting squad, due 2026-08-03); Choose the model tier for quote drafts (Tech lead, Quoting squad, due 2026-08-03). No later decision record says they closed.",
+        "owner": "Lead, Quoting squad",
         "due": "before the board meeting",
         "from_keys": [
           "decisions"
@@ -2730,7 +2730,7 @@
         "topic": "cost-owner",
         "question": "Who brings cost back within budget, and by when?",
         "check": "answered",
-        "answer": "The record names the model behind most of it, vendor-a/xl: $0.963 [F24] of $1.89 [F25] over budget. The postmortem names the fix: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back. Owner: Quoting squad lead, due 2026-12-10.",
+        "answer": "The record names the model behind most of it, vendor-a/xl: $0.963 [F24] of $1.89 [F25] over budget. The postmortem names the fix: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back. Owner: Lead, Quoting squad, due 2026-12-10.",
         "from_keys": [
           "cost",
           "postmortem"
@@ -2755,7 +2755,7 @@
         "question": "Was the waived check closed before its waiver ran out?",
         "check": "open",
         "missing": "Open bugs within the severity limits: waived by Head of Product, Quoting squad until 2026-09-19. No later release check in the record says it closed.",
-        "owner": "Quoting squad lead",
+        "owner": "Lead, Quoting squad",
         "due": "before the board meeting",
         "from_keys": [
           "release"
@@ -2778,7 +2778,7 @@
         "topic": "postmortem",
         "question": "What went wrong, and who owns each fix?",
         "check": "answered",
-        "answer": "The learning review of 2026-11-26 covers 2 incidents [F32] from 2026-09-07 to 2026-11-26. Each change it lists cites its evidence. 4 fixes [F33], each with one owner and a due date: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back (Quoting squad lead, due 2026-12-10); Give every routing change made during an incident an end date, and list the open ones in the weekly incident review (Platform on-call lead, due 2026-12-17); Put the cost-budget-check result beside the eval-kit result on every quote drafting release candidate (Quoting squad tech lead, due 2027-01-08); Show 'price updating' and retry when the price book sync lags, instead of price pending (Price book squad lead, due 2026-12-17).",
+        "answer": "The learning review of 2026-11-26 covers 2 incidents [F32] from 2026-09-07 to 2026-11-26. Each change it lists cites its evidence. 4 fixes [F33], each with one owner and a due date: Send only drafts over the standard model's context limit to vendor-a/xl, and route the rest back (Lead, Quoting squad, due 2026-12-10); Give every routing change made during an incident an end date, and list the open ones in the weekly incident review (Platform on-call lead, due 2026-12-17); Put the cost-budget-check result beside the eval-kit result on every quote drafting release candidate (Tech lead, Quoting squad, due 2027-01-08); Show 'price updating' and retry when the price book sync lags, instead of price pending (Price book squad lead, due 2026-12-17).",
         "from_keys": [
           "postmortem"
         ],
@@ -2913,7 +2913,7 @@
       "F10": {
         "value": 3,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -2924,7 +2924,7 @@
       "F11": {
         "value": 2,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
@@ -2935,7 +2935,7 @@
       "F12": {
         "value": 1,
         "unit": "decisions",
-        "source": "decision-record 0.3.0: counted from decisions.md (sha256 42c46365e3dc)",
+        "source": "decision-record 0.3.0: counted from decisions.md (sha256 a01557cce6fe)",
         "window": {
           "from": "2026-07-13",
           "to": "2026-07-27"
