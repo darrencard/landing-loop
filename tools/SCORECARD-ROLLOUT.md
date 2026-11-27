@@ -35,16 +35,16 @@ Four pictures only. Use the one your row names; draw no other.
 
 | Skill | Rows | Picture (svgkit) | Figure (`figure_line`) | Word |
 |---|---|---|---|---|
-| Portfolio review | one per project, ranked | `pips(filled, 4)`: plan, owner, work linked, cost budget | `11 of 14` | next step as `check_word`; rank 1 `check_word("DO FIRST", ink=True)` |
+| Portfolio review | one per project, ranked | `pips(filled, 4)`: plan, owner, work linked, cost budget | `3 of 4 in place` | next step as `check_word`; rank 1 `check_word("DO FIRST", ink=True)` |
 | Decision record | one per decision | `paired_bars(plan, days, top=frame max, hatch_id=unique)` | `28 DAYS` | `person_call(decider)` |
 | Spec auditor | one per check, holds first | none (`picture=""`); a frame-level `share_bar` row first: "11 of 14 pass" | line refs | `check_word("HOLD", ink=True)` or `check_word("PASS")` |
 | Release readiness | one per gate | none; a `share_bar` row first: "6 of 7 ready" | expiry date for a waiver | `check_word("READY")` or `check_word("HOLD", ink=True)`; waiver approver `person_call` |
-| Cost budget check | usage, price, cost per task; then over budget by model | `paired_bars(budget, actual, top=row max, hatch_id=...)` | `9,000 → 10,300 · +14%` | `check_word("OVER", ink=True)` or `check_word("WITHIN")` |
-| Eval kit | one per version | `range_line` with the frame's domain (step 4) | `21 of 30` | `check_word("TOO CLOSE TO CALL")`, `check_word("MEETS TARGET")`, `check_word("BELOW TARGET", ink=True)` |
+| Cost budget check | usage, price, cost per task; then over budget by model | `paired_bars(budget, actual, top=row max, hatch_id=...)` | `9,000 → 10,300 · +14%` | `check_word("OVER BUDGET", ink=True)` or `check_word("WITHIN BUDGET")` (the contract's words) |
+| Eval kit | one per version | `range_line` with the frame's domain (step 4) | `21 of 30` | `check_word("TOO CLOSE TO CALL")` (short for the contract's "not confirmed: too close to call"), `check_word("MEETS TARGET")`, `check_word("BELOW TARGET", ink=True)` |
 | Did it land? | one per project | `range_line(prior, actual, target, status, domain, relative=True)` | `prior → actual · TARGET x` | `status_mark(status)` and the cost word |
-| Customer signals | still raised; gone | `share_bar(last30, total)` | `7 accounts · 5 in 30 days` | `check_word` |
-| Postmortem | incidents, then fixes | incidents: `paired_bars(plan, time to fix, ...)`; fixes: none | hours or days | fixes: `person_call(owner)`, due as the figure |
-| Board Q&A prep | open first, then answered | none; a `share_bar` row first: "13 of 15 answered" | due date or source | open: `person_call(owner)`; answered: `check_word("ANSWERED")` |
+| Customer signals | still raised; gone | `share_bar(last30, total)` | `7 accounts · 5 in 30 days` | `check_word("PROBLEM STILL RAISED", ink=True)` or `check_word("PROBLEM NOT RAISED")` (the contract's words) |
+| Postmortem | incidents, then fixes | incidents: one bar each, time to fix, scaled to the longest in the frame, no plan bar and no hatching (there is no plan for time to fix); fixes: none | hours or days | fixes: `person_call(owner)`, due as the figure |
+| Board Q&A prep | open first, then answered | none; a `share_bar` row first: "13 of 15 answered" | due date or source | open: `check_word("OPEN", ink=True)` plus `person_call(owner)`; answered: `check_word("ANSWERED")` |
 | Team operations read | one per area read | `pips(floor, 5, dashed=band width)` | `level 2 or below` | one row `check_word("START HERE", ink=True)`; unread areas as one `sc_note` |
 | AI-native hiring loop | one per candidate | `range_line` with the frame's domain | `3.23 · TARGET 3.00 · RESTRAINT 2.33 < FLOOR 2.50` | `check_word("MEETS TARGET")` or `check_word("BELOW TARGET", ink=True)`; decider `person_call` in the head |
 
